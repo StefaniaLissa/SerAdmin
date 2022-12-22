@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "440209737680",
+    "project_id": "ser-admin-app",
+    "storage_bucket": "ser-admin-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440209737680:android:409cead7c98bd52b335bd5",
+        "android_client_info": {
+          "package_name": "com.example.seradmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440209737680-fo1mhk74rftbiiuns5t9el0lgc6l9o8r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJA3blLPJsZbz5FAxpQ6WItDGrRx01B1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440209737680-fo1mhk74rftbiiuns5t9el0lgc6l9o8r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
