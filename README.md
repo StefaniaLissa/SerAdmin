@@ -1,5 +1,5 @@
 # SerAdmin
-Como abrir bien un proyecto Android:
+Como abrir bien un proyecto Android para que funcione:
 
 ![image](https://user-images.githubusercontent.com/60698993/212157516-034298e7-3209-4e41-9532-3dfead98434c.png)
 
