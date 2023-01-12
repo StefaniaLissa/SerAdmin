@@ -13,7 +13,7 @@ El proyecto en Kotlin puede dar los siguientes errores:
 Solución: Abrir bien el proyecto Android
 
 2. Invalid VCS root mapping
-Solución: No importa
+Solución: Es un error por el git de Android, no es importante.
 
 3. 
 
