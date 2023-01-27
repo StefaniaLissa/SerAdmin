@@ -12,21 +12,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.seradmin.Recycler.AdaptadorListado;
+import com.example.seradmin.Recycler.PerfilesClientes;
 
 public class GestorMain extends AppCompatActivity {
 
     RecyclerView RVClientes;
+    AdaptadorListado aL;
+    Button anadirCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_perfiles);
+        anadirCliente = findViewById(R.id.floatAnadirCliente);
 
         RVClientes = (RecyclerView) findViewById(R.id.RVClientes);
         RVClientes.setHasFixedSize(true);
         RVClientes.setLayoutManager(new LinearLayoutManager(this));
+
+        AdaptadorListado = new AdaptadorListado(completo);
+        RVClientes.setAdapter(AdaptadorListado);
 
         ActivityResultLauncher controladorGestor = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -66,9 +75,15 @@ public class GestorMain extends AppCompatActivity {
 
                 });
 
-        setOnClickListener(someActivityResultLauncher);
 
-        lanzador.setOnClickListener(new View.OnClickListener() {
+        AdaptadorListado.setClickListener(new AdaptadorListado.ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, PerfilesClientes perfilesClientes) {
+                Toast.makeText(GestorMain.this,"Pulsado"+position,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        anadirCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Listado.this, Ingresar.class);
