@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SerAdmin</string>
+    <string name="sociedad">Tipo de Sociedad</string>
 </resources>
