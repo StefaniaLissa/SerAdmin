@@ -23,7 +23,7 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/contraseña"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
@@ -35,7 +35,7 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/nombre"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
@@ -47,7 +47,7 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/editTextTextPersonName2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
@@ -59,7 +59,7 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/telefono"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
@@ -71,10 +71,12 @@ tools:context=".NuevoCliente">
 
         <Spinner
             android:id="@+id/sociedad"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
             style="@style/spinner_style"
-            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:prompt="Selecciona"
+            android:background="@drawable/spinner"
+            android:spinnerMode="dropdown"
             android:splitMotionEvents="false"
             android:touchscreenBlocksFocus="false" />
     </LinearLayout>
@@ -92,7 +94,8 @@ tools:context=".NuevoCliente">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 <ImageView
     android:id="@+id/imageView2"
