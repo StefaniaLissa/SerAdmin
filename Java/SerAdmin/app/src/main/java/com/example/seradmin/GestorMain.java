@@ -18,11 +18,17 @@ import android.widget.Toast;
 import com.example.seradmin.Recycler.AdaptadorListado;
 import com.example.seradmin.Recycler.PerfilesClientes;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class GestorMain extends AppCompatActivity {
 
+    public static final int NUMERO_PERFILES = 5;
     RecyclerView RVClientes;
     AdaptadorListado aL;
     Button anadirCliente;
+    private ArrayList perfiles;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +40,11 @@ public class GestorMain extends AppCompatActivity {
         RVClientes.setHasFixedSize(true);
         RVClientes.setLayoutManager(new LinearLayoutManager(this));
 
-        AdaptadorListado = new AdaptadorListado(completo);
-        RVClientes.setAdapter(AdaptadorListado);
+        perfiles = new ArrayList<>(Arrays.asList(new PerfilesClientes().generarPerfiles(NUMERO_PERFILES)));
+
+        AdaptadorListado al = new AdaptadorListado(perfiles);
+        RVClientes.setAdapter(al);
+        /*
 
         ActivityResultLauncher controladorGestor = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -75,21 +84,21 @@ public class GestorMain extends AppCompatActivity {
 
                 });
 
-
-        AdaptadorListado.setClickListener(new AdaptadorListado.ItemClickListener() {
+        */
+       /* AdaptadorListado.setClickListener(new AdaptadorListado.ItemClickListener() {
             @Override
             public void onClick(View view, int position, PerfilesClientes perfilesClientes) {
                 Toast.makeText(GestorMain.this,"Pulsado"+position,Toast.LENGTH_SHORT).show();
             }
-        });
-
+        });*/
+    /*
         anadirCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Listado.this, Ingresar.class);
+                Intent intent = new Intent(GestorMain.this, Ingresar.class);
                 intent.putExtra(CLAVE_LISTA, completo);
                 someActivityResultLauncher.launch(intent);
             }
-        });
+        });*/
     }
 }

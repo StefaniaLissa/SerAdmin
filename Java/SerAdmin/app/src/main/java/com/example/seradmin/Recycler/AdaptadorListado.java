@@ -31,7 +31,7 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
 
     private RecyclerViewClickListener listener;
 
-    public AdaptadorListado(ArrayList<PerfilesClientes> dataSet, RecyclerViewClickListener listener) {
+    public AdaptadorListado(ArrayList<PerfilesClientes> dataSet) {
         perfilesList = dataSet;
         this.listener = listener;
         //perfilesList.addAll(dataSet);;
