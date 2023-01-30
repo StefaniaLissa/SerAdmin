@@ -1,5 +1,6 @@
 package com.example.seradmin.Recycler;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -11,6 +12,14 @@ public class PerfilesClientes {
 
 
     public PerfilesClientes(){}
+
+    public PerfilesClientes(String nombre, String apellidos, Date nac, String sexo, String sociedad) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.nac = nac;
+        this.sexo = sexo;
+        this.sociedad=sociedad;
+    }
 
     public PerfilesClientes(String nombre, String apellidos, Date nac, String sexo, String sociedad, int imagen) {
         this.nombre = nombre;
@@ -71,14 +80,16 @@ public class PerfilesClientes {
     };
 
 
-    /*public ArrayList<PerfilesClientes> generarPerfiles(int n) {
+    public ArrayList<PerfilesClientes> generarPerfiles(int n) {
         ArrayList<PerfilesClientes> perfiles = new ArrayList<PerfilesClientes>();
+        Date fecha = new Date(21/03/1994);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         for (int i = 0; i < n; i++) {
-            perfiles.add( new PerfilesClientes("Perfiles" + (i + 1), 28, "Masculino",
-                    "descripcion buena", imagenes[i]));
+            perfiles.add( new PerfilesClientes("Nombre " + (i + 1), "Apellido " + (i + 1), fecha,
+                    "masculino", "autonomo"));
         }
         return perfiles;
-    }*/
+    }
 
     /*public void idRandom() {
         uid = UUID.randomUUID().toString();
