@@ -34,7 +34,7 @@ public class GestorMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_perfiles);
-        anadirCliente = findViewById(R.id.floatAnadirCliente);
+        //anadirCliente = findViewById(R.id.floatAnadirCliente);
 
         RVClientes = (RecyclerView) findViewById(R.id.RVClientes);
         RVClientes.setHasFixedSize(true);
