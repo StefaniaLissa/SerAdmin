@@ -34,19 +34,17 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
     public AdaptadorListado(ArrayList<PerfilesClientes> dataSet) {
         perfilesList = dataSet;
         this.listener = listener;
-        //perfilesList.addAll(dataSet);;
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final TextView nomClienteCajaPerfiles;
+        private final TextView nomClienteCajaPerfiles1;
         private final TextView letraNombre;
         private final ImageView imagenCajaPerfiles;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            nomClienteCajaPerfiles = (TextView) v.findViewById(R.id.NomClienteCajaPerfiles);
+            nomClienteCajaPerfiles1 = (TextView) v.findViewById(R.id.NomClienteCajaPerfiles1);
             letraNombre = (TextView) v.findViewById(R.id.letraNombre);
             imagenCajaPerfiles = (ImageView) v.findViewById(R.id.imagenCajaPerfiles);
 
@@ -54,7 +52,7 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
 
 
         public TextView getNomCliente() {
-            return nomClienteCajaPerfiles;
+            return nomClienteCajaPerfiles1;
         }
 
         public TextView getLetraNom() {
@@ -72,26 +70,19 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
 
     }
 
-    /*public AdaptadorImagen(PerfilesImagen[] dataSet) {
-        perfilesList = new ArrayList<>();
-        perfilesList.addAll(Arrays.asList (dataSet));;
-
-    }*/
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_perfiles, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.caja_perfiles, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.getNomCliente().setText(" " + perfilesList.get(position).getNombre() +
-                " " + perfilesList.get(position).getApellidos());
+        holder.getNomCliente().setText(perfilesList.get(position).getNombre() + perfilesList.get(position).getApellidos());
         holder.getLetraNom().setText(perfilesList.get(position).getLetra());
-        holder.getImagenPerfil().setImageResource(perfilesList.get(position).getImagen());
+        //holder.getImagenPerfil().setImageResource(perfilesList.get(position).getImagen());
 
     }
 
