@@ -27,7 +27,7 @@ public class GestorMain extends AppCompatActivity {
     RecyclerView RVClientes;
     AdaptadorListado aL;
     Button anadirCliente;
-    private ArrayList perfiles;
+    private ArrayList<PerfilesClientes> perfiles;
 
 
     @Override
@@ -40,10 +40,11 @@ public class GestorMain extends AppCompatActivity {
         RVClientes.setHasFixedSize(true);
         RVClientes.setLayoutManager(new LinearLayoutManager(this));
 
-        perfiles = new ArrayList<>(Arrays.asList(new PerfilesClientes().generarPerfiles(NUMERO_PERFILES)));
+        perfiles = new ArrayList(new PerfilesClientes().generarPerfiles(NUMERO_PERFILES));
+        //Arrays.asList(new PerfilesClientes().generarPerfiles(NUMERO_PERFILES)));
 
-        AdaptadorListado al = new AdaptadorListado(perfiles);
-        RVClientes.setAdapter(al);
+        aL = new AdaptadorListado(perfiles);
+        RVClientes.setAdapter(aL);
         /*
 
         ActivityResultLauncher controladorGestor = registerForActivityResult(

@@ -2,16 +2,26 @@ package com.example.seradmin.Recycler;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class PerfilesClientes {
 
-    String nombre, apellidos, sexo, sociedad;
-    Date nac;
-    int imagen;
+    public String nombre;
+    public String apellidos;
+    public String sexo;
+    public String sociedad;
+    public Date nac;
+    public int imagen;
 
 
     public PerfilesClientes(){}
+    public PerfilesClientes(String nombre, String apellidos,String sexo, String sociedad) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.sexo = sexo;
+        this.sociedad=sociedad;
+    }
 
     public PerfilesClientes(String nombre, String apellidos, Date nac, String sexo, String sociedad) {
         this.nombre = nombre;
@@ -75,23 +85,30 @@ public class PerfilesClientes {
     public void setSociedad(String sociedad) {this.sociedad = sociedad; }
 
     public String getLetra() {
-        String letra= getNombre().substring(0);
+        String letra= String.valueOf(getNombre().charAt(0));
         return letra;
     };
 
 
-    public ArrayList<PerfilesClientes> generarPerfiles(int n) {
-        ArrayList<PerfilesClientes> perfiles = new ArrayList<PerfilesClientes>();
-        Date fecha = new Date(21/03/1994);
+    /*public ArrayList<PerfilesClientes> generarPerfiles(int n) {
+        ArrayList<PerfilesClientes> perfiles = new ArrayList<>();
+        Date fecha = new Date("1994-03-21");
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         for (int i = 0; i < n; i++) {
             perfiles.add( new PerfilesClientes("Nombre " + (i + 1), "Apellido " + (i + 1), fecha,
                     "masculino", "autonomo"));
         }
         return perfiles;
+    }*/
+    public ArrayList<PerfilesClientes> generarPerfiles(int n) {
+        ArrayList<PerfilesClientes> perfiles = new ArrayList<>();
+        //Calendar calendar = Calendar.getInstance();
+        //calendar.set(1994, Calendar.MARCH, 21);
+        //Date fecha = calendar.getTime();
+        for (int i = 0; i < n; i++) {
+            perfiles.add(new PerfilesClientes("Nombre " + (i + 1), "Apellido " + (i + 1), "masculino", "autonomo"));
+        }
+        return perfiles;
     }
 
-    /*public void idRandom() {
-        uid = UUID.randomUUID().toString();
-    }*/
 }
