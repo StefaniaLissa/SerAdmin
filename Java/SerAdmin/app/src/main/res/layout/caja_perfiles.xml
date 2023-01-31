@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/gradient"
+    android:background="#030537"
     android:orientation="vertical"
     android:padding="2dp">
 
@@ -34,7 +34,7 @@
             android:src="@drawable/pexels_polina_kovaleva_5927743"
             app:civ_border_color="#FFFFFF"
             app:civ_border_width="2dp" />
-<!--         app:civ_shadow="true"/> -->
+        <!--         app:civ_shadow="true"/> -->
 
 
         <TextView

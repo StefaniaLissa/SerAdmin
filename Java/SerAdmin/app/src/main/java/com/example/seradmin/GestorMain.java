@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.seradmin.InterfazUsuari.InterfazUsuario;
 import com.example.seradmin.Recycler.AdaptadorListado;
 import com.example.seradmin.Recycler.PerfilesClientes;
 
@@ -41,17 +42,16 @@ public class GestorMain extends AppCompatActivity {
         RVClientes.setLayoutManager(new LinearLayoutManager(this));
 
         perfiles = new ArrayList(new PerfilesClientes().generarPerfiles(NUMERO_PERFILES));
-        //Arrays.asList(new PerfilesClientes().generarPerfiles(NUMERO_PERFILES)));
 
         aL = new AdaptadorListado(perfiles);
         RVClientes.setAdapter(aL);
-        /*
+
 
         ActivityResultLauncher controladorGestor = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(), result -> {
                     //Log.d(TAG, "Vuelve cancelado");
                     int code = result.getResultCode();
-                    switch (code) {
+                    /*switch (code) {
                         case RESULT_CANCELED:
                             break;
                         case CLAVE_INGRESAR:
@@ -81,17 +81,18 @@ public class GestorMain extends AppCompatActivity {
                             rV.setAdapter(AdaptadorListado);
                             break;
 
-                    }
+                    }*/
 
                 });
 
-        */
-       /* AdaptadorListado.setClickListener(new AdaptadorListado.ItemClickListener() {
+        aL.setClickListener(new AdaptadorListado.ItemClickListener() {
             @Override
             public void onClick(View view, int position, PerfilesClientes perfilesClientes) {
-                Toast.makeText(GestorMain.this,"Pulsado"+position,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(GestorMain.this, InterfazUsuario.class);
+                intent.putExtra(CLAVE_LISTA);
+                controladorGestor.launch(intent);
             }
-        });*/
+        });
     /*
         anadirCliente.setOnClickListener(new View.OnClickListener() {
             @Override
