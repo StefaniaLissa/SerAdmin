@@ -80,10 +80,15 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.getNomCliente().setText(perfilesList.get(position).getNombre() + perfilesList.get(position).getApellidos());
+//      String letraActual = perfilesList.get(position).getLetra();
+//      String letraSiguiente = "";
+        holder.getNomCliente().setText(perfilesList.get(position).getNombre() + " "  + perfilesList.get(position).getApellidos());
         holder.getLetraNom().setText(perfilesList.get(position).getLetra());
         //holder.getImagenPerfil().setImageResource(perfilesList.get(position).getImagen());
-
+//      if (letraActual != letraSiguiente) {
+//          holder.getLetraNom().setText(perfilesList.get(position).getLetra());
+//      }
+//      letraSiguiente = perfilesList.get(position).getLetra();
     }
 
     @Override

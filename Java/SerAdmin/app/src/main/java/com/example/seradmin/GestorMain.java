@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.seradmin.InterfazUsuari.InterfazUsuario;
 import com.example.seradmin.Recycler.AdaptadorListado;
 import com.example.seradmin.Recycler.PerfilesClientes;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,9 +27,10 @@ public class GestorMain extends AppCompatActivity {
 
     public static final int NUMERO_PERFILES = 5;
     private static final int CLAVE_LISTA = 55;
+    private static final int CLAVE_AÑADIR = 56;
     RecyclerView RVClientes;
     AdaptadorListado aL;
-    Button anadirCliente;
+    FloatingActionButton anadirCliente;
     private ArrayList<PerfilesClientes> perfiles;
 
 
@@ -36,7 +38,8 @@ public class GestorMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_perfiles);
-        //anadirCliente = findViewById(R.id.floatAnadirCliente);
+
+        anadirCliente = findViewById(R.id.añadir);
 
         RVClientes = (RecyclerView) findViewById(R.id.RVClientes);
         RVClientes.setHasFixedSize(true);
@@ -90,7 +93,16 @@ public class GestorMain extends AppCompatActivity {
             @Override
             public void onClick(View view, int position, PerfilesClientes perfilesClientes) {
                 Intent intent = new Intent(GestorMain.this, com.example.seradmin.InterfazUsuari.InterfazUsuario.class);
-                intent.putExtra("Vuelta", CLAVE_LISTA);
+                intent.putExtra("Detalle", CLAVE_LISTA);
+                controladorGestor.launch(intent);
+            }
+        });
+
+        anadirCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GestorMain.this, NuevoCliente.class);
+                intent.putExtra("Añadir", CLAVE_AÑADIR);
                 controladorGestor.launch(intent);
             }
         });
