@@ -1,27 +1,30 @@
-package com.example.seradmin.Recycler;
+package com.example.seradmin.Carpetas;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seradmin.R;
+import com.example.seradmin.Recycler.AdaptadorListado;
+import com.example.seradmin.Recycler.PerfilesClientes;
 
 import java.util.ArrayList;
 
-public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.ViewHolder> {
-
-    private ArrayList<PerfilesClientes> perfilesList;
+public class AdaptadorCarpetas extends RecyclerView.Adapter<AdaptadorListado.ViewHolder>{
+    private ArrayList<PerfilesClientes> carpetasList;
 
     public interface ItemClickListener {
         void onClick(View view, int position, PerfilesClientes perfilesClientes);
     }
 
-    private ItemClickListener clickListener;
+    private AdaptadorCarpetas.ItemClickListener clickListener;
 
-    public void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(AdaptadorListado.ItemClickListener itemClickListener) {
         this.clickListener = itemClickListener;
     }
 
@@ -29,9 +32,9 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
         void onClick(View v, int position);
     }
 
-    private RecyclerViewClickListener listener;
+    private AdaptadorListado.RecyclerViewClickListener listener;
 
-    public AdaptadorListado(ArrayList<PerfilesClientes> dataSet) {
+    public AdaptadorListado(java.util.ArrayList<PerfilesClientes> dataSet) {
         perfilesList = dataSet;
         this.listener = listener;
     }
@@ -72,14 +75,14 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
 
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public AdaptadorListado.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.caja_perfiles, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(v);
+        AdaptadorListado.ViewHolder viewHolder = new AdaptadorListado.ViewHolder(v);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(AdaptadorListado.ViewHolder holder, int position) {
         holder.getNomCliente().setText(perfilesList.get(position).getNombre() + perfilesList.get(position).getApellidos());
         holder.getLetraNom().setText(perfilesList.get(position).getLetra());
         //holder.getImagenPerfil().setImageResource(perfilesList.get(position).getImagen());
