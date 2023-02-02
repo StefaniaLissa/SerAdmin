@@ -22,7 +22,7 @@ tools:context=".NuevoCliente">
         app:layout_constraintVertical_bias="0.6">
 
         <EditText
-            android:id="@+id/contraseña"
+            android:id="@+id/titulo"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bordes"
@@ -34,7 +34,7 @@ tools:context=".NuevoCliente">
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/nombre"
+            android:id="@+id/fechaInicio"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bordes"
@@ -46,7 +46,7 @@ tools:context=".NuevoCliente">
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/fechaFin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bordes"
@@ -58,7 +58,7 @@ tools:context=".NuevoCliente">
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/telefono"
+            android:id="@+id/horaInicio"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bordes"

@@ -25,6 +25,7 @@ import java.util.Arrays;
 public class GestorMain extends AppCompatActivity {
 
     public static final int NUMERO_PERFILES = 5;
+    private static final int CLAVE_LISTA = 55;
     RecyclerView RVClientes;
     AdaptadorListado aL;
     Button anadirCliente;
@@ -88,8 +89,8 @@ public class GestorMain extends AppCompatActivity {
         aL.setClickListener(new AdaptadorListado.ItemClickListener() {
             @Override
             public void onClick(View view, int position, PerfilesClientes perfilesClientes) {
-                Intent intent = new Intent(GestorMain.this, InterfazUsuario.class);
-                intent.putExtra(CLAVE_LISTA);
+                Intent intent = new Intent(GestorMain.this, com.example.seradmin.InterfazUsuari.InterfazUsuario.class);
+                intent.putExtra("Vuelta", CLAVE_LISTA);
                 controladorGestor.launch(intent);
             }
         });
