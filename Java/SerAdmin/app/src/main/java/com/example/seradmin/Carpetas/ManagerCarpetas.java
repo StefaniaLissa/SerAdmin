@@ -17,6 +17,7 @@ import com.example.seradmin.Recycler.PerfilesClientes;
 import java.util.ArrayList;
 
 public class ManagerCarpetas extends AppCompatActivity {
+    private static final int SELECCION_CARPETAS = 5;
     RecyclerView RVCarpetas;
     AdaptadorPDF adaptadorCarpetas;
     private ArrayList<Carpetas> carpetas;
@@ -39,7 +40,7 @@ public class ManagerCarpetas extends AppCompatActivity {
         RVCarpetas.setAdapter(carpetas);
 
 
-        anadirCarpeta.setOnClickListener(new View.OnClickListener() {
+       anadirCarpeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
