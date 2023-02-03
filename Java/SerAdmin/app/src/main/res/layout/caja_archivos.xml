@@ -28,7 +28,7 @@
 
         <ImageView
             android:id="@+id/imagenArchivo"
-            app:srcCompat="@drawable/carpeta"
+            app:srcCompat="@drawable/folder"
             android:layout_width="110dp"
             android:layout_height="45dp"
             android:layout_marginTop="8dp"

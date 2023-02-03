@@ -25,7 +25,7 @@ public class ManagerPDF extends AppCompatActivity {
         RVPDF.setHasFixedSize(true);
         RVPDF.setLayoutManager(new LinearLayoutManager(this));
 
-        //archivos = new ArrayList(new PerfilesClientes().generarPerfiles(NUMERO_ARCHIVOS));
+        archivos = new ArrayList(new PerfilesClientes().generarPerfiles(NUMERO_ARCHIVOS));
 
         adaptadorPDF = new AdaptadorPDF(archivos);
         RVPDF.setAdapter(adaptadorPDF);
