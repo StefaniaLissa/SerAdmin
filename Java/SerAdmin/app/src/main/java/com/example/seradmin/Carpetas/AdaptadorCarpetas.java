@@ -18,6 +18,10 @@ import java.util.ArrayList;
 public class AdaptadorCarpetas extends RecyclerView.Adapter<AdaptadorCarpetas.ViewHolder>{
     private ArrayList<Carpetas> carpetasList;
 
+    public AdaptadorCarpetas() {
+
+    }
+
     public interface ItemClickListener {
         void onClick(View view, int position, Carpetas carpetasList);
     }
@@ -68,7 +72,8 @@ public class AdaptadorCarpetas extends RecyclerView.Adapter<AdaptadorCarpetas.Vi
     @Override
     public AdaptadorCarpetas.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.caja_carpetas, viewGroup, false);
-        AdaptadorCarpetas.ViewHolder viewHolder = new AdaptadorCarpetas().ViewHolder(v);
+        //AdaptadorCarpetas.ViewHolder viewHolder = new AdaptadorCarpetas().ViewHolder(v);
+        AdaptadorCarpetas.ViewHolder viewHolder = null;
         return viewHolder;
     }
 

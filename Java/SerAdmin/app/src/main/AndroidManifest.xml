@@ -14,14 +14,14 @@
         android:theme="@style/Theme.SerAdmin"
         tools:targetApi="31">
         <activity
-            android:name=".ManagerPDF"
+            android:name=".Carpetas.ManagerPDF"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ManagerCarpetas"
+            android:name=".Carpetas.ManagerCarpetas"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

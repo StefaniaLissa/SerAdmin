@@ -22,7 +22,7 @@ public class AdaptadorPDF extends RecyclerView.Adapter<AdaptadorPDF.ViewHolder>{
     private AdaptadorPDF.ItemClickListener clickListener;
 
     public void setClickListener(AdaptadorCarpetas.ItemClickListener itemClickListener) {
-        this.clickListener = itemClickListener;
+        //this.clickListener = itemClickListener;
     }
 
     public interface RecyclerViewClickListener {
@@ -65,7 +65,8 @@ public class AdaptadorPDF extends RecyclerView.Adapter<AdaptadorPDF.ViewHolder>{
     @Override
     public AdaptadorPDF.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.caja_archivos, viewGroup, false);
-        AdaptadorPDF.ViewHolder viewHolder = new AdaptadorPDF().ViewHolder(v);
+        //AdaptadorPDF.ViewHolder viewHolder = new AdaptadorPDF().ViewHolder(v);
+        AdaptadorPDF.ViewHolder viewHolder = null;
         return viewHolder;
     }
 

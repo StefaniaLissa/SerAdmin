@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#030537"
     android:orientation="vertical"
     android:padding="2dp">
@@ -37,9 +38,8 @@
             android:id="@+id/nomArchivo"
             android:layout_width="158dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:gravity="center_vertical"
             android:text="Mod101"
-            android:textAlignment="textStart"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
