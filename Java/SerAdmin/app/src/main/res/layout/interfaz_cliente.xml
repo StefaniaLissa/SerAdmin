@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/elipsis" />
+            app:srcCompat="@drawable/dots" />
 
         <SearchView
             android:id="@+id/buscador"
@@ -64,14 +64,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="237dp"
+        android:layout_height="238dp"
         android:orientation="vertical">
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="327dp"
+        android:layout_height="328dp"
         android:orientation="horizontal">
 
         <TextView
@@ -97,7 +97,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:gravity="bottom">
 
             <ImageButton
                 android:id="@+id/imageButton2"
@@ -106,7 +108,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#00000000"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/hogar__1_" />
+                app:srcCompat="@drawable/home" />
 
             <ImageButton
                 android:id="@+id/imageButton3"

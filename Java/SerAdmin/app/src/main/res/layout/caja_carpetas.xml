@@ -32,15 +32,14 @@
             android:layout_height="45dp"
             android:layout_marginTop="8dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/carpeta" />
+            app:srcCompat="@drawable/folder" />
 
         <TextView
             android:id="@+id/nomCarpeta"
             android:layout_width="158dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:text="Mod101"
-            android:textAlignment="textStart"
+            android:gravity="center_vertical"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
