@@ -1,4 +1,8 @@
 <resources>
+    <dimen name="ancho_cajas_texto">250dp</dimen>
+    <dimen name="alto_cajas_texto">50dp</dimen>
+    <dimen name="bordes">2.5dp</dimen>
+    <dimen name="eventosYarchivosMain">264dp</dimen>
     <dimen name="one_dp">1dp</dimen>
     <dimen name="tiny_margin">2dp</dimen>
     <dimen name="small_margin">4dp</dimen>
@@ -100,4 +104,5 @@
     <dimen name="quick_filter_active_line_size">6dp</dimen>
     <dimen name="quick_filter_inactive_line_size">2dp</dimen>
     <dimen name="zero">0dp</dimen>
+    <dimen name="alto_boton">60dp</dimen>
 </resources>

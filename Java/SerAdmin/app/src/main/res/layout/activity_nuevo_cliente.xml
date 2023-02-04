@@ -9,8 +9,8 @@ tools:context=".NuevoCliente">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="250dp"
-        android:layout_height="400dp"
+        android:layout_width="@dimen/ancho_cajas_texto"
+        android:layout_height="wrap_content"
         android:divider="@drawable/divider_nuevo_gestor"
         android:gravity="center"
         android:orientation="vertical"
@@ -19,12 +19,24 @@ tools:context=".NuevoCliente">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6">
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:srcCompat="@drawable/logoseradmin" />
 
         <EditText
             android:id="@+id/titulo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_cajas_texto"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
             android:ems="10"
@@ -35,8 +47,8 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/fechaInicio"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_cajas_texto"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
             android:ems="10"
@@ -47,8 +59,8 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/fechaFin"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_cajas_texto"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
             android:ems="10"
@@ -59,8 +71,8 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/horaInicio"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_cajas_texto"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
             android:ems="10"
@@ -72,46 +84,26 @@ tools:context=".NuevoCliente">
         <Spinner
             android:id="@+id/sociedad"
             style="@style/SpinnerTheme"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/ancho_cajas_texto"
             android:layout_height="50dp"
             android:background="@drawable/spinner"
             android:spinnerMode="dialog"
             android:splitMotionEvents="false"
-            android:touchscreenBlocksFocus="false"/>
+            android:touchscreenBlocksFocus="false" />
+
+        <Button
+            android:id="@+id/crear"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_boton"
+            android:backgroundTint="#00000000"
+            android:text="Crear cuenta"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2.5dp" />
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/añadir2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_add_24"
-        android:textAlignment="center"
-        app:backgroundTint="#1F62FF"
-        app:ensureMinTouchTargetSize="false"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="1.0"
-        app:tint="#FFFFFF" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@drawable/logoseradmin" />
 
     <!--<TextView
         android:id="@+id/hintSpinner"

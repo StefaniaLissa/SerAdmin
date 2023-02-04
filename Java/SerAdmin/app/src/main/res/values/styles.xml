@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="spinner_style">
         <item name="android:background">@drawable/borde_spinner</item>
     </style>
+
     <style name="SpinnerTheme" parent="android:Widget.Material.Spinner.Underlined">
         <item name="android:background">@drawable/spinnerbg
         </item>
-        <item name="android:popupBackground" >@drawable/spinnerbg
+        <item name="android:popupBackground">@drawable/spinnerbg
         </item>
-<item name="android:radius">10dp</item>
+        <item name="android:radius">10dp</item>
         <item name="android:textAlignment">textStart</item>
     </style>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"></style>
 
     <style name="DayView">
         <item name="android:gravity">center</item>
