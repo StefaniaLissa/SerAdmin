@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "718156182947",
+    "project_id": "seradmin-2023",
+    "storage_bucket": "seradmin-2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718156182947:android:20acef0dc3a26168b2d616",
+        "android_client_info": {
+          "package_name": "com.example.seradmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718156182947-cp6febbvva9t9lnvc15uff7t615va244.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAootEURwMsZR1xj2t9LvjMcI0sOi68-rk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718156182947-cp6febbvva9t9lnvc15uff7t615va244.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
