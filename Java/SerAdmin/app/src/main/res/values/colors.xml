@@ -69,6 +69,8 @@
     <color name="md_deep_purple">#673AB7</color>
     <color name="md_green">#4CAF50</color>
     <color name="md_grey">#9E9E9E</color>
+    <color name="md_grey_black">#616161</color>
+    <color name="md_grey_white">#CDCDCD</color>
     <color name="md_indigo">#3F51B5</color>
     <color name="md_light_blue">#03A9F4</color>
     <color name="md_light_green">#8BC34A</color>
@@ -79,5 +81,7 @@
     <color name="md_red">#F44336</color>
     <color name="md_teal">#009688</color>
     <color name="md_yellow">#FFEB3B</color>
+    <color name="red_text">#9C0B00</color>
+    <color name="transparente">#00FFFFFF</color>
 
 </resources>

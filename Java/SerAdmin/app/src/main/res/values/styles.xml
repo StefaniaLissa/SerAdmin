@@ -50,4 +50,27 @@
     <style name="DatePickerDarkStyle">
         <item name="android:textColorPrimary">@color/oxford_blue</item>
     </style>
+    <style name="AppTheme.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:outlineProvider">none</item>
+    </style>
+    <style name="AppTheme.ActionBar.TitleTextStyle">
+        <item name="android:textSize">@dimen/actionbar_text_size</item>
+    </style>
+
+    <style name="ColoredButtonStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/bigger_text_size</item>
+        <item name="android:paddingStart">@dimen/big_margin</item>
+        <item name="android:paddingEnd">@dimen/big_margin</item>
+        <item name="android:paddingTop">@dimen/normal_margin</item>
+        <item name="android:paddingBottom">@dimen/normal_margin</item>
+        <item name="android:background">@drawable/zround_background</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="hoy">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/day_text_size</item>
+        <item name="background">@drawable/zic_circle_vector</item>
+    </style>
 </resources>

@@ -2,7 +2,52 @@
     <string name="app_name">SerAdmin</string>
     <string name="sociedad">Tipo de Sociedad</string>
 
-<!--CALENDARIO-->
+    <!--CALENDARIO-->
+    <string name="january">Enero</string>
+    <string name="february">Febrero</string>
+    <string name="march">Marzo</string>
+    <string name="april">Abril</string>
+    <string name="may">Mayo</string>
+    <string name="june">Junio</string>
+    <string name="july">Julio</string>
+    <string name="august">Agosto</string>
+    <string name="september">Septiembre</string>
+    <string name="october">Octubre</string>
+    <string name="november">Noviembre</string>
+    <string name="december">Diciembre</string>
+    <string name="january_short">Ene</string>
+    <string name="february_short">Feb</string>
+    <string name="march_short">Mar</string>
+    <string name="april_short">Abr</string>
+    <string name="may_short">Mayo</string>
+    <string name="june_short">Jun</string>
+    <string name="july_short">Jul</string>
+    <string name="august_short">Ago</string>
+    <string name="september_short">Sep</string>
+    <string name="october_short">Oct</string>
+    <string name="november_short">Nov</string>
+    <string name="december_short">Dic</string>
+    <string name="monday_letter">L</string>
+    <string name="tuesday_letter">M</string>
+    <string name="wednesday_letter">M</string>
+    <string name="thursday_letter">J</string>
+    <string name="friday_letter">V</string>
+    <string name="saturday_letter">S</string>
+    <string name="sunday_letter">D</string>
+    <string name="monday">Lunes</string>
+    <string name="tuesday">Martes</string>
+    <string name="wednesday">Miércoles</string>
+    <string name="thursday">Jueves</string>
+    <string name="friday">Viernes</string>
+    <string name="saturday">Sábado</string>
+    <string name="sunday">Domingo</string>
+    <string name="monday_short">Lun</string>
+    <string name="tuesday_short">Mar</string>
+    <string name="wednesday_short">Mier</string>
+    <string name="thursday_short">Juev</string>
+    <string name="friday_short">Vier</string>
+    <string name="saturday_short">Sab</string>
+    <string name="sunday_short">Dom</string>
     <string name="app_launcher_name">Calendario</string>
     <string name="change_view">Cambiar vista</string>
     <string name="daily_view">Vista diaria</string>
@@ -210,16 +255,7 @@
     <string name="friday_alt">viernes</string>
     <string name="saturday_alt">sábado</string>
     <string name="sunday_alt">domingo</string>
-    <!-- List widget config example events -->
-    <string name="sample_title_1">Ejercicio</string>
-    <string name="sample_description_1">Día de ejercitar piernas</string>
-    <string name="sample_title_2">Reunión con John</string>
-    <string name="sample_description_2">En el jardín de Rockstone</string>
-    <string name="sample_title_3">Biblioteca</string>
-    <string name="sample_title_4">Comer con María</string>
-    <string name="sample_description_4">En la plaza</string>
-    <string name="sample_title_5">Hora del café</string>
-    <!-- List widget config -->
+
     <string name="show_events_happening">Mostrar los eventos que ocurren:</string>
     <string name="within_the_next_one_year">Durante el próximo año</string>
     <string name="today_only">Solo hoy</string>
@@ -239,25 +275,15 @@
         <item quantity="many">En los próximos meses %d</item>
         <item quantity="other">En los próximos meses %d</item>
     </plurals>
-    <!-- FAQ -->
-    <string name="faq_1_title">¿Cómo puedo eliminar los festivos importados a través del botón \"Añadir festivos\"\?</string>
-    <string name="faq_1_text">A los eventos creados de esta forma se les asigna el tipo de evento \"Festivos\". En Ajustes -&gt; Gestionar tipos de evento, mantén pulsado el tipo de evento para seleccionarlo y elimínalo pulsando en la papelera.</string>
-    <string name="faq_2_title">¿Puedo sincronizar eventos a través de Google Calendar u otros servicios compatibles con CalDAV\?</string>
-    <string name="faq_2_title_extra">¿Quizás incluso pueda compartir los calendarios con otras personas\?</string>
-    <string name="faq_2_text">Sí, simplemente activa la opción \"Sincronizar CalDAV\" en los ajustes de la aplicación y selecciona los calendarios que quieras sincronizar. Sin embargo, hará falta una aplicación de terceros para sincronizar el dispositivo con los servidores. Si quieres sincronizar un calendario de Google, utiliza la aplicación de calendario oficial. Para otros calendarios, necesitarás una aplicación de terceros para sincronizarlos, por ejemplo, DAVx5.</string>
-    <string name="faq_3_title">Veo las notificaciones, pero no suenan. ¿Qué puedo hacer\?</string>
-    <string name="faq_3_text">Tanto las notificaciones como el sonido de notificación dependen del sistema en gran parte. Si no suenan las notificaciones, entra en los ajustes de la aplicación, pulsa en la opción de \"Tipo de sonido usado en recordatorios\" y cámbialo a una opción diferente. Si continúa fallando, comprueba en las opciones de sonido que la opción seleccionada no esté silenciada.</string>
-    <string name="faq_4_title">¿La aplicación admite zonas horarias\?</string>
-    <string name="faq_4_text">Sí. Por defecto todos los eventos se crean en tu zona horaria actual. Si quieres cambiar la zona horaria de un evento, primero activa la opción de Permitir cambiar la zona horaria en la configuración de la aplicación, luego, selecciona la zona horaria en la ventana de Detalles del evento. Es una opción desactivada por defecto porque la mayoría de personas no lo necesitan.</string>
-    <string name="faq_5_title">¿Por qué no aparece ninguna notificación\?</string>
-    <string name="faq_5_text">Comprueba la batería y las opciones de notificación, asegúrate de que los recordatorios no estén bloqueados y de que se permita la ejecución de la aplicación en segundo plano. En esta página web &lt;a href=https://dontkillmyapp.com&gt;https://dontkillmyapp.com&lt;/a&gt; encontrarás consejos útiles.</string>
-    <string name="faq_6_title">¿Cómo puedo modificar o eliminar un tipo de evento\?</string>
-    <string name="faq_6_text">Puede hacer ambas cosas en la aplicación Configuración - Administrar tipos de eventos. Simplemente haga clic en el elemento deseado para cambiar la etiqueta y el color, o seleccione el elemento deseado presionándolo prolongadamente y use la papelera en el menú superior para eliminarlo.</string>
-    <string name="calendario">boton calendario</string>
-    <string name="home">Boton home</string>
-    <string name="files">Boton documentos</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error">Error</string>
+    <string name="delete">Borrar</string>
+    <string name="save">Guardar</string>
+    <string name="remove">Eliminar</string>
+    <string name="title">Título</string>
+    <string name="every_day">Todos los días</string>
     <string name="proximos_eventos">PROXIMOS EVENTOS</string>
     <string name="recientes">RECIENTES</string>
-    <string name="imagen_de_usuario">Imagen de usuario</string>
 
 </resources>

@@ -23,7 +23,6 @@
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:contentDescription="@string/imagen_de_usuario"
             app:srcCompat="@drawable/dots" />
 
         <SearchView
@@ -131,7 +130,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#00000000"
-            android:contentDescription="@string/home"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/home" />
 
@@ -141,7 +139,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#00000000"
-            android:contentDescription="@string/files"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/folder" />
 
@@ -151,7 +148,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#00000000"
-            android:contentDescription="@string/calendario"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/calendario" />
 
