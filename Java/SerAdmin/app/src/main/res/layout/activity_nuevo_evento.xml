@@ -9,8 +9,8 @@ tools:context=".NuevoCliente">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="250dp"
-        android:layout_height="550dp"
+        android:layout_width="@dimen/ancho_cajas_texto"
+        android:layout_height="wrap_content"
         android:divider="@drawable/divider"
         android:gravity="center"
         android:orientation="vertical"
@@ -23,8 +23,8 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/titulo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_cajas_texto"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
             android:ems="10"
@@ -35,8 +35,8 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/fechaInicio"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_cajas_texto"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
             android:ems="10"
@@ -47,8 +47,8 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/fechaFin"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_cajas_texto"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
             android:ems="10"
@@ -59,8 +59,8 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/horaInicio"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_cajas_texto"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
             android:ems="10"
@@ -71,8 +71,8 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/horaFin"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_cajas_texto"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
             android:ems="10"
@@ -83,8 +83,8 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/ubicacion"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_cajas_texto"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"
             android:ems="10"
@@ -95,7 +95,7 @@ tools:context=".NuevoCliente">
 
         <EditText
             android:id="@+id/descripcion"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/ancho_cajas_texto"
             android:layout_height="100dp"
             android:background="@drawable/bordes"
             android:backgroundTint="@color/white"

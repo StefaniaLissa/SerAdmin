@@ -82,7 +82,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/logo"
         android:layout_width="260dp"
         android:layout_height="245dp"
         app:layout_constraintBottom_toBottomOf="parent"
