@@ -18,16 +18,16 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+//        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        logo = findViewById(R.id.logo);
-        logo.setOnClickListener(v -> {
-            //Registra evento de click en foto (no funciona)
-            Bundle bundle = new Bundle();
-            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, logo.getContentDescription().toString());
-            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-            Toast.makeText(getApplicationContext(), "CLICK", Toast.LENGTH_LONG).show();
-        });
+//        logo = findViewById(R.id.logo);
+//        logo.setOnClickListener(v -> {
+//            //Registra evento de click en foto (no funciona)
+//            Bundle bundle = new Bundle();
+//            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, logo.getContentDescription().toString());
+//            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+//            Toast.makeText(getApplicationContext(), "CLICK", Toast.LENGTH_LONG).show();
+//        });
 
 
     }
