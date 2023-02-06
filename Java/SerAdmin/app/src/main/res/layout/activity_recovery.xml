@@ -44,7 +44,7 @@
             android:textAlignment="center" />
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/SMS"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:backgroundTint="#00000000"
@@ -53,6 +53,18 @@
             android:textStyle="bold"
             app:strokeColor="@color/white"
             app:strokeWidth="2.5dp" />
+
+        <EditText
+            android:id="@+id/escribirSMS"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/bordes"
+            android:backgroundTint="@color/white"
+            android:visibility="invisible"
+            android:ems="10"
+            android:hint="Escribir SMS"
+            android:inputType="phone"
+            android:textAlignment="center" />
 
     </LinearLayout>
 

@@ -70,7 +70,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/sms"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:backgroundTint="#00000000"
