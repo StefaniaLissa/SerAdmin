@@ -17,30 +17,29 @@ import com.example.seradmin.Recycler.PerfilesClientes;
 import java.util.ArrayList;
 
 public class ManagerCarpetas extends AppCompatActivity {
-//    private static final int SELECCION_CARPETAS = 5;
-//    RecyclerView RVCarpetas;
-//    AdaptadorPDF adaptadorCarpetas;
-//    private ArrayList<Carpetas> carpetas;
-//    Button anadirCarpeta;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.manager_carpetas);
-//
-//        Button anadirCarpeta = findViewById(R.id.anadirCarpeta);
-//
-//        RVCarpetas = (RecyclerView) findViewById(R.id.RVCarpetas);
-//        RVCarpetas.setHasFixedSize(true);
-//        RVCarpetas.setLayoutManager(new LinearLayoutManager(this));
-//
+    RecyclerView RVCarpetas;
+    AdaptadorPDF adaptadorCarpetas;
+    private ArrayList<Carpetas> carpetas;
+    Button anadirCarpeta;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.manager_carpetas);
+
+        Button anadirCarpeta = findViewById(R.id.anadirCarpeta);
+
+        RVCarpetas = (RecyclerView) findViewById(R.id.RVCarpetas);
+        RVCarpetas.setHasFixedSize(true);
+        RVCarpetas.setLayoutManager(new LinearLayoutManager(this));
+
 //        carpetas = new ArrayList(new Carpetas());
 //
 //        adaptadorCarpetas = new AdaptadorCarpetas(carpetas);
 //        RVCarpetas.setAdapter(carpetas);
-//
-//
-//       anadirCarpeta.setOnClickListener(new View.OnClickListener() {
+
+
+//        anadirCarpeta.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -56,6 +55,6 @@ public class ManagerCarpetas extends AppCompatActivity {
 //                // Procesa el URI del archivo seleccionado
 //            }
 //        }
-//
-//    }
+
+    }
 }
