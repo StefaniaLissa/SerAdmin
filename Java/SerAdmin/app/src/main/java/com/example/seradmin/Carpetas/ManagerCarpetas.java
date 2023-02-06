@@ -33,28 +33,28 @@ public class ManagerCarpetas extends AppCompatActivity {
         RVCarpetas.setHasFixedSize(true);
         RVCarpetas.setLayoutManager(new LinearLayoutManager(this));
 
-        carpetas = new ArrayList(new Carpetas());
+//        carpetas = new ArrayList(new Carpetas());
+//
+//        adaptadorCarpetas = new AdaptadorCarpetas(carpetas);
+//        RVCarpetas.setAdapter(carpetas);
 
-        adaptadorCarpetas = new AdaptadorCarpetas(carpetas);
-        RVCarpetas.setAdapter(carpetas);
 
-
-        anadirCarpeta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("application/pdf");
-                startActivityForResult(intent, SELECCION_CARPETAS);
-            }
-        });
-
-        @Override
-        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-            if (requestCode == SELECCION_CARPETAS && resultCode == RESULT_OK) {
-                Uri uri = data.getData();
-                // Procesa el URI del archivo seleccionado
-            }
-        }
+//        anadirCarpeta.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                intent.setType("application/pdf");
+//                startActivityForResult(intent, SELECCION_CARPETAS);
+//            }
+//        });
+//
+//        @Override
+//        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//            if (requestCode == SELECCION_CARPETAS && resultCode == RESULT_OK) {
+//                Uri uri = data.getData();
+//                // Procesa el URI del archivo seleccionado
+//            }
+//        }
 
     }
 }

@@ -68,7 +68,8 @@ public class AdaptadorCarpetas extends RecyclerView.Adapter<AdaptadorCarpetas.Vi
     @Override
     public AdaptadorCarpetas.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.caja_carpetas, viewGroup, false);
-        AdaptadorCarpetas.ViewHolder viewHolder = new AdaptadorCarpetas().ViewHolder(v);
+        //AdaptadorCarpetas.ViewHolder viewHolder = new AdaptadorCarpetas().ViewHolder(v);
+        AdaptadorCarpetas.ViewHolder viewHolder = null;
         return viewHolder;
     }
 
