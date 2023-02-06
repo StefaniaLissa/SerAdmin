@@ -2,7 +2,6 @@
     <!-- Base application theme. -->
     <style name="Theme.SerAdmin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="android:textColor">@color/white</item>
         <item name="colorPrimary">@color/cobalt_blue</item>
         <item name="colorPrimaryVariant">@color/early_black</item>
         <item name="colorOnPrimary">@color/white</item>

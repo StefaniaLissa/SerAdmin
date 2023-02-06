@@ -40,7 +40,8 @@
         android:paddingTop="@dimen/medium_margin"
         android:paddingBottom="@dimen/medium_margin"
         android:textSize="@dimen/month_text_size"
-        tools:text="Enero" />
+        tools:text="Enero"
+        android:textColor="@color/white"/>
 
     <ImageView
         android:id="@+id/right"
