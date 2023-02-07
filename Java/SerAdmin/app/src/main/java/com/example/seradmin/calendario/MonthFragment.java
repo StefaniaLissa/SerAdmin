@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.seradmin.R;
@@ -21,10 +22,13 @@ import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.auth.callback.Callback;
+
 public class MonthFragment extends Fragment{
 
     private ImageView right, left;
     private TextView mes, dayTV;
+    LinearLayout  linearLayout;
     private final int DAYS_CNT = 42;
     private final String DATE_PATTERN = "ddMMYYYY";
     private final String YEAR_PATTERN = "YYYY";
@@ -63,7 +67,7 @@ public class MonthFragment extends Fragment{
 
         res = view.getResources();
         for (int i = 0; i < DAYS_CNT; i++) {
-            dayTV = view.findViewById(res.getIdentifier("day_" + i, "id", packageName));
+            linearLayout = view.findViewById(res.getIdentifier("day_" + i, "id", packageName));
         }
         updateCalendar(targetDate, view);
 
@@ -126,14 +130,40 @@ public class MonthFragment extends Fragment{
         mes.setTextColor(Color.WHITE);
     }
 
+//    private void updateDays(List<Day> days, View view) {
+//        final int len = days.size();
+//
+//        for (int i = 0; i < len; i++) {
+//            final Day day = days.get(i);
+//             dayTV = view.findViewById(res.getIdentifier("day_" + i, "id", packageName));
+//            int curTextColor = Color.GRAY;
+//
+//            if (day.getIsThisMonth()) {
+//                curTextColor = Color.WHITE;
+//            }
+//
+//            if (day.getIsToday()) {
+//                dayTV.setTextAppearance(R.style.hoy);
+//            }
+//
+//            dayTV.setText(String.valueOf(day.getValue()));
+//            dayTV.setTextColor(curTextColor);
+//
+//        }
+//    }
+
     private void updateDays(List<Day> days, View view) {
         final int len = days.size();
 
+        LayoutInflater inflater = LayoutInflater.from(this.getContext());
+        
         for (int i = 0; i < len; i++) {
             final Day day = days.get(i);
-             dayTV = view.findViewById(res.getIdentifier("day_" + i, "id", packageName));
-            int curTextColor = Color.GRAY;
+            linearLayout = view.findViewById(res.getIdentifier("day_" + i, "id", packageName));
+            final View v = inflater.inflate(R.layout.day_monthly_number_view, null);
+            dayTV = v.findViewById(R.id.day_monthly_number_id);
 
+            int curTextColor = Color.GRAY;
             if (day.getIsThisMonth()) {
                 curTextColor = Color.WHITE;
             }
@@ -144,7 +174,7 @@ public class MonthFragment extends Fragment{
 
             dayTV.setText(String.valueOf(day.getValue()));
             dayTV.setTextColor(curTextColor);
-
+            linearLayout.addView(dayTV);
         }
     }
 
@@ -165,4 +195,6 @@ public class MonthFragment extends Fragment{
     public DateTime getTargetDate() {
         return targetDate;
     }
+
+
 }
