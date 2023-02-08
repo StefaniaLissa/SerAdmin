@@ -33,6 +33,21 @@ public class Recovery extends AppCompatActivity {
         escribirSMS = findViewById(R.id.escribirSMS);
         mandarSMS = findViewById(R.id.SMS);
 
+        requestPermissionLauncherSMS = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                // Permission is granted. Continue the action or workflow in your
+                // app.
+                mandarSMS();
+            } else {
+                // Explain to the user that the feature is unavailable because the
+                // feature requires a permission that the user has denied. At the
+                // same time, respect the user's decision. Don't link to system
+                // settings in an effort to convince the user to change their
+                // decision.
+                Toast.makeText(Recovery.this, "Necesitamos permiso para mandar SMSs", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         mandarSMS.setOnClickListener(v -> {
             //checkSMSStatePermission();
             comprobarPermisosSMS();
@@ -42,21 +57,6 @@ public class Recovery extends AppCompatActivity {
     }
 
     public void comprobarPermisosSMS () {
-
-//        requestPermissionLauncherSMS = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-//            if (isGranted) {
-//                // Permission is granted. Continue the action or workflow in your
-//                // app.
-//                mandarSMS();
-//            } else {
-//                // Explain to the user that the feature is unavailable because the
-//                // feature requires a permission that the user has denied. At the
-//                // same time, respect the user's decision. Don't link to system
-//                // settings in an effort to convince the user to change their
-//                // decision.
-//                Toast.makeText(Recovery.this, "Necesitamos permiso para llamar", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         if (ContextCompat.checkSelfPermission(
                 Recovery.this, Manifest.permission.RECEIVE_SMS) ==
@@ -79,7 +79,7 @@ public class Recovery extends AppCompatActivity {
             // You can directly ask for the permission.
             // The registered ActivityResultCallback gets the result of this request.
             requestPermissionLauncherSMS.launch(Manifest.permission.RECEIVE_SMS);
-            requestPermissionLauncherSMS.launch(Manifest.permission.SEND_SMS);
+            //requestPermissionLauncherSMS.launch(Manifest.permission.SEND_SMS);
         }
     }
 
@@ -106,30 +106,6 @@ public class Recovery extends AppCompatActivity {
             String[] permission_list = new String[1];
             permission_list[0] = permission;
             ActivityCompat.requestPermissions(this, permission_list, 1);
-        }
-    }
-
-    public void llamadaClick(View v){
-        if (ContextCompat.checkSelfPermission(
-                Recovery.this, Manifest.permission.RECEIVE_SMS) ==
-                PackageManager.PERMISSION_GRANTED) {
-            // You can use the API that requires the permission.
-            mandarSMS();
-        } else if (false) {
-            // In an educational UI, explain to the user why your app requires this
-            // permission for a specific feature to behave as expected, and what
-            // features are disabled if it's declined. In this UI, include a
-            // "cancel" or "no thanks" button that lets the user continue
-            // using your app without granting the permission.
-
-            // Mostrar UI Dialog para explicar al usuarios la necesidad del permiso
-            // Vamos a usar la de por defecto de Android. Se ejecuta en el else
-
-        } else {
-            // You can directly ask for the permission.
-            // The registered ActivityResultCallback gets the result of this request.
-            requestPermissionLauncherSMS.launch(Manifest.permission.RECEIVE_SMS);
-            requestPermissionLauncherSMS.launch(Manifest.permission.SEND_SMS);
         }
     }
 

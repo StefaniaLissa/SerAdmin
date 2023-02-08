@@ -100,7 +100,7 @@ public class Login extends AppCompatActivity {
                 intent.putExtra("GESTOR", CLAVE_GESTOR);
                 controladorLogin.launch(intent);
             } else if (usuario.getText().toString().startsWith("C")) {
-                Intent intent = new Intent(Login.this, NuevoCliente.class);
+                Intent intent = new Intent(Login.this, GestorMain.class);
                 intent.putExtra("CLIENTE", CLAVE_CLIENTE);
                 controladorLogin.launch(intent);
             }
