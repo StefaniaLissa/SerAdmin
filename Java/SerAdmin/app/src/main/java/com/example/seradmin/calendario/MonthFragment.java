@@ -18,11 +18,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.seradmin.R;
+import com.example.seradmin.database.eventosDatabase.Evento;
 
 import org.joda.time.DateTime;
 
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.security.auth.callback.Callback;
@@ -116,12 +118,25 @@ public class MonthFragment extends Fragment{
 
             isToday = isThisMonth && isToday(targetDate, value);
 
-            final Day day = new Day(value, isThisMonth, isToday);
+            ArrayList<Event> events = new ArrayList<Event>();
+            final Day day = new Day(value, isThisMonth, isToday, events);
+            if (isToday) {  //Momentaneo hasta que BBDD
+                cargarEvento(targetDate, day);
+            }
             days.add(day);
             value++;
         }
 
         updateCalendar(getMonthName(), days, view);
+    }
+
+    private void cargarEvento(DateTime targetDate, Day day) {
+        ArrayList<Event> eventos = new ArrayList<Event>();
+        DateTime inicio = new DateTime();
+        DateTime fin = new DateTime();
+        Event uno = new Event(inicio, fin, "Hoy");
+        eventos.add(uno);
+        day.setDayEvents(eventos); ;
     }
 
     public void updateCalendar(String month, List<Day> days, View view) {
@@ -141,7 +156,9 @@ public class MonthFragment extends Fragment{
 
         for (int i = 0; i < len; i++) {
             final Day day = days.get(i);
+
             linearLayout = view.findViewById(res.getIdentifier("day_" + i, "id", packageName));
+            linearLayout.removeAllViews();
             final View v = inflater.inflate(R.layout.day_monthly_number_view, null);
             dayTV = v.findViewById(R.id.day_monthly_number_holder);
             TextView text = v.findViewById(R.id.day_monthly_number_id);
@@ -160,6 +177,14 @@ public class MonthFragment extends Fragment{
             text.setText(String.valueOf(day.getValue()));
             text.setTextColor(curTextColor);
             linearLayout.addView(dayTV);
+
+            for (Event event : day.getDayEvents()) {
+                final View ev = inflater.inflate(R.layout.day_monthly_event_view_widget, null);
+                RelativeLayout rl = ev.findViewById(R.id.day_monthly_event_holder);
+                TextView titulo = ev.findViewById(R.id.day_monthly_event_id);
+                titulo.setText(event.getTitulo());
+                linearLayout.addView(rl);
+            }
         }
     }
 
