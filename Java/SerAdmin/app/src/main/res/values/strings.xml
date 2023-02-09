@@ -285,5 +285,6 @@
     <string name="every_day">Todos los días</string>
     <string name="proximos_eventos">PROXIMOS EVENTOS</string>
     <string name="recientes">RECIENTES</string>
+    <string name="contraseña">Contraseña</string>
 
 </resources>

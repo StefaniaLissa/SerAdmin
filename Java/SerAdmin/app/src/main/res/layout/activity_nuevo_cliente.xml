@@ -25,61 +25,84 @@ tools:context=".NuevoCliente">
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:srcCompat="@drawable/logoseradmin" />
+            tools:srcCompat="@drawable/logoseradmin"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-30dp"/>
 
         <EditText
-            android:id="@+id/titulo"
-            android:layout_width="@dimen/ancho_cajas_texto"
-            android:layout_height="@dimen/alto_cajas_texto"
-            android:background="@drawable/bordes"
-            android:backgroundTint="@color/white"
-            android:ems="10"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:textAlignment="center"
-            android:textStyle="bold" />
+            android:id="@+id/dni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="DNI"
+            android:inputType="text"
+            android:maxLength="180"
+            android:maxLines="1"
+            android:minEms="20"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/day_text_size"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_white"
+            android:backgroundTint="@color/white" />
 
         <EditText
-            android:id="@+id/fechaInicio"
-            android:layout_width="@dimen/ancho_cajas_texto"
-            android:layout_height="@dimen/alto_cajas_texto"
-            android:background="@drawable/bordes"
-            android:backgroundTint="@color/white"
-            android:ems="10"
+            android:id="@+id/contraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/contraseña"
+            android:inputType="text"
+            android:maxLength="180"
+            android:maxLines="1"
+            android:minEms="20"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/day_text_size"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_white"
+            android:backgroundTint="@color/white"/>
+
+        <EditText
+            android:id="@+id/nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Nombre"
-            android:inputType="textPersonName"
-            android:textAlignment="center"
-            android:textStyle="bold" />
+            android:inputType="textCapSentences"
+            android:maxLength="180"
+            android:maxLines="1"
+            android:minEms="20"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/day_text_size"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_white"
+            android:backgroundTint="@color/white"/>
 
         <EditText
-            android:id="@+id/fechaFin"
-            android:layout_width="@dimen/ancho_cajas_texto"
-            android:layout_height="@dimen/alto_cajas_texto"
-            android:background="@drawable/bordes"
-            android:backgroundTint="@color/white"
-            android:ems="10"
+            android:id="@+id/apellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Apellido"
-            android:inputType="textPersonName"
-            android:textAlignment="center"
-            android:textStyle="bold" />
+            android:inputType="textCapSentences"
+            android:maxLength="180"
+            android:maxLines="1"
+            android:minEms="20"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/day_text_size"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_white"
+            android:backgroundTint="@color/white"/>
 
         <EditText
-            android:id="@+id/horaInicio"
-            android:layout_width="@dimen/ancho_cajas_texto"
-            android:layout_height="@dimen/alto_cajas_texto"
-            android:background="@drawable/bordes"
-            android:backgroundTint="@color/white"
-            android:ems="10"
+            android:id="@+id/telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Teléfono"
-            android:inputType="phone"
-            android:textAlignment="center"
-            android:textStyle="bold" />
+            android:inputType="textCapSentences"
+            android:maxLength="180"
+            android:maxLines="1"
+            android:minEms="20"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/day_text_size"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_white"
+            android:backgroundTint="@color/white"/>
 
         <Spinner
             android:id="@+id/sociedad"
@@ -87,6 +110,7 @@ tools:context=".NuevoCliente">
             android:layout_width="@dimen/ancho_cajas_texto"
             android:layout_height="50dp"
             android:background="@drawable/spinner"
+            android:dropDownWidth="wrap_content"
             android:spinnerMode="dialog"
             android:splitMotionEvents="false"
             android:touchscreenBlocksFocus="false" />
@@ -95,15 +119,15 @@ tools:context=".NuevoCliente">
             android:id="@+id/crear"
             android:layout_width="@dimen/ancho_cajas_texto"
             android:layout_height="@dimen/alto_boton"
-            android:backgroundTint="#00000000"
+            android:backgroundTint="@color/transparente"
             android:text="Crear cuenta"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
             app:strokeColor="@color/white"
             app:strokeWidth="2.5dp" />
 
     </LinearLayout>
-
 
     <!--<TextView
         android:id="@+id/hintSpinner"

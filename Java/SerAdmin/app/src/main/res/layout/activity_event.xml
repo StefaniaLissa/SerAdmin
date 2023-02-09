@@ -143,7 +143,8 @@
                         android:text="@string/all_day"
                         android:textSize="@dimen/day_text_size"
                         android:textColor="@color/white"
-                        android:buttonTint="@color/white"/>
+                        android:buttonTint="@color/white"
+                        />
 
                 </RelativeLayout>
 
@@ -647,9 +648,10 @@
 <!--                    android:id="@+id/event_type_divider"-->
 <!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="@dimen/divider_height"-->
-<!--                    android:layout_below="@+id/event_type_color"-->
+<!--                    android:layout_below="@+id/event_type_image"-->
 <!--                    android:background="@color/divider_grey"-->
-<!--                    android:importantForAccessibility="no" />-->
+<!--                    android:importantForAccessibility="no"-->
+<!--                    android:visibility="gone" />-->
 
             </RelativeLayout>
         </androidx.core.widget.NestedScrollView>
