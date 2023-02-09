@@ -13,13 +13,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Recovery extends AppCompatActivity {
 
+    private static final int CLAVE_SMS_CORRECTO = 55;
     EditText telefono, escribirSMS;
     Button mandarSMS;
     ActivityResultLauncher<String> requestPermissionLauncherSMS;
@@ -53,7 +56,6 @@ public class Recovery extends AppCompatActivity {
             comprobarPermisosSMS();
         });
 
-
     }
 
     public void comprobarPermisosSMS () {
@@ -79,7 +81,7 @@ public class Recovery extends AppCompatActivity {
             // You can directly ask for the permission.
             // The registered ActivityResultCallback gets the result of this request.
             requestPermissionLauncherSMS.launch(Manifest.permission.RECEIVE_SMS);
-            //requestPermissionLauncherSMS.launch(Manifest.permission.SEND_SMS);
+            requestPermissionLauncherSMS.launch(Manifest.permission.SEND_SMS);
         }
     }
 
@@ -120,6 +122,17 @@ public class Recovery extends AppCompatActivity {
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phone, null, text , null, null);
         escribirSMS.setVisibility(View.VISIBLE);
+        escribirSMS.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (v.getText().toString().equals(text)) {
+                    Intent intent = new Intent(Recovery.this, NuevaContraseña.class);
+                    intent.putExtra("SMSCORRECTO", CLAVE_SMS_CORRECTO);
+                    startActivity(intent);
+                }
+                return false;
+            }
+        });
     }
 
 }

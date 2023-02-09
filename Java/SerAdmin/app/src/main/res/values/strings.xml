@@ -286,5 +286,8 @@
     <string name="proximos_eventos">PROXIMOS EVENTOS</string>
     <string name="recientes">RECIENTES</string>
     <string name="contraseña">Contraseña</string>
+    <string name="dni">DNI</string>
+    <string name="nueva_contrasenya">Nueva Contraseña</string>
+    <string name="repetir_contrasenya">Repetir Contraseña</string>
 
 </resources>
