@@ -73,6 +73,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <receiver android:name=".SmsReceiver"
+            android:exported="false">
+        <intent-filter>
+            <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+        </intent-filter>
+        </receiver>
         <activity
             android:name=".Recovery"
             android:exported="true">

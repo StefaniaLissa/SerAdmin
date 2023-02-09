@@ -1,27 +1,24 @@
 package com.example.seradmin;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.telephony.SmsMessage;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.seradmin.InterfazUsuari.InterfazUsuario;
 import com.example.seradmin.Recycler.AdaptadorListado;
 import com.example.seradmin.Recycler.PerfilesClientes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GestorMain extends AppCompatActivity {
 
@@ -116,4 +113,5 @@ public class GestorMain extends AppCompatActivity {
             }
         });*/
     }
+
 }

@@ -42,6 +42,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.2.0')
     implementation 'com.google.firebase:firebase-database:19.3.0'
     implementation 'com.google.firebase:firebase-analytics:21.2.0'
+    implementation 'com.google.firebase:firebase-auth'
 
     //Agregados
     implementation 'de.hdodenhof:circleimageview:3.1.0'
