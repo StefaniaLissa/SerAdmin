@@ -4,7 +4,7 @@ import com.example.seradmin.R;
 
 public class ExtensionTable {
     public static int getExtensionIcon(String extension) {
-        return R.drawable.ic_java;
+        return R.drawable.pdf;
 //        switch (extension) {
 //            case ".c": return R.drawable.ic_c;
 //            case ".cpp": return R.drawable.ic_cpp;

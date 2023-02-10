@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class TreeViewHolder extends RecyclerView.ViewHolder {
 
-    private int nodePadding = 50;
+    //private int nodePadding = 50;
 
     public TreeViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 
     public void bindTreeNode(TreeNode node) {
-        int padding = node.getLevel() * nodePadding;
+        int padding = node.getLevel(); //* nodePadding;
         itemView.setPadding(
                 padding,
                 itemView.getPaddingTop(),
@@ -23,12 +23,12 @@ public class TreeViewHolder extends RecyclerView.ViewHolder {
                 itemView.getPaddingBottom());
     }
 
-    public void setNodePadding(int padding) {
-        this.nodePadding = padding;
-    }
-
-    public int getNodePadding() {
-        return nodePadding;
-    }
+//    public void setNodePadding(int padding) {
+//        this.nodePadding = padding;
+//    }
+//
+//    public int getNodePadding() {
+//        return nodePadding;
+//    }
 }
 

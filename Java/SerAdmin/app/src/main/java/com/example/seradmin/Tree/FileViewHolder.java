@@ -36,7 +36,7 @@ public class FileViewHolder extends TreeViewHolder {
 
         int dotIndex = fileNameStr.indexOf('.');
         if (dotIndex == -1) {
-            fileTypeIcon.setImageResource(R.drawable.ic_launcher_background);
+            fileTypeIcon.setImageResource(R.drawable.folder);
         } else {
             String extension = fileNameStr.substring(dotIndex);
             int extensionIcon = ExtensionTable.getExtensionIcon(extension);
@@ -47,7 +47,7 @@ public class FileViewHolder extends TreeViewHolder {
             fileStateIcon.setVisibility(View.INVISIBLE);
         } else {
             fileStateIcon.setVisibility(View.VISIBLE);
-            int stateIcon = node.isExpanded() ? R.drawable.ic_baseline_keyboard_arrow_down_24 : R.drawable.ic_baseline_keyboard_arrow_down_24;
+            int stateIcon = node.isExpanded() ? R.drawable.down_arrow : R.drawable.next;
             fileStateIcon.setImageResource(stateIcon);
         }
     }

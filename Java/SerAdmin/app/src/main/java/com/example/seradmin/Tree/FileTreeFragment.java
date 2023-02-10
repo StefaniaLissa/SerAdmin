@@ -21,17 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileTreeFragment extends Fragment {
-
     private TreeViewAdapter treeViewAdapter;
-
     private static final String TAG = "FileTreeFragment";
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
