@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     android:fillViewport="true"
     android:scrollbarSize="5dp"
-    android:scrollbarThumbHorizontal="@color/black"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:scrollbarThumbHorizontal="@color/black">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/files_recycler_view"
