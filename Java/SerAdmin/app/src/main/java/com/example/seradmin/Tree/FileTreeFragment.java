@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seradmin.R;
+import com.example.seradmin.Tree.ControladoresTree.TreeNode;
 import com.example.seradmin.Tree.ControladoresTree.TreeViewAdapter;
 import com.example.seradmin.Tree.ControladoresTree.TreeViewHolderFactory;
-import com.google.firebase.database.core.utilities.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;

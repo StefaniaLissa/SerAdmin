@@ -5,7 +5,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.core.utilities.TreeNode;
 
 public class TreeViewHolder extends RecyclerView.ViewHolder {
 

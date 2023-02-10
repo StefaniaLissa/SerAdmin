@@ -27,28 +27,28 @@ public class FileViewHolder extends TreeViewHolder {
         fileTypeIcon = itemView.findViewById(R.id.file_type_icon);
     }
 
-//    @Override
-////    public void bindTreeNode(TreeNode node) {
-////        super.bindTreeNode(node);
-////
-////        String fileNameStr = node.getValue().toString();
-////        fileName.setText(fileNameStr);
-////
-////        int dotIndex = fileNameStr.indexOf('.');
-////        if (dotIndex == -1) {
-////            fileTypeIcon.setImageResource(R.drawable.ic_folder);
-////        } else {
-////            String extension = fileNameStr.substring(dotIndex);
-////            int extensionIcon = ExtensionTable.getExtensionIcon(extension);
-////            fileTypeIcon.setImageResource(extensionIcon);
-////        }
-//
-//        if (node.getChildren().isEmpty()) {
-//            fileStateIcon.setVisibility(View.INVISIBLE);
-//        } else {
-//            fileStateIcon.setVisibility(View.VISIBLE);
-//            int stateIcon = node.isExpanded() ? R.drawable.ic_arrow_down : R.drawable.ic_arrow_right;
-//            fileStateIcon.setImageResource(stateIcon);
-//        }
-//    }
+    @Override
+    public void bindTreeNode(TreeNode node) {
+        super.bindTreeNode(node);
+
+        String fileNameStr = node.getValue().toString();
+        fileName.setText(fileNameStr);
+
+        int dotIndex = fileNameStr.indexOf('.');
+        if (dotIndex == -1) {
+            fileTypeIcon.setImageResource(R.drawable.ic_launcher_background);
+        } else {
+            String extension = fileNameStr.substring(dotIndex);
+            int extensionIcon = ExtensionTable.getExtensionIcon(extension);
+            fileTypeIcon.setImageResource(extensionIcon);
+        }
+
+        if (node.getChildren().isEmpty()) {
+            fileStateIcon.setVisibility(View.INVISIBLE);
+        } else {
+            fileStateIcon.setVisibility(View.VISIBLE);
+            int stateIcon = node.isExpanded() ? R.drawable.ic_baseline_keyboard_arrow_down_24 : R.drawable.ic_baseline_keyboard_arrow_down_24;
+            fileStateIcon.setImageResource(stateIcon);
+        }
+    }
 }
