@@ -12,13 +12,18 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.Serializable;
 
 public class Recovery extends AppCompatActivity {
 
@@ -40,7 +45,7 @@ public class Recovery extends AppCompatActivity {
             if (isGranted) {
                 // Permission is granted. Continue the action or workflow in your
                 // app.
-                mandarSMS();
+                //mandarSMS();
             } else {
                 // Explain to the user that the feature is unavailable because the
                 // feature requires a permission that the user has denied. At the
@@ -85,31 +90,31 @@ public class Recovery extends AppCompatActivity {
         }
     }
 
-    private void checkSMSStatePermission() {
-        int permissionCheck = ContextCompat.checkSelfPermission(
-                this, android.Manifest.permission.SEND_SMS);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            Log.i("Mensaje", "No se tiene permiso para enviar SMS.");
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.SEND_SMS}, 225);
-        } else {
-            Log.i("Mensaje", "Se tiene permiso para enviar SMS!");
-            String phone = telefono.getText().toString();
-            String text = Integer.toString(generarNumeroAletorio());
-            SmsManager sms = SmsManager.getDefault();
-            sms.sendTextMessage(phone, null, text , null, null);
-            escribirSMS.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void requestSmsPermission() {
-        String permission = android.Manifest.permission.RECEIVE_SMS;
-        int grant = ContextCompat.checkSelfPermission(this, permission);
-        if ( grant != PackageManager.PERMISSION_GRANTED) {
-            String[] permission_list = new String[1];
-            permission_list[0] = permission;
-            ActivityCompat.requestPermissions(this, permission_list, 1);
-        }
-    }
+//    private void checkSMSStatePermission() {
+//        int permissionCheck = ContextCompat.checkSelfPermission(
+//                this, android.Manifest.permission.SEND_SMS);
+//        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+//            Log.i("Mensaje", "No se tiene permiso para enviar SMS.");
+//            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.SEND_SMS}, 225);
+//        } else {
+//            Log.i("Mensaje", "Se tiene permiso para enviar SMS!");
+//            String phone = telefono.getText().toString();
+//            String text = Integer.toString(generarNumeroAletorio());
+//            SmsManager sms = SmsManager.getDefault();
+//            sms.sendTextMessage(phone, null, text , null, null);
+//            escribirSMS.setVisibility(View.VISIBLE);
+//        }
+//    }
+//
+//    private void requestSmsPermission() {
+//        String permission = android.Manifest.permission.RECEIVE_SMS;
+//        int grant = ContextCompat.checkSelfPermission(this, permission);
+//        if ( grant != PackageManager.PERMISSION_GRANTED) {
+//            String[] permission_list = new String[1];
+//            permission_list[0] = permission;
+//            ActivityCompat.requestPermissions(this, permission_list, 1);
+//        }
+//    }
 
     public int generarNumeroAletorio() {
         int num = (int) (Math.random() * 100000) + 100000;
@@ -122,17 +127,31 @@ public class Recovery extends AppCompatActivity {
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phone, null, text , null, null);
         escribirSMS.setVisibility(View.VISIBLE);
-        escribirSMS.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        escribirSMS.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (v.getText().toString().equals(text)) {
-                    Intent intent = new Intent(Recovery.this, NuevaContraseña.class);
-                    intent.putExtra("SMSCORRECTO", CLAVE_SMS_CORRECTO);
-                    startActivity(intent);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(s.toString().equals(text)){
+
+                    lanzarNuevaContraseña();
+
                 }
-                return false;
             }
         });
+
+    }
+
+    public void lanzarNuevaContraseña() {
+        Intent intent = new Intent(getApplicationContext(), NuevaContraseña.class);
+        //Bundle bundle = new Bundle();
+        //bundle.putSerializable("Gestor", (Serializable) gestorObjeto);
+        //intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
 }
