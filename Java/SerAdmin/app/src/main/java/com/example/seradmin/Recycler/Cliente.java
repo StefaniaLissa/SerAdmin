@@ -20,7 +20,7 @@ public class Cliente {
 
     private String contraseña;
 
-    public Cliente() {
+    public Cliente(String nombre, String apellido, String dni, String dni_gestor, String num_tel, String contraseña) {
     }
 
     public Cliente(String nombre, String apellidos, String sexo, String sociedad) {

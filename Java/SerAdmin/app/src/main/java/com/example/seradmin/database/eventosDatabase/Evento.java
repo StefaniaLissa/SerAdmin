@@ -19,6 +19,8 @@ public class Evento implements Serializable {
     public float latitud;
     public float longitud;
     public String descripcion;
+    public Timestamp inicio;
+    public Timestamp fin;
 
     public Evento(){
     }

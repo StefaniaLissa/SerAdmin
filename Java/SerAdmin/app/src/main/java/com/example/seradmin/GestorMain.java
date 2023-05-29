@@ -56,10 +56,10 @@ public class GestorMain extends AppCompatActivity {
 
         Intent i = getIntent();
         Bundle extra = i.getExtras();
-        Gestor gestor = (Gestor) extra.getSerializable("Gestor");
+         Gestor gestor = (Gestor) extra.getSerializable("Gestor");
         //Gestor v_gestor = gestor.
 
-        dni_gestor = gestor.getDNI();
+         dni_gestor = gestor.getDNI();
 
         // Obtención de una instancia de FirebaseFirestore
         db = FirebaseFirestore.getInstance();
