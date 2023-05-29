@@ -1,5 +1,6 @@
 package com.example.seradmin.Recycler;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,14 @@ import java.util.ArrayList;
 
 public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.ViewHolder> {
 
-    private ArrayList<PerfilesClientes> perfilesList;
+    private ArrayList<Cliente> perfilesList;
+
+    private ArrayList<Cliente> perfilesList2;
+
+    private Context context;
 
     public interface ItemClickListener {
-        void onClick(View view, int position, PerfilesClientes perfilesClientes);
+        void onClick(View view, int position, Cliente cliente);
     }
 
     private ItemClickListener clickListener;
@@ -31,9 +36,16 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
 
     private RecyclerViewClickListener listener;
 
-    public AdaptadorListado(ArrayList<PerfilesClientes> dataSet) {
+    public AdaptadorListado(ArrayList<Cliente> dataSet) {
         perfilesList = dataSet;
         this.listener = listener;
+    }
+
+    public AdaptadorListado(ArrayList<Cliente> perfilesList, Context context) {
+        this.perfilesList = perfilesList;
+        this.context = context;
+        //almacena una copia de la lista en perfilesList2.
+        perfilesList2 = new ArrayList<>(perfilesList);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

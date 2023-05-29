@@ -22,7 +22,7 @@ tools:context=".NuevoCliente">
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/logoNC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:srcCompat="@drawable/logoseradmin"

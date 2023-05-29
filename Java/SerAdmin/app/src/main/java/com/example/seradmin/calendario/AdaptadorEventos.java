@@ -1,44 +1,81 @@
 package com.example.seradmin.calendario;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.seradmin.R;
 import com.example.seradmin.database.eventosDatabase.Evento;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class AdaptadorEventos extends RecyclerView.Adapter<AdaptadorEventos.ViewHolder>{
 
-    List<Evento> eventos;
+    private ArrayList<Evento> eventosList;
+
+    public interface ItemClickListener {
+        void onClick(View view, int position, Evento evento);
+    }
+
+    private ItemClickListener clickListener;
+
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+    }
+
+    public AdaptadorEventos(ArrayList<Evento> dataSet) {
+        eventosList = dataSet;
+        this.clickListener = clickListener;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final TextView tituloEvento;
+        private final TextView fechaEvento;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public ViewHolder(View v) {
+            super(v);
+            v.setOnClickListener(this);
+            tituloEvento = (TextView) v.findViewById(R.id.tituloEvento);
+            fechaEvento = (TextView) v.findViewById(R.id.fechaEvento);
+
         }
 
-        @Override
-        public void onClick(View v) {
 
+        public TextView getTituloEvento() {
+            return tituloEvento;
         }
+
+        public TextView getFechaEvento() {
+            return fechaEvento;
+        }
+
+        public void onClick(View view) {
+            // Si tengo un manejador de evento lo propago con el índice
+            if (clickListener != null) clickListener.onClick(view, getAdapterPosition(), eventosList.get(getAdapterPosition()));
+        }
+
     }
 
-    @NonNull
+
     @Override
-    public AdaptadorEventos.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.caja_eventos, viewGroup, false);
+        ViewHolder viewHolder = new ViewHolder(v);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdaptadorEventos.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.getTituloEvento().setText(eventosList.get(position).getTitulo());
+        holder.getFechaEvento().setText(eventosList.get(position).getFechaInicio().toString());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return eventosList.size();
     }
 }
+

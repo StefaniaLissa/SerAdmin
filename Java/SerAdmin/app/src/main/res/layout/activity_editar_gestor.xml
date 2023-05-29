@@ -5,11 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".NuevoGestor">
+    tools:context=".EditarGestor">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Cuenta"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/listo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toEndOf="@+id/titulo"
+            android:src="@drawable/zic_check_vector"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="250dp"
+        android:layout_width="@dimen/ancho_cajas_texto"
         android:layout_height="wrap_content"
         android:divider="@drawable/divider_nuevo_gestor"
         android:gravity="center"
@@ -17,30 +48,50 @@
         android:showDividers="middle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
-            android:id="@+id/imagen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:adjustViewBounds="false"
-            android:cropToPadding="false"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/logoseradmin" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/dni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:hint="DNI"
+                android:inputType="none"
+                android:editable="false"
+                android:textColor="@color/md_grey"
+                android:textColorHint="@color/hint_white"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/day_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/alert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="El DNI no se puede editar"
+                android:textColor="@color/carrot_orange"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@+id/dni" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
-            android:id="@+id/dni"
+            android:id="@+id/contrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-20dp"
             android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:hint="DNI/NIE"
+            android:hint="@string/contraseña"
             android:inputType="text"
             android:maxLength="180"
             android:maxLines="1"
@@ -49,51 +100,25 @@
             android:textColorHint="@color/hint_white"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/day_text_size" />
-
-        <TextView
-            android:id="@+id/alert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-30dp"
-            android:text="Número de identificación no válido"
-            android:textColor="@color/carrot_orange"
-            android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/dni" />
-
-        <EditText
-            android:id="@+id/contraseña"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:hint="Contraseña"
-            android:inputType="text"
-            android:maxLength="180"
-            android:maxLines="1"
-            android:minEms="20"
-            android:textColor="@color/white"
-            android:textColorHint="@color/hint_white"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/day_text_size" />
-
         <TextView
             android:id="@+id/alertC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-30dp"
             android:text="* Obligatorio"
             android:textColor="@color/carrot_orange"
             android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/dni" />
+            app:layout_constraintTop_toBottomOf="@+id/dni"
+            android:layout_marginTop="-30dp"
+            android:layout_marginBottom="-20dp"/>
+
 
         <EditText
             android:id="@+id/nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:gravity="center"
             android:hint="Nombre"
-            android:inputType="text"
+            android:inputType="textCapSentences"
             android:maxLength="180"
             android:maxLines="1"
             android:minEms="20"
@@ -101,25 +126,25 @@
             android:textColorHint="@color/hint_white"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/day_text_size" />
-
         <TextView
             android:id="@+id/alertN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-30dp"
             android:text="* Obligatorio"
             android:textColor="@color/carrot_orange"
             android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/dni" />
+            app:layout_constraintTop_toBottomOf="@+id/nombre"
+            android:layout_marginTop="-30dp"
+            android:layout_marginBottom="-20dp"/>
+
 
         <EditText
             android:id="@+id/apellido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:gravity="center"
             android:hint="Apellido"
-            android:inputType="text"
+            android:inputType="textCapSentences"
             android:maxLength="180"
             android:maxLines="1"
             android:minEms="20"
@@ -127,25 +152,25 @@
             android:textColorHint="@color/hint_white"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/day_text_size" />
-
         <TextView
             android:id="@+id/alertA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-30dp"
             android:text="* Obligatorio"
             android:textColor="@color/carrot_orange"
             android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/dni" />
+            app:layout_constraintTop_toBottomOf="@+id/dni"
+            android:layout_marginTop="-30dp"
+            android:layout_marginBottom="-20dp"/>
+
 
         <EditText
             android:id="@+id/telefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:hint="Teléfono Móvil"
-            android:inputType="text"
+            android:hint="Teléfono"
+            android:inputType="textCapSentences"
             android:maxLength="180"
             android:maxLines="1"
             android:minEms="20"
@@ -153,49 +178,50 @@
             android:textColorHint="@color/hint_white"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/day_text_size" />
-
         <TextView
             android:id="@+id/alert2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-30dp"
             android:text="Número de teléfono móvil no válido"
             android:textColor="@color/carrot_orange"
             android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/dni" />
+            app:layout_constraintTop_toBottomOf="@+id/dni"
+            android:layout_marginTop="-30dp"
+            android:layout_marginBottom="-20dp"/>
+
 
         <Button
-            android:id="@+id/crear"
+            android:id="@+id/save"
             android:layout_width="@dimen/ancho_cajas_texto"
             android:layout_height="@dimen/alto_boton"
-            android:backgroundTint="#00000000"
-            android:text="Crear cuenta"
+            android:backgroundTint="@color/transparente"
+            android:text="Guardar cambios"
+            android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:strokeColor="@color/white"
-            app:strokeWidth="2.5dp" />
-
-        <TextView
-            android:id="@+id/alertVerifyDNI"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-28dp"
-            android:gravity="center"
-            android:text="Ya existe una cuenta con ese DNI/NIE"
-            android:textColor="@color/carrot_orange"
-            android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/dni" />
-
+            app:strokeWidth="1dp" />
         <TextView
             android:id="@+id/alertVerifyTel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-25dp"
-            android:gravity="center"
-            android:text="Número móvil ya registrado"
+            android:text="Teléfono ya registrado"
             android:textColor="@color/carrot_orange"
             android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/dni" />
+            app:layout_constraintTop_toBottomOf="@+id/telefono"
+            android:layout_marginTop="-30dp"
+            android:layout_marginBottom="-20dp"/>
+
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="@dimen/ancho_cajas_texto"
+            android:layout_height="@dimen/alto_boton"
+            android:backgroundTint="@color/transparente"
+            android:text="Eliminar cuenta"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
 
     </LinearLayout>
 

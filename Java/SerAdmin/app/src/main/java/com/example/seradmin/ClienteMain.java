@@ -1,5 +1,11 @@
 package com.example.seradmin;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.SearchView;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -7,13 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.SearchView;
-import android.widget.Toast;
-
-import com.example.seradmin.InterfazUsuari.InterfazUsuario;
 import com.example.seradmin.Recycler.AdaptadorListado;
 import com.example.seradmin.Recycler.Cliente;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,14 +20,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GestorMain extends AppCompatActivity {
+public class ClienteMain extends AppCompatActivity {
 
     public static final int NUMERO_PERFILES = 5;
     private static final int CLAVE_LISTA = 55;
@@ -39,8 +36,6 @@ public class GestorMain extends AppCompatActivity {
     private ArrayList<Cliente> perfiles;
     private FirebaseFirestore db;
     private SearchView searchView;
-
-    private String dni_gestor;
 
 
     @Override
@@ -54,21 +49,12 @@ public class GestorMain extends AppCompatActivity {
         RVClientes.setHasFixedSize(true);
         RVClientes.setLayoutManager(new LinearLayoutManager(this));
 
-        Intent i = getIntent();
-        Bundle extra = i.getExtras();
-        Gestor gestor = (Gestor) extra.getSerializable("Gestor");
-        //Gestor v_gestor = gestor.
-
-        dni_gestor = gestor.getDNI();
-
         // Obtención de una instancia de FirebaseFirestore
         db = FirebaseFirestore.getInstance();
         //Obtención de la colección "Clientes" en Firebase
         CollectionReference clientes_firebase = db.collection("Clientes");
         // Obtiene los documentos en la colección de clientes y los agrega a la lista de perfiles
-
-        Query clientesGestor = clientes_firebase.whereEqualTo("DNI_Gestor", dni_gestor);
-        clientesGestor.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        clientes_firebase.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
@@ -79,30 +65,19 @@ public class GestorMain extends AppCompatActivity {
                             document.get("DNI").toString(),
                             document.get("DNI_Gestor").toString(),
                             document.get("Num_Tel").toString(),
-                            document.get("Contraseña").toString(),
-                            document.get("Sociedad").toString()
+                            document.get("Contraseña").toString()
                     ));
 
 
                 }
-                aL = new AdaptadorListado(perfiles, GestorMain.this);
+                aL = new AdaptadorListado(perfiles, ClienteMain.this);
                 RVClientes.setAdapter(aL);
                 aL.notifyDataSetChanged();
-
-                aL.setClickListener(new AdaptadorListado.ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, Cliente cliente) {
-                        Intent intent = new Intent(GestorMain.this, InterfazUsuario.class);
-                        intent.putExtra("Detalle", CLAVE_LISTA);
-                        intent.putExtra("Cliente", (Serializable) cliente);
-                        controladorGestor.launch(intent);
-                    }
-                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(GestorMain.this, "Error al cargar los datos ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ClienteMain.this, "Error al cargar los datos ", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -114,9 +89,8 @@ public class GestorMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Abre una nueva actividad para agregar un cliente
-                Intent intent = new Intent(GestorMain.this, NuevoCliente.class);
-                intent.putExtra("Añadir", CLAVE_AÑADIR);
-                intent.putExtra("DNI_Gestor", dni_gestor);
+                Intent intent = new Intent(ClienteMain.this, com.example.seradmin.InterfazUsuari.InterfazUsuario.class);
+                intent.putExtra("Detalle", CLAVE_LISTA);
                 controladorGestor.launch(intent);
             }
         });
@@ -179,6 +153,25 @@ public class GestorMain extends AppCompatActivity {
                     }*/
 
                 });
+
+
+//        anadirCliente.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(GestorMain.this, NuevoCliente.class);
+//                intent.putExtra("Añadir", CLAVE_AÑADIR);
+//                controladorGestor.launch(intent);
+//            }
+//        });
+    /*
+        anadirCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GestorMain.this, Ingresar.class);
+                intent.putExtra(CLAVE_LISTA, completo);
+                someActivityResultLauncher.launch(intent);
+            }
+        });*/
 
 
 }
