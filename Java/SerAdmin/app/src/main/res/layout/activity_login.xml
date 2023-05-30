@@ -49,60 +49,38 @@
             android:id="@+id/user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
             android:gravity="center"
-            android:hint="Nombre de Usuario"
+            android:hint="DNI"
             android:inputType="text"
             android:maxLength="180"
             android:maxLines="1"
             android:minEms="20"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/day_text_size"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:backgroundTint="@color/white" />
-
-<!--        <EditText-->
-<!--            android:id="@+id/user"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:background="@drawable/bordes"-->
-<!--            android:backgroundTint="@color/white"-->
-<!--            android:ems="10"-->
-<!--            android:hint="Nombre de Usuario"-->
-<!--            android:inputType="textPersonName"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textStyle="bold" />-->
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/day_text_size"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
             android:gravity="center"
             android:hint="Contraseña"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:maxLength="180"
             android:maxLines="1"
             android:minEms="20"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/day_text_size"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:backgroundTint="@color/white" />
-
-<!--        <EditText-->
-<!--            android:id="@+id/password"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:background="@drawable/bordes"-->
-<!--            android:backgroundTint="@color/white"-->
-<!--            android:ems="10"-->
-<!--            android:hint="Contraseña"-->
-<!--            android:inputType="textPassword"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textStyle="bold" />-->
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/day_text_size"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/sms"
+            android:id="@+id/log"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:backgroundTint="#00000000"
@@ -111,7 +89,21 @@
             android:textStyle="bold"
             app:strokeColor="@color/white"
             app:strokeWidth="2.5dp" />
+
+
+        <TextView
+            android:id="@+id/alert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-15dp"
+            android:gravity="center"
+            android:text="DNI o contraseña incorrectas"
+            android:textColor="@color/carrot_orange"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
     </LinearLayout>
+
 
     <ImageView
         android:id="@+id/logo"

@@ -70,7 +70,7 @@ public class ClienteMain extends AppCompatActivity {
 
 
                 }
-                aL = new AdaptadorListado(perfiles, ClienteMain.this);
+                aL = new AdaptadorListado(perfiles);
                 RVClientes.setAdapter(aL);
                 aL.notifyDataSetChanged();
             }

@@ -14,6 +14,8 @@ import com.example.seradmin.calendario.Calendario;
 
 public class InterfazUsuario extends AppCompatActivity {
 
+    public static final int CLAVE_ELIMINAR_CLIENTE = 63;
+    public static final int CLAVE_MODIFICAR_CLIENTE = 64;
     private static final int CLAVE_HOME = 60;
     private static final int CLAVE_FILES = 61;
     private static final int CLAVE_CALENDAR = 62;

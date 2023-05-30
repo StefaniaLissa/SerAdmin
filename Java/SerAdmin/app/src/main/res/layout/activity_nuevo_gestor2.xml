@@ -20,19 +20,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imagen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:adjustViewBounds="false"
-            android:cropToPadding="false"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/logoseradmin" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imagen"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            android:adjustViewBounds="false"-->
+<!--            android:cropToPadding="false"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:srcCompat="@drawable/logoseradmin" />-->
 
         <EditText
             android:id="@+id/dni"
@@ -163,6 +163,17 @@
             android:textColor="@color/carrot_orange"
             android:visibility="invisible"
             app:layout_constraintTop_toBottomOf="@+id/dni" />
+
+        <Spinner
+            android:id="@+id/sociedad2"
+            style="@style/SpinnerTheme"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/spinner"
+            android:dropDownWidth="wrap_content"
+            android:spinnerMode="dialog"
+            android:splitMotionEvents="false"
+            android:touchscreenBlocksFocus="false" />
 
         <Button
             android:id="@+id/crear"

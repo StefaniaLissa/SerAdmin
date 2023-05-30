@@ -9,12 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.seradmin.InterfazUsuari.InterfazUsuario;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -32,7 +34,7 @@ public class Login extends AppCompatActivity {
     ImageView logo;
     Button login;
     EditText usuario, contraseña;
-    TextView crearCuenta, olvidar;
+    TextView crearCuenta, olvidar, alert;
 
     FirebaseFirestore db;
 
@@ -52,12 +54,12 @@ public class Login extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(), "CLICK", Toast.LENGTH_LONG).show();
 //        });
 
-        login = findViewById(R.id.sms);
+        login = findViewById(R.id.log);
         usuario = findViewById(R.id.user);
         contraseña = findViewById(R.id.password);
         crearCuenta = findViewById(R.id.createAccount);
         olvidar = findViewById(R.id.forget);
-
+        alert = findViewById(R.id.alert);
 
         logo = findViewById(R.id.logo);
 
@@ -139,19 +141,20 @@ public class Login extends AppCompatActivity {
 
                                 AlphaAnimation animation = new AlphaAnimation(0, 1);
                                 animation.setDuration(4000);
-//                        alert.startAnimation(animation);
-//                        alert.setVisibility(View.VISIBLE);
+                        alert.startAnimation(animation);
+                        alert.setVisibility(View.VISIBLE);
                                 AlphaAnimation animation2 = new AlphaAnimation(1, 0);
                                 animation2.setDuration(4000);
-//                        alert.startAnimation(animation2);
-//                        alert.setVisibility(View.INVISIBLE);
+                        alert.startAnimation(animation2);
+                        alert.setVisibility(View.INVISIBLE);
 
                             } else {
 
                                 Intent intent = new Intent(getApplicationContext(), GestorMain.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable("Gestor", (Serializable) gestorObjeto);
-                                intent.putExtras(bundle);
+                                //Bundle bundle = new Bundle();
+                                //bundle.putSerializable("Gestor", (Serializable) gestorObjeto);
+                                //intent.putExtras(bundle);
+                                intent.putExtra("DNI_Gestor", gestorObjeto.getDNI());
                                 controladorLogin.launch(intent);
                                 finish();
 
@@ -182,16 +185,16 @@ public class Login extends AppCompatActivity {
 
                         AlphaAnimation animation = new AlphaAnimation(0, 1);
                         animation.setDuration(4000);
-//                        alert.startAnimation(animation);
-//                        alert.setVisibility(View.VISIBLE);
+                        alert.startAnimation(animation);
+                        alert.setVisibility(View.VISIBLE);
                         AlphaAnimation animation2 = new AlphaAnimation(1, 0);
                         animation2.setDuration(4000);
-//                        alert.startAnimation(animation2);
-//                        alert.setVisibility(View.INVISIBLE);
+                        alert.startAnimation(animation2);
+                        alert.setVisibility(View.INVISIBLE);
 
                     } else {
 
-                        Intent intent = new Intent(getApplicationContext(), ClienteMain.class);
+                        Intent intent = new Intent(getApplicationContext(), InterfazUsuario.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("Cliente", (Serializable) clienteObjeto);
                         intent.putExtras(bundle);

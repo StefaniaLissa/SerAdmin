@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 
 public class NuevoCliente extends AppCompatActivity {
 
+    public static final int CLAVE_ADD_CLIENTE = 70;
     EditText nombre, apellido, contraseña, num_tel, dni, dni_gestor;
     Button crearCliente;
     ImageView imagen;
@@ -41,27 +42,27 @@ public class NuevoCliente extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nuevo_cliente);
+        setContentView(R.layout.activity_nuevo_gestor2);
 
-        Spinner spinner = (Spinner) findViewById(R.id.sociedad);
+        Spinner spinner = (Spinner) findViewById(R.id.sociedad2);
         Resources res = getResources();
         String [] sociedades = res.getStringArray(R.array.sociedades);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        imagen = findViewById(R.id.logoNC);
-        imagen.setImageResource(R.drawable.logoseradmin);
+        //imagen = findViewById(R.id.imagen);
+        //imagen.setImageResource(R.drawable.logoseradmin);
         dni = findViewById(R.id.dni);
         nombre = findViewById(R.id.nombre);
         apellido = findViewById(R.id.apellido);
         contraseña = findViewById(R.id.contraseña);
         num_tel = findViewById(R.id.telefono);
         crearCliente = findViewById(R.id.crear);
-//            alertDNI = findViewById(R.id.alert);
-//            alertTel = findViewById(R.id.alert2);
-//            alertCon = findViewById(R.id.alertC);
-//            alertNom = findViewById(R.id.alertN);
-//            alertApe = findViewById(R.id.alertA);
-//            alertVerifyDNI = findViewById(R.id.alertVerifyDNI);
-//            alertVerifyTel = findViewById(R.id.alertVerifyTel);
+            alertDNI = findViewById(R.id.alert);
+            alertTel = findViewById(R.id.alert2);
+            alertCon = findViewById(R.id.alertC);
+            alertNom = findViewById(R.id.alertN);
+            alertApe = findViewById(R.id.alertA);
+            alertVerifyDNI = findViewById(R.id.alertVerifyDNI);
+            alertVerifyTel = findViewById(R.id.alertVerifyTel);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,R.layout.spinner_texto, sociedades) {
@@ -167,9 +168,11 @@ public class NuevoCliente extends AppCompatActivity {
                                                 Cliente clienteObject = new Cliente(s_nom, s_ape, s_dni, s_dni_gestor, s_num, s_cont, s_sociedad);
 
                                                 Intent intent = new Intent(getApplicationContext(), GestorMain.class);
-                                                Bundle bundle = new Bundle();
-                                                bundle.putSerializable("Cliente", (Serializable) clienteObject);
-                                                intent.putExtras(bundle);
+//                                                Bundle bundle = new Bundle();
+//                                                bundle.putSerializable("Cliente", clienteObject);
+//                                                intent.putExtras(bundle);
+                                                intent.putExtra("DNI_Gestor", s_dni_gestor);
+                                                //setResult(CLAVE_ADD_CLIENTE , intent);
                                                 startActivity(intent);
                                                 finish();
                                             }).addOnFailureListener(e -> Log.w(TAG, "Error insert cliente", e));
@@ -299,5 +302,13 @@ public class NuevoCliente extends AppCompatActivity {
 
 
         //spinner.setPrompt("Sociedades");
+    }
+    public void volverGestorMain (int clave) {
+
+        Intent intent = new Intent(NuevoCliente.this, GestorMain.class);
+        setResult(clave , intent);
+        NuevoCliente.super.onBackPressed();
+        finish();
+
     }
 }

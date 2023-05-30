@@ -1,6 +1,5 @@
 package com.example.seradmin.Recycler;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.seradmin.R;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.ViewHolder> {
 
-    private ArrayList<Cliente> perfilesList;
+    private ArrayList<Cliente> perfilesArrayList;
 
-    private ArrayList<Cliente> perfilesList2;
-
-    private Context context;
+    private List<Cliente> perfilesList;
 
     public interface ItemClickListener {
         void onClick(View view, int position, Cliente cliente);
@@ -37,15 +36,31 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
     private RecyclerViewClickListener listener;
 
     public AdaptadorListado(ArrayList<Cliente> dataSet) {
-        perfilesList = dataSet;
+        perfilesArrayList = dataSet;
         this.listener = listener;
     }
 
-    public AdaptadorListado(ArrayList<Cliente> perfilesList, Context context) {
-        this.perfilesList = perfilesList;
-        this.context = context;
-        //almacena una copia de la lista en perfilesList2.
-        perfilesList2 = new ArrayList<>(perfilesList);
+    public void filtrado(final String nombreCliente) {
+        int longitud = nombreCliente.length();
+        if (longitud == 0) {
+            perfilesArrayList.clear();
+            perfilesArrayList.addAll(perfilesArrayList);
+        } else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<Cliente> collecion = perfilesArrayList.stream()
+                        .filter(i -> i.getNombre().toLowerCase().contains(nombreCliente.toLowerCase()))
+                        .collect(Collectors.toList());
+                perfilesArrayList.clear();
+                perfilesArrayList.addAll(collecion);
+            } else {
+                for (Cliente c : perfilesArrayList) {
+                    if (c.getNombre().toLowerCase().contains(nombreCliente.toLowerCase())) {
+                        perfilesArrayList.add(c);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -77,7 +92,7 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
 
         public void onClick(View view) {
             // Si tengo un manejador de evento lo propago con el índice
-            if (clickListener != null) clickListener.onClick(view, getAdapterPosition(), perfilesList.get(getAdapterPosition()));
+            if (clickListener != null) clickListener.onClick(view, getAdapterPosition(), perfilesArrayList.get(getAdapterPosition()));
         }
 
     }
@@ -94,8 +109,8 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
     public void onBindViewHolder(ViewHolder holder, int position) {
 //      String letraActual = perfilesList.get(position).getLetra();
 //      String letraSiguiente = "";
-        holder.getNomCliente().setText(perfilesList.get(position).getNombre() + " "  + perfilesList.get(position).getApellidos());
-        holder.getLetraNom().setText(perfilesList.get(position).getLetra());
+        holder.getNomCliente().setText(perfilesArrayList.get(position).getNombre() + " "  + perfilesArrayList.get(position).getApellidos());
+        holder.getLetraNom().setText(perfilesArrayList.get(position).getLetra());
         //holder.getImagenPerfil().setImageResource(perfilesList.get(position).getImagen());
 //      if (letraActual != letraSiguiente) {
 //          holder.getLetraNom().setText(perfilesList.get(position).getLetra());
@@ -105,7 +120,8 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
 
     @Override
     public int getItemCount() {
-        return perfilesList.size();
+        //return 1;
+        return perfilesArrayList.size();
     }
 
 }
