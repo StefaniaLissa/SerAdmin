@@ -1,10 +1,16 @@
 package com.example.seradmin.Recycler;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Cliente implements Serializable {
+
+    // Exclude previene que no lo escribamos, el id se autogenera
+    @Exclude
+    public String id;
 
     public String nombre;
     public String apellidos;
@@ -19,9 +25,12 @@ public class Cliente implements Serializable {
 
     private String num_tel;
 
-    private String contraseña;
+    private String pass;
 
-    public Cliente(String nombre, String apellido, String dni, String dni_gestor, String num_tel, String contraseña) {
+    public Cliente() {
+    }
+
+    public Cliente(String nombre, String apellido, String dni, String dni_gestor, String num_tel, String pass) {
     }
 
     public Cliente(String nombre, String apellidos, String sexo, String sociedad) {
@@ -31,13 +40,24 @@ public class Cliente implements Serializable {
         this.sociedad = sociedad;
     }
 
-    public Cliente(String nombre, String apellidos, String dni_cliente, String dni_gestor, String num_tel, String contraseña, String sociedad) {
+    public Cliente(String nombre, String apellidos, String dni_cliente, String dni_gestor, String num_tel, String pass, String sociedad) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.dni_cliente = dni_cliente;
         this.dni_gestor = dni_gestor;
         this.num_tel = num_tel;
-        this.contraseña = contraseña;
+        this.pass = pass;
+        this.sociedad = sociedad;
+    }
+
+    public Cliente(String id, String nombre, String apellidos, String dni_cliente, String dni_gestor, String num_tel, String pass, String sociedad) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni_cliente = dni_cliente;
+        this.dni_gestor = dni_gestor;
+        this.num_tel = num_tel;
+        this.pass = pass;
         this.sociedad = sociedad;
     }
 
@@ -56,6 +76,14 @@ public class Cliente implements Serializable {
         this.sexo = sexo;
         this.sociedad = sociedad;
         this.imagen = imagen;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getImagen() {
@@ -134,7 +162,15 @@ public class Cliente implements Serializable {
         return num_tel;
     }
 
-    public void setNum_tel(String num_tel) {
+    public void setNum_tel(String pass) {
+        this.pass = pass;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String num_tel) {
         this.num_tel = num_tel;
     }
 
@@ -162,7 +198,7 @@ public class Cliente implements Serializable {
         //calendar.set(1994, Calendar.MARCH, 21);
         //Date fecha = calendar.getTime();
         for (int i = 0; i < n; i++) {
-            perfiles.add(new Cliente("Nombre " + (i + 1), "Apellido " + (i + 1), "masculino", "autonomo"));
+            //perfiles.add(new Cliente("Nombre " + (i + 1), "Apellido " + (i + 1), "masculino", "autonomo"));
         }
         return perfiles;
     }

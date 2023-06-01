@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.seradmin.InterfazUsuari.InterfazUsuario;
 import com.example.seradmin.Recycler.Cliente;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -84,7 +85,7 @@ public class EditarCliente extends AppCompatActivity {
                                     db.collection("Clientes").document(id).set(modificado, SetOptions.merge());
 
                                     Toast.makeText(EditarCliente.this, "Datos del cliente actualizados", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(EditarCliente.this, ClienteMain.class);
+                                    Intent intent = new Intent(EditarCliente.this, GestorMain.class);
                                     startActivity(intent);
                                     finish();
 

@@ -129,7 +129,7 @@ public class EditarGestor extends AppCompatActivity {
 
                                         Intent intent = new Intent(getApplicationContext(), GestorMain.class);
                                         Bundle bundle1 = new Bundle();
-                                        bundle1.putSerializable("Gestor", (Serializable) gestorObjeto);
+                                        bundle1.putSerializable("Gestor", gestorObjeto);
                                         Log.d("GESTOR EDIT ACTUALIZADO", getGestorObject().toString());
                                         intent.putExtras(bundle1);
                                         startActivity(intent);
@@ -257,7 +257,7 @@ public class EditarGestor extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), GestorMain.class);
                     Bundle bundle1 = new Bundle();
-                    bundle1.putSerializable("Gestor", (Serializable) getGestorObject());
+                    bundle1.putSerializable("Gestor", getGestorObject());
                     Log.d( "GESTOR EDIT LISTO",  getGestorObject().toString());
                     intent.putExtras(bundle1);
                     startActivity(intent);

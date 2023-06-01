@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.seradmin.InterfazUsuari.InterfazUsuario;
+import com.example.seradmin.Recycler.Cliente;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -137,16 +138,16 @@ public class Login extends AppCompatActivity {
 
                             Gestor gestorObjeto = new Gestor(g_dni, g_pass, g_nombre, g_apellido, g_telefono);
 
-                            if (gestorObjeto.getDNI().equals("")) {
+                            if (dni.equals("") || pass.equals("")) {
 
                                 AlphaAnimation animation = new AlphaAnimation(0, 1);
                                 animation.setDuration(4000);
-                        alert.startAnimation(animation);
-                        alert.setVisibility(View.VISIBLE);
+                                alert.startAnimation(animation);
+                                alert.setVisibility(View.VISIBLE);
                                 AlphaAnimation animation2 = new AlphaAnimation(1, 0);
                                 animation2.setDuration(4000);
-                        alert.startAnimation(animation2);
-                        alert.setVisibility(View.INVISIBLE);
+                                alert.startAnimation(animation2);
+                                alert.setVisibility(View.INVISIBLE);
 
                             } else {
 
@@ -154,7 +155,8 @@ public class Login extends AppCompatActivity {
                                 //Bundle bundle = new Bundle();
                                 //bundle.putSerializable("Gestor", (Serializable) gestorObjeto);
                                 //intent.putExtras(bundle);
-                                intent.putExtra("DNI_Gestor", gestorObjeto.getDNI());
+                                //intent.putExtra("DNI_Gestor", gestorObjeto);
+                                intent.putExtra("Gestor", gestorObjeto);
                                 controladorLogin.launch(intent);
                                 finish();
 
@@ -179,7 +181,7 @@ public class Login extends AppCompatActivity {
                         c_sociedad = document.get("Sociedad").toString();
                     }
 
-                    com.example.seradmin.Recycler.Cliente clienteObjeto = new com.example.seradmin.Recycler.Cliente(c_nombre, c_apellido, c_dni, c_dni_gestor, c_telefono, c_pass, c_sociedad);
+                    Cliente clienteObjeto = new Cliente(c_nombre, c_apellido, c_dni, c_dni_gestor, c_telefono, c_pass, c_sociedad);
 
                     if (clienteObjeto.getDni_cliente().equals("")) {
 
@@ -195,9 +197,7 @@ public class Login extends AppCompatActivity {
                     } else {
 
                         Intent intent = new Intent(getApplicationContext(), InterfazUsuario.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("Cliente", (Serializable) clienteObjeto);
-                        intent.putExtras(bundle);
+                        intent.putExtra("Cliente", clienteObjeto);
                         controladorLogin.launch(intent);
                         finish();
 

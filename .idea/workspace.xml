@@ -9,7 +9,18 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="284f4f4b-3ebb-44ec-b0ca-dc2d781c3b78" name="Changes" comment="" />
+    <list default="true" id="284f4f4b-3ebb-44ec-b0ca-dc2d781c3b78" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Java/SerAdmin/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Java/SerAdmin/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/SerAdmin/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Java/SerAdmin/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/java/com/example/seradmin/EditarCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/java/com/example/seradmin/EditarCliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/java/com/example/seradmin/EventoDetalle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/java/com/example/seradmin/EventoDetalle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/java/com/example/seradmin/InterfazUsuari/InterfazUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/java/com/example/seradmin/InterfazUsuari/InterfazUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/java/com/example/seradmin/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/java/com/example/seradmin/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/java/com/example/seradmin/Recycler/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/java/com/example/seradmin/Recycler/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Java/SerAdmin/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/SerAdmin/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Java/SerAdmin/build.gradle" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,15 +37,10 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/stefa/OneDrive/Documentos/GitHub/SerAdmin2/Java/SerAdmin/app"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Perfiles\at6DAM2\Documents\GitHub\SerAdmin\SerAdmin\app\src\main\res\layout" />

@@ -37,7 +37,7 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
 
     public AdaptadorListado(ArrayList<Cliente> dataSet) {
         perfilesArrayList = dataSet;
-        this.listener = listener;
+        //this.listener = listener;
     }
 
     public void filtrado(final String nombreCliente) {

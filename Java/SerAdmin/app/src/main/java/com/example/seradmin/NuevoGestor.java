@@ -108,11 +108,11 @@ public class NuevoGestor extends AppCompatActivity {
                                         db.collection("Gestores").add(gestor).addOnSuccessListener(documentReference -> {
                                             Log.d(TAG, "Insert gestor con ID: " + documentReference.getId());
 
-                                            Gestor clienteObject = new Gestor(s_dni, s_cont, s_nom, s_ape, s_num);
+                                            Gestor gestorObject = new Gestor(s_dni, s_cont, s_nom, s_ape, s_num);
 
                                             Intent intent = new Intent(getApplicationContext(), GestorMain.class);
                                             Bundle bundle = new Bundle();
-                                            bundle.putSerializable("Gestor", (Serializable) clienteObject);
+                                            bundle.putSerializable("Gestor", gestorObject);
                                             intent.putExtras(bundle);
                                             startActivity(intent);
                                             finish();
