@@ -12,6 +12,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.seradmin.R;
+import com.google.firebase.storage.StorageReference;
 
 public class MainTree extends AppCompatActivity {
     private final static int NUMBER_OF_FRAGMENTS = 4;
