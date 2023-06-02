@@ -16,6 +16,8 @@ import com.example.seradmin.R;
 import com.example.seradmin.Tree.ControladoresTree.TreeNode;
 import com.example.seradmin.Tree.ControladoresTree.TreeViewAdapter;
 import com.example.seradmin.Tree.ControladoresTree.TreeViewHolderFactory;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,29 @@ public class FileTreeFragment extends Fragment {
         treeViewAdapter = new TreeViewAdapter(factory);
         recyclerView.setAdapter(treeViewAdapter);
 
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        // Crea una referencia al directorio "pdfs" en Firebase Storage
+        StorageReference storageRef = storage.getReference().child("pdfs");
+
+        // Recupera la lista de archivos PDF en el directorio "pdfs"
+        storageRef.listAll().addOnSuccessListener(listResult -> {
+            List<TreeNode> fileRoots = new ArrayList<>();
+
+            // Por cada archivo PDF recuperado, crea un nodo en el árbol
+            for (StorageReference item : listResult.getItems()) {
+                String fileName = item.getName();
+                TreeNode pdfNode = new TreeNode(fileName, R.layout.list_item_file);
+                fileRoots.add(pdfNode);
+            }
+
+            // Actualiza los nodos del árbol con los archivos PDF recuperados
+            treeViewAdapter.updateTreeNodes(fileRoots);
+        }).addOnFailureListener(e -> {
+            // Maneja el error de recuperación de archivos desde Firebase Storage
+            Log.e(TAG, "Error retrieving PDF files from Firebase Storage", e);
+        });
+
         TreeNode javaDirectory = new TreeNode("Java", R.layout.list_item_file);
         javaDirectory.addChild(new TreeNode("FileJava1.java", R.layout.list_item_file));
         javaDirectory.addChild(new TreeNode("FileJava2.java", R.layout.list_item_file));
@@ -54,15 +79,15 @@ public class FileTreeFragment extends Fragment {
 //
 //        javaDirectory.addChild(gradleDirectory);
 //
-        TreeNode lowLevelRoot = new TreeNode("LowLevel", R.layout.list_item_file);
-
-        List<TreeNode> fileRoots = new ArrayList<>();
-        fileRoots.add(javaDirectory);
-//        fileRoots.add(lowLevelRoot);
-//        fileRoots.add(cSharpDirectory);
-//        fileRoots.add(gitFolder);
-
-        treeViewAdapter.updateTreeNodes(fileRoots);
+//        TreeNode lowLevelRoot = new TreeNode("LowLevel", R.layout.list_item_file);
+//
+//        List<TreeNode> fileRoots = new ArrayList<>();
+//        fileRoots.add(javaDirectory);
+////        fileRoots.add(lowLevelRoot);
+////        fileRoots.add(cSharpDirectory);
+////        fileRoots.add(gitFolder);
+//
+//        treeViewAdapter.updateTreeNodes(fileRoots);
 
         treeViewAdapter.setTreeNodeClickListener((treeNode, nodeView) -> {
             Log.d(TAG, "Click on TreeNode with value " + treeNode.getValue().toString());
@@ -75,6 +100,8 @@ public class FileTreeFragment extends Fragment {
 
         return view;
     }
+
+
 
 //    @Override
 //    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
