@@ -16,9 +16,11 @@ import com.example.seradmin.R;
 import com.example.seradmin.Tree.ControladoresTree.TreeNode;
 import com.example.seradmin.Tree.ControladoresTree.TreeViewAdapter;
 import com.example.seradmin.Tree.ControladoresTree.TreeViewHolderFactory;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,11 +46,12 @@ public class FileTreeFragment extends Fragment {
         treeViewAdapter = new TreeViewAdapter(factory);
         recyclerView.setAdapter(treeViewAdapter);
 
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
         // Crea una referencia al directorio "pdfs" en Firebase Storage
         StorageReference storageRef = storage.getReference().child("pdfs");
-
+        TreeNode pdfNode = new TreeNode("Java", R.layout.list_item_file);
         // Recupera la lista de archivos PDF en el directorio "pdfs"
         storageRef.listAll().addOnSuccessListener(listResult -> {
             List<TreeNode> fileRoots = new ArrayList<>();
@@ -56,10 +59,11 @@ public class FileTreeFragment extends Fragment {
             // Por cada archivo PDF recuperado, crea un nodo en el árbol
             for (StorageReference item : listResult.getItems()) {
                 String fileName = item.getName();
-                TreeNode pdfNode = new TreeNode(fileName, R.layout.list_item_file);
-                fileRoots.add(pdfNode);
-            }
+                //TreeNode pdfNode = new TreeNode(fileName, R.layout.list_item_file);
+                pdfNode.addChild(new TreeNode(fileName, R.layout.list_item_file));
 
+            }
+            fileRoots.add(pdfNode);
             // Actualiza los nodos del árbol con los archivos PDF recuperados
             treeViewAdapter.updateTreeNodes(fileRoots);
         }).addOnFailureListener(e -> {
@@ -67,10 +71,10 @@ public class FileTreeFragment extends Fragment {
             Log.e(TAG, "Error retrieving PDF files from Firebase Storage", e);
         });
 
-        TreeNode javaDirectory = new TreeNode("Java", R.layout.list_item_file);
-        javaDirectory.addChild(new TreeNode("FileJava1.java", R.layout.list_item_file));
-        javaDirectory.addChild(new TreeNode("FileJava2.java", R.layout.list_item_file));
-        javaDirectory.addChild(new TreeNode("FileJava3.java", R.layout.list_item_file));
+//        TreeNode javaDirectory = new TreeNode("Java", R.layout.list_item_file);
+//        javaDirectory.addChild(new TreeNode("FileJava1.java", R.layout.list_item_file));
+//        javaDirectory.addChild(new TreeNode("FileJava2.java", R.layout.list_item_file));
+//        javaDirectory.addChild(new TreeNode("FileJava3.java", R.layout.list_item_file));
 
 //        TreeNode gradleDirectory = new TreeNode("Gradle", R.layout.list_item_file);
 //        gradleDirectory.addChild(new TreeNode("FileGradle1.gradle", R.layout.list_item_file));
@@ -86,20 +90,45 @@ public class FileTreeFragment extends Fragment {
 ////        fileRoots.add(lowLevelRoot);
 ////        fileRoots.add(cSharpDirectory);
 ////        fileRoots.add(gitFolder);
-//
+////
 //        treeViewAdapter.updateTreeNodes(fileRoots);
-
         treeViewAdapter.setTreeNodeClickListener((treeNode, nodeView) -> {
-            Log.d(TAG, "Click on TreeNode with value " + treeNode.getValue().toString());
+            if (treeNode.getValue() instanceof String) {
+                String fileName = (String) treeNode.getValue();
+                downloadFile(fileName);
+            }
         });
 
-        treeViewAdapter.setTreeNodeLongClickListener((treeNode, nodeView) -> {
-            Log.d(TAG, "LongClick on TreeNode with value " + treeNode.getValue().toString());
-            return true;
-        });
+
+//        treeViewAdapter.setTreeNodeClickListener((treeNode, nodeView) -> {
+//            Log.d(TAG, "Click on TreeNode with value " + treeNode.getValue().toString());
+//        });
+//
+//        treeViewAdapter.setTreeNodeLongClickListener((treeNode, nodeView) -> {
+//            Log.d(TAG, "LongClick on TreeNode with value " + treeNode.getValue().toString());
+//            return true;
+//        });
+
+
 
         return view;
+
     }
+
+    private void downloadFile(String fileName) {
+        File localFile = new File(requireContext().getFilesDir(), fileName);
+
+        FirebaseStorage mStorageRef = FirebaseStorage.getInstance();
+        StorageReference storageRef = mStorageRef.getReference().child("pdfs").child(fileName);
+
+        storageRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+            // El archivo se ha descargado exitosamente, puedes mostrar una notificación o realizar otras acciones
+        }).addOnFailureListener(exception -> {
+            // Ha ocurrido un error al descargar el archivo, maneja el error aquí
+        });
+    }
+
+
 
 
 

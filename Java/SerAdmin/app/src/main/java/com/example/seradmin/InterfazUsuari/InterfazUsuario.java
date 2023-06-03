@@ -16,8 +16,6 @@ import com.example.seradmin.Recycler.Cliente;
 import com.example.seradmin.Tree.*;
 import com.example.seradmin.calendario.Calendario;
 
-import java.io.Serializable;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class InterfazUsuario extends AppCompatActivity {
@@ -40,7 +38,7 @@ public class InterfazUsuario extends AppCompatActivity {
         home = findViewById(R.id.home);
         files = findViewById(R.id.files);
         calendar = findViewById(R.id.calendar);
-        imagen = findViewById(R.id.imagenCajaCliente);
+        imagen = findViewById(R.id.LogOut);
 
         eventos = findViewById(R.id.recyclerEventos);
 

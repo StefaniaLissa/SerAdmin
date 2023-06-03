@@ -27,6 +27,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -121,6 +122,8 @@ public class NuevoCliente extends AppCompatActivity {
                     s_dni_gestor = gestor.getDNI(),
                     s_sociedad = spinner.getSelectedItem().toString();
 
+
+
             Pattern dniPattern = Pattern.compile("^\\d{8}[A-Z]");
             Pattern niePattern = Pattern.compile("^[XYZ]\\d{7}[A-Z]");
             Pattern telPattern = Pattern.compile("^[76]{1}[0-9]{8}$");
@@ -168,6 +171,8 @@ public class NuevoCliente extends AppCompatActivity {
                                         cliente.put("Apellido", s_ape);
                                         cliente.put("Num_Telf", s_num);
                                         cliente.put("Sociedad", s_sociedad);
+                                        cliente.put("Archivos", new ArrayList<String>());
+
 
                                         db.collection("Clientes").add(cliente).addOnSuccessListener(documentReference -> {
                                             Log.d(TAG, "Insert cliente con ID: " + documentReference.getId());
