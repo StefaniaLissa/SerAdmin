@@ -26,7 +26,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -60,7 +59,7 @@ public class GestorMain extends AppCompatActivity {
         anadirCliente = findViewById(R.id.añadir);
         buscador = findViewById(R.id.buscador);
 
-        imagenGestor = findViewById(R.id.imagenCajaCliente);
+        imagenGestor = findViewById(R.id.LogOut);
 
         RVClientes = (RecyclerView) findViewById(R.id.RVClientes);
         RVClientes.setHasFixedSize(true);

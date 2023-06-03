@@ -38,11 +38,11 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
 
-            android:id="@+id/imagenCajaCliente"
+            android:id="@+id/LogOut"
             android:layout_width="33dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/pexels_polina_kovaleva_5927743"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
             tools:srcCompat="@tools:sample/avatars" />
 
     </LinearLayout>

@@ -179,6 +179,7 @@ public class Login extends AppCompatActivity {
                         c_telefono = document.get("Num_Telf").toString();
                         c_dni_gestor = document.get("DNI_Gestor").toString();
                         c_sociedad = document.get("Sociedad").toString();
+
                     }
 
                     Cliente clienteObjeto = new Cliente(c_nombre, c_apellido, c_dni, c_dni_gestor, c_telefono, c_pass, c_sociedad);
