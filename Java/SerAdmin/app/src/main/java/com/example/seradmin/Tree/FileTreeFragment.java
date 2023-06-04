@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.seradmin.Login;
 import com.example.seradmin.R;
 import com.example.seradmin.Tree.ControladoresTree.TreeNode;
 import com.example.seradmin.Tree.ControladoresTree.TreeViewAdapter;
@@ -49,11 +50,18 @@ public class FileTreeFragment extends Fragment {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
+        // Obtener el clientId de los extras del intent
+        //String idCliente = getIntent().getStringExtra(Login.EXTRA_ID_CLIENTE);
+
         // Crea una referencia al directorio "pdfs" en Firebase Storage
         StorageReference storageRef = storage.getReference().child("pdfs");
+        // Filtra los archivos por el ID del cliente
+        //StorageReference clientRef = storageRef.child(idCliente);
+
         TreeNode pdfNode = new TreeNode("Java", R.layout.list_item_file);
         // Recupera la lista de archivos PDF en el directorio "pdfs"
         storageRef.listAll().addOnSuccessListener(listResult -> {
+        //clientRef.listAll().addOnSuccessListener(listResult -> {
             List<TreeNode> fileRoots = new ArrayList<>();
 
             // Por cada archivo PDF recuperado, crea un nodo en el árbol
