@@ -19,6 +19,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.seradmin.Login;
 import com.example.seradmin.R;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
@@ -28,7 +29,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class MainTree extends AppCompatActivity {
-    private final static int NUMBER_OF_FRAGMENTS = 4;
+    private static final int NUMBER_OF_FRAGMENTS = 4;
     private static final int REQUEST_CODE = 1;
     private Button selectButton;
 
@@ -51,12 +52,14 @@ public class MainTree extends AppCompatActivity {
 
 
     }
+
     private void selectPDF() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("application/pdf");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(Intent.createChooser(intent, "Select PDF"), REQUEST_CODE);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -65,37 +68,38 @@ public class MainTree extends AppCompatActivity {
             Uri selectedPDF = data.getData();
             String fileName = getFileName(selectedPDF);
             FirebaseStorage mStorageRef = FirebaseStorage.getInstance();
+            String idCliente = getIntent().getStringExtra(Login.EXTRA_ID_CLIENTE);
             // Aquí puedes realizar acciones con el archivo PDF seleccionado, como subirlo a un servidor
-            StorageReference storageRef = mStorageRef.getReference().child("pdfs").child(fileName);
+            StorageReference storageRef = mStorageRef.getReference().child(idCliente).child("pdfs").child(fileName);
 
             // Sube el archivo a Firebase Storage
             UploadTask uploadTask = storageRef.putFile(selectedPDF);
 
-
             // Registra un listener para la finalización de la carga
             uploadTask.addOnCompleteListener(task -> {
-//                if (task.isSuccessful()) {
-//                    // La carga del archivo se ha completado exitosamente
-//                    // Puedes obtener la URL de descarga del archivo usando storageRef.getDownloadUrl()
-//                    storageRef.getDownloadUrl().addOnSuccessListener(downloadUrl -> {
-//                        String fileUrl = downloadUrl.toString();
-//                        DocumentReference clientRef = FirebaseFirestore.getInstance().collection("Clientes").document(clientId);
-//                        clientRef.update("archivos", FieldValue.arrayUnion(fileUrl))
-//                                .addOnSuccessListener(aVoid -> {
-//                                    // La URL del archivo se ha guardado exitosamente en Firestore
-//                                })
-//                                .addOnFailureListener(e -> {
-//                                    // Ha ocurrido un error al guardar la URL del archivo en Firestore, maneja el error aquí
-//                                });
-//                    });
-//                } else {
-//                    // La carga del archivo ha fallado
-//                    Exception exception = task.getException();
-//                    // Maneja el error de carga del archivo aquí
-//                }
+                if (task.isSuccessful()) {
+                    // La carga del archivo se ha completado exitosamente
+                    // Puedes obtener la URL de descarga del archivo usando storageRef.getDownloadUrl()
+                    storageRef.getDownloadUrl().addOnSuccessListener(downloadUrl -> {
+                        String fileUrl = downloadUrl.toString();
+                        DocumentReference clientRef = FirebaseFirestore.getInstance().collection("Clientes").document(idCliente);
+                        clientRef.update("archivos", FieldValue.arrayUnion(fileUrl))
+                                .addOnSuccessListener(aVoid -> {
+                                    // La URL del archivo se ha guardado exitosamente en Firestore
+                                })
+                                .addOnFailureListener(e -> {
+                                    // Ha ocurrido un error al guardar la URL del archivo en Firestore, maneja el error aquí
+                                });
+                    });
+                } else {
+                    // La carga del archivo ha fallado
+                    Exception exception = task.getException();
+                    // Maneja el error de carga del archivo aquí
+                }
             });
-        }/////////////////////////////Esto lo dejo para mañana domingo
+        }
     }
+
     @SuppressLint("Range")
     private String getFileName(Uri uri) {
         String result = null;
@@ -115,7 +119,6 @@ public class MainTree extends AppCompatActivity {
         return result;
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -132,12 +135,7 @@ public class MainTree extends AppCompatActivity {
         @Override
         public Fragment createFragment(int position) {
             return new FileTreeFragment();
-//            switch (position) {
-//                case 0: return new FileTreeFragment();
-//                case 1: return new LogTreeFragment();
-//                case 2: return new RoomTreeFragment();
-//                default: return new JsonTreeFragment();
-//            }
+            // Cambia el fragmento según la posición actual si es necesario
         }
 
         @Override

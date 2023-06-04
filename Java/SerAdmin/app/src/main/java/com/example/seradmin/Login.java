@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.example.seradmin.InterfazUsuari.InterfazUsuario;
 import com.example.seradmin.Recycler.Cliente;
+import com.example.seradmin.Tree.FileTreeFragment;
+import com.example.seradmin.Tree.MainTree;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -26,6 +28,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.io.Serializable;
 
 public class Login extends AppCompatActivity {
+    public static final String EXTRA_ID_CLIENTE = "ID_CLIENTE";
 
     private static final int CLAVE_GESTOR = 55;
     private static final int CLAVE_CLIENTE = 56;
@@ -199,7 +202,20 @@ public class Login extends AppCompatActivity {
 
                         Intent intent = new Intent(getApplicationContext(), InterfazUsuario.class);
                         intent.putExtra("Cliente", clienteObjeto);
+                        intent.putExtra(EXTRA_ID_CLIENTE, clienteObjeto.getDni_cliente());
                         controladorLogin.launch(intent);
+                        finish();
+
+                        Intent intent2 = new Intent(getApplicationContext(), MainTree.class);
+                        intent.putExtra("Cliente", clienteObjeto);
+                        intent.putExtra(EXTRA_ID_CLIENTE, clienteObjeto.getDni_cliente());
+                        controladorLogin.launch(intent2);
+                        finish();
+
+                        Intent intent3 = new Intent(getApplicationContext(), FileTreeFragment.class);
+                        intent.putExtra("Cliente", clienteObjeto);
+                        intent.putExtra(EXTRA_ID_CLIENTE, clienteObjeto.getDni_cliente());
+                        controladorLogin.launch(intent3);
                         finish();
 
                     }
