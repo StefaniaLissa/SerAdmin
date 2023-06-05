@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.seradmin.calendario.Calendario;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -83,7 +84,7 @@ public class NuevoEvento extends AppCompatActivity {
                             })
                             .addOnFailureListener(e -> Log.w(TAG, "Error insertando evento", e));
 
-                    Intent intent = new Intent(NuevoEvento.this, EventoMain.class);
+                    Intent intent = new Intent(NuevoEvento.this, Calendario.class);
                     setResult(CLAVE_INSERTADO, intent);
                     NuevoEvento.super.onBackPressed();
                     finish();
@@ -219,6 +220,7 @@ public class NuevoEvento extends AppCompatActivity {
             evento.put("Titulo", s_titulo);
             evento.put("Inicio", timeStampInicio);
             evento.put("Fin", timeStampFin);
+            //evento.put("DNI_Cliente", cliente);
             evento.put("Latitud", s_latitud);
             evento.put("Longitud", s_longitud);
             evento.put("Descripcion", s_descripcion);

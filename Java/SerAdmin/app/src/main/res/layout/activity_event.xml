@@ -8,16 +8,16 @@
     android:background="@drawable/gradient"
     tools:context=".calendario.EventActivity">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/event_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/menu_event"
-            app:title="Nuevo Evento"
-            app:titleTextColor="@color/white"
-            android:backgroundTint="@color/oxford_blue" />
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/event_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="@color/oxford_blue"
+        app:menu="@menu/menu_event"
+        app:title="Nuevo Evento"
+        app:titleTextColor="@color/white" />
 
-        <androidx.core.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
             android:id="@+id/event_nested_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -158,6 +158,8 @@
                     android:paddingTop="@dimen/activity_margin"
                     android:paddingEnd="@dimen/activity_margin"
                     android:paddingBottom="@dimen/activity_margin"
+                    android:focusable="false"
+                    android:clickable="true"
                     android:textSize="@dimen/day_text_size"
                     tools:text="January 1 1970"
                     android:textColor="@color/white"/>
@@ -170,6 +172,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/medium_margin"
                     android:background="?attr/selectableItemBackground"
+                    android:focusable="false"
+                    android:clickable="true"
                     android:padding="@dimen/activity_margin"
                     android:textSize="@dimen/day_text_size"
                     tools:text="00:00"
@@ -185,6 +189,8 @@
                     android:paddingTop="@dimen/activity_margin"
                     android:paddingEnd="@dimen/activity_margin"
                     android:paddingBottom="@dimen/activity_margin"
+                    android:focusable="false"
+                    android:clickable="true"
                     android:textSize="@dimen/day_text_size"
                     tools:text="January 1 1970"
                     android:textColor="@color/white"/>
@@ -197,6 +203,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/medium_margin"
                     android:background="?attr/selectableItemBackground"
+                    android:focusable="false"
+                    android:clickable="true"
                     android:padding="@dimen/activity_margin"
                     android:textSize="@dimen/day_text_size"
                     tools:text="00:00"
@@ -424,6 +432,7 @@
                         android:padding="@dimen/activity_margin"
                         android:text="@string/every_day"
                         android:textSize="@dimen/day_text_size" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -455,6 +464,7 @@
                         android:padding="@dimen/activity_margin"
                         android:text="@string/forever"
                         android:textSize="@dimen/day_text_size" />
+
                 </RelativeLayout>
 
                 <ImageView
@@ -631,7 +641,7 @@
 <!--                        android:textSize="@dimen/day_text_size"-->
 <!--                        android:textColor="@color/white"/>-->
 
-                    <ImageView
+                <ImageView
                         android:id="@+id/event_color"
                         android:layout_width="@dimen/color_sample_size"
                         android:layout_height="@dimen/color_sample_size"
@@ -642,7 +652,7 @@
                         android:layout_marginEnd="@dimen/big_margin"
                         android:clickable="true" />
 
-<!--                </RelativeLayout>-->
+                <!--                </RelativeLayout>-->
 
 <!--                <ImageView-->
 <!--                    android:id="@+id/event_type_divider"-->
@@ -655,4 +665,5 @@
 
             </RelativeLayout>
         </androidx.core.widget.NestedScrollView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
