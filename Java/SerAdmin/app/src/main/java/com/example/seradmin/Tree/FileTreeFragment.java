@@ -28,10 +28,12 @@ import java.util.List;
 public class FileTreeFragment extends Fragment {
     private TreeViewAdapter treeViewAdapter;
     private static final String TAG = "FileTreeFragment";
+    private String idCliente;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        idCliente = getActivity().getIntent().getStringExtra(Login.EXTRA_ID_CLIENTE);
     }
     @Nullable
     @Override
@@ -54,7 +56,7 @@ public class FileTreeFragment extends Fragment {
         //String idCliente = getIntent().getStringExtra(Login.EXTRA_ID_CLIENTE);
 
         // Crea una referencia al directorio "pdfs" en Firebase Storage
-        StorageReference storageRef = storage.getReference().child("pdfs");
+        StorageReference storageRef = storage.getReference().child(idCliente).child("pdfs");
         // Filtra los archivos por el ID del cliente
         //StorageReference clientRef = storageRef.child(idCliente);
 
