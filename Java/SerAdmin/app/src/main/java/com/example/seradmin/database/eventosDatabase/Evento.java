@@ -16,6 +16,7 @@ public class Evento implements Serializable {
     public String horaInicio;
     public String fechaFin;
     public String horaFin;
+    public String dni_cliente;
     public float latitud;
     public float longitud;
     public String descripcion;
@@ -38,12 +39,35 @@ public class Evento implements Serializable {
 
     }
 
+    public Evento(String id, String dni_cliente, String titulo, String fechaInicio, String fechaFin, String horaInicio,
+                  String horaFin, float latitud, float longitud, String descripcion){
+        this.id = id;
+        this.dni_cliente = dni_cliente;
+        this.titulo = titulo;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.descripcion = descripcion;
+
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getDni_cliente() {
+        return dni_cliente;
+    }
+
+    public void setDni_cliente(String dni_cliente) {
+        this.dni_cliente = dni_cliente;
     }
 
     public String getFechaInicio() {

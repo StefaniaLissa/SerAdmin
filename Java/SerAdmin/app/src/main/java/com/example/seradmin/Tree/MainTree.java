@@ -21,6 +21,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.seradmin.Login;
 import com.example.seradmin.R;
+import com.example.seradmin.Recycler.Cliente;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,6 +33,7 @@ public class MainTree extends AppCompatActivity {
     private static final int NUMBER_OF_FRAGMENTS = 4;
     private static final int REQUEST_CODE = 1;
     private Button selectButton;
+    Cliente cliente = new Cliente();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class MainTree extends AppCompatActivity {
             }
         });
 
+        //cliente = (Cliente) getIntent().getSerializableExtra("Cliente");
 
     }
 
@@ -83,6 +86,7 @@ public class MainTree extends AppCompatActivity {
                     storageRef.getDownloadUrl().addOnSuccessListener(downloadUrl -> {
                         String fileUrl = downloadUrl.toString();
                         DocumentReference clientRef = FirebaseFirestore.getInstance().collection("Clientes").document(idCliente);
+                        //DocumentReference clientRef = FirebaseFirestore.getInstance().collection("Clientes").document(cliente.getId());
                         clientRef.update("archivos", FieldValue.arrayUnion(fileUrl))
                                 .addOnSuccessListener(aVoid -> {
                                     // La URL del archivo se ha guardado exitosamente en Firestore

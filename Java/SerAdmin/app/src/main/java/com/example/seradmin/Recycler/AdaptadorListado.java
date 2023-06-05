@@ -17,7 +17,7 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
 
     private ArrayList<Cliente> perfilesArrayList;
 
-    private List<Cliente> perfilesList;
+    private ArrayList<Cliente> perfilesArrayList2;
 
     public interface ItemClickListener {
         void onClick(View view, int position, Cliente cliente);
@@ -38,13 +38,15 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
     public AdaptadorListado(ArrayList<Cliente> dataSet) {
         perfilesArrayList = dataSet;
         //this.listener = listener;
+        //almacena una copia de la lista en perfilesList2.
+        perfilesArrayList2 = new ArrayList<>(perfilesArrayList);
     }
 
     public void filtrado(final String nombreCliente) {
         int longitud = nombreCliente.length();
         if (longitud == 0) {
             perfilesArrayList.clear();
-            perfilesArrayList.addAll(perfilesArrayList);
+            perfilesArrayList.addAll(perfilesArrayList2);
         } else {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 List<Cliente> collecion = perfilesArrayList.stream()
@@ -53,7 +55,7 @@ public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.View
                 perfilesArrayList.clear();
                 perfilesArrayList.addAll(collecion);
             } else {
-                for (Cliente c : perfilesArrayList) {
+                for (Cliente c : perfilesArrayList2) {
                     if (c.getNombre().toLowerCase().contains(nombreCliente.toLowerCase())) {
                         perfilesArrayList.add(c);
                     }
