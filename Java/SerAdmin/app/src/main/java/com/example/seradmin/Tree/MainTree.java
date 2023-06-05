@@ -19,6 +19,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.seradmin.InterfazUsuari.InterfazUsuario;
 import com.example.seradmin.Login;
 import com.example.seradmin.R;
 import com.example.seradmin.Recycler.Cliente;
@@ -52,7 +53,7 @@ public class MainTree extends AppCompatActivity {
             }
         });
 
-        //cliente = (Cliente) getIntent().getSerializableExtra("Cliente");
+        cliente = (Cliente) getIntent().getSerializableExtra("Cliente");
 
     }
 
@@ -71,7 +72,8 @@ public class MainTree extends AppCompatActivity {
             Uri selectedPDF = data.getData();
             String fileName = getFileName(selectedPDF);
             FirebaseStorage mStorageRef = FirebaseStorage.getInstance();
-            String idCliente = getIntent().getStringExtra(Login.EXTRA_ID_CLIENTE);
+            String idCliente = cliente.getDni_cliente();
+
             // Aquí puedes realizar acciones con el archivo PDF seleccionado, como subirlo a un servidor
             StorageReference storageRef = mStorageRef.getReference().child(idCliente).child("pdfs").child(fileName);
 

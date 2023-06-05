@@ -2,6 +2,8 @@ package com.example.seradmin.InterfazUsuari;
 
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
+import static com.example.seradmin.Login.EXTRA_ID_CLIENTE;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -97,6 +99,7 @@ public class InterfazUsuario extends AppCompatActivity {
         files.setOnClickListener(view -> {
             Intent intent = new Intent(InterfazUsuario.this, MainTree.class);
             intent.putExtra("Cliente", cliente);
+            intent.putExtra(EXTRA_ID_CLIENTE, cliente.getDni_cliente());
             intent.putExtra("Files", CLAVE_FILES);
             controladorInterfaz.launch(intent);
             finish();

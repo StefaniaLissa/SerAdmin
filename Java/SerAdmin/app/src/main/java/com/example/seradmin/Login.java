@@ -206,17 +206,17 @@ public class Login extends AppCompatActivity {
                         controladorLogin.launch(intent);
                         finish();
 
-                        Intent intent2 = new Intent(getApplicationContext(), MainTree.class);
-                        intent.putExtra("Cliente", clienteObjeto);
-                        intent.putExtra(EXTRA_ID_CLIENTE, clienteObjeto.getDni_cliente());
-                        controladorLogin.launch(intent2);
-                        finish();
-
-                        Intent intent3 = new Intent(getApplicationContext(), FileTreeFragment.class);
-                        intent.putExtra("Cliente", clienteObjeto);
-                        intent.putExtra(EXTRA_ID_CLIENTE, clienteObjeto.getDni_cliente());
-                        controladorLogin.launch(intent3);
-                        finish();
+//                        Intent intent2 = new Intent(getApplicationContext(), MainTree.class);
+//                        intent.putExtra("Cliente", clienteObjeto);
+//                        intent.putExtra(EXTRA_ID_CLIENTE, clienteObjeto.getDni_cliente());
+//                        controladorLogin.launch(intent2);
+//                        finish();
+//
+//                        Intent intent3 = new Intent(getApplicationContext(), FileTreeFragment.class);
+//                        intent.putExtra("Cliente", clienteObjeto);
+//                        intent.putExtra(EXTRA_ID_CLIENTE, clienteObjeto.getDni_cliente());
+//                        controladorLogin.launch(intent3);
+//                        finish();
 
                     }
                 }
