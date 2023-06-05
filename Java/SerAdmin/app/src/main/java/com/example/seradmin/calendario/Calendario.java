@@ -42,9 +42,11 @@ public class Calendario extends AppCompatActivity {
         files = findViewById(R.id.files);
         calendar = findViewById(R.id.calendar);
 
-        if (getIntent().getExtras().containsKey("Cliente")) {
-            cliente = (Cliente) getIntent().getSerializableExtra("Cliente");
-            Log.d("Cliente", cliente.getNombre());
+        if (getIntent().getExtras() != null) {
+            if (getIntent().getExtras().containsKey("Cliente")) {
+                cliente = (Cliente) getIntent().getSerializableExtra("Cliente");
+                Log.d("Cliente", cliente.getNombre());
+            }
         }
 
         home.setOnClickListener(view -> {

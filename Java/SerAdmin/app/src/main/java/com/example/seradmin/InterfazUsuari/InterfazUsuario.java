@@ -92,6 +92,8 @@ public class InterfazUsuario extends AppCompatActivity {
             }
 
         }
+
+        poblarRecyclerView();
         //Log.d("Cliente", cliente.getId());
 
         files.setOnClickListener(view -> {
