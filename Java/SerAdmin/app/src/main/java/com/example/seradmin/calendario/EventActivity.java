@@ -2,6 +2,8 @@ package com.example.seradmin.calendario;
 
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatCheckBox;
@@ -15,6 +17,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -22,9 +25,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.seradmin.DatePickerFragment;
 import com.example.seradmin.EventoMain;
+import com.example.seradmin.ManejadorFechas;
 import com.example.seradmin.NuevoEvento;
 import com.example.seradmin.R;
 import com.example.seradmin.Recycler.Cliente;
@@ -80,8 +85,8 @@ public class EventActivity extends AppCompatActivity {
             Log.d("Cliente", cliente.getNombre());
         }
 
-        ManejadorFechas manejadorFechaSalida = new ManejadorFechas(event_start_date);
-        ManejadorFechas manejadorFechaVuelta = new ManejadorFechas(event_end_date);
+        ManejadorFechas manejadorFechaSalida = new ManejadorFechas(event_start_date, getSupportFragmentManager());
+        ManejadorFechas manejadorFechaVuelta = new ManejadorFechas(event_end_date, getSupportFragmentManager());
 
         event_start_date.setOnClickListener(manejadorFechaSalida);
         event_end_date.setOnClickListener(manejadorFechaVuelta);
@@ -92,8 +97,23 @@ public class EventActivity extends AppCompatActivity {
         event_start_time.setOnClickListener(manejadorHoraSalida);
         event_end_time.setOnClickListener(manejadorHoraVuelta);
 
-        event_toolbar.getChildAt(0).setOnClickListener(view -> {
-            crearEvento();
+        event_toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.save:
+                        //Toast.makeText(MainActivity.this,"Search Successful",Toast.LENGTH_LONG).show();
+                        crearEvento();
+                        break;
+//                    case R.id.menus_logout:
+//                        Toast.makeText(MainActivity.this,"Logout Successful",Toast.LENGTH_LONG).show();
+//                        break;
+//                    case R.id.acc_settings:
+//                        Toast.makeText(MainActivity.this,"Setting Successful",Toast.LENGTH_LONG).show();
+//                        break;
+                }
+                return true;
+            }
         });
 
 //        crearEvento.setOnClickListener(new View.OnClickListener() {
@@ -150,39 +170,6 @@ public class EventActivity extends AppCompatActivity {
 
     }
 
-    public class ManejadorFechas implements View.OnClickListener {
-
-        EditText fecha;
-
-        TextView fechaT;
-
-        public ManejadorFechas() {
-
-        }
-
-        public ManejadorFechas(EditText fecha) {
-            this.fecha = fecha;
-        }
-
-        public ManejadorFechas(TextView fechaT) {
-            this.fechaT = fechaT;
-        }
-
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.event_start_date:
-                    showDatePickerDialog(event_start_date);
-                    break;
-
-                case R.id.event_end_date:
-                    showDatePickerDialog(event_end_date);
-                    break;
-            }
-        }
-
-    }
-
     public class ManejadorHoras implements View.OnClickListener {
 
         EditText hora;
@@ -213,19 +200,6 @@ public class EventActivity extends AppCompatActivity {
                     break;
             }
         }
-    }
-
-    private void showDatePickerDialog(final TextView fecha) {
-        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                // +1 because January is zero
-                final String selectedDate = day + "-" + (month+1) + "-" + year;
-                fecha.setText(selectedDate);
-            }
-        });
-
-        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     private void showTimePickerDialog(final TextView hora) {
@@ -309,6 +283,7 @@ public class EventActivity extends AppCompatActivity {
             Intent intent = new Intent(EventActivity.this, Calendario.class);
             setResult(CLAVE_INSERTADO, intent);
             EventActivity.super.onBackPressed();
+            controladorEventos.launch(intent);
             finish();
 
         } else {
@@ -325,5 +300,43 @@ public class EventActivity extends AppCompatActivity {
 
         }
     }
+
+    ActivityResultLauncher controladorEventos = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                //Log.d(TAG, "Vuelve cancelado");
+                int code = result.getResultCode();
+                    /*switch (code) {
+                        case RESULT_CANCELED:
+                            break;
+                        case CLAVE_INGRESAR:
+                            Log.d(TAG, "NUEVO INGRESO");
+                            PerfilesImagen nuevoPerfil = (PerfilesImagen) result.getData().getSerializableExtra(mensaje);
+                            completo.add(nuevoPerfil);
+                            contactoDao.insert(nuevoPerfil);
+                            AdaptadorListado = new AdaptadorListado(completo, listener);
+                            rV.setAdapter(AdaptadorListado);
+                            break;
+
+                        case CLAVE_VOLVER:
+                            AdaptadorListado = new AdaptadorListado(completo, listener);
+                            rV.setAdapter(AdaptadorListado);
+                            break;
+
+                        case CLAVE_ELIMINAR:
+                            Log.d(TAG, "NUEVO ELIMINADO");
+                            //Intent elim = result.getData();
+                            String nom = result.getData().getStringExtra(mensaje2);
+                            Log.d(TAG, nom);
+                            PerfilesImagen elimPerfil = contactoDao.findByName(nom);
+                            Log.d(TAG, elimPerfil.getNombre());
+                            completo.remove(elimPerfil);
+                            contactoDao.delete(elimPerfil);
+                            AdaptadorListado = new AdaptadorImagen(completo, listener);
+                            rV.setAdapter(AdaptadorListado);
+                            break;
+
+                    }*/
+
+            });
 
 }
