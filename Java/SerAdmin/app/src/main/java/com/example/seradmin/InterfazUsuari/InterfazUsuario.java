@@ -125,7 +125,7 @@ public class InterfazUsuario extends AppCompatActivity {
     public void poblarRecyclerView() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference eventos_firebase = db.collection("Eventos");
-        Query eventosCliente = eventos_firebase.whereEqualTo("DNI_Cliente", cliente.getDni_cliente());
+        Query eventosCliente = eventos_firebase.whereEqualTo("DNI_Cliente",cliente.getDni_cliente()).orderBy("Inicio", Query.Direction.ASCENDING);
         eventosCliente.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
