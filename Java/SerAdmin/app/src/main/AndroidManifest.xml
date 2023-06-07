@@ -33,6 +33,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SerAdmin"
         tools:targetApi="31">
+
         <activity
             android:name=".ClienteDetalle"
             android:exported="false">
@@ -78,6 +79,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".InterfazUsuari.Navegador"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".InterfazUsuari.InterfazUsuario"
             android:exported="false">
             <meta-data
@@ -100,10 +108,7 @@
         </activity>
         <activity
             android:name=".Tree.NuevoArchivo"
-            android:exported="false">
-
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".GestorMain"
             android:exported="true">
@@ -130,6 +135,15 @@
         <activity
             android:name=".Login"
             android:exported="true">
+<<<<<<< Updated upstream
+=======
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+>>>>>>> Stashed changes
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -151,7 +165,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".EventoMain"
