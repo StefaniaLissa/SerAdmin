@@ -116,6 +116,21 @@ public class Login extends AppCompatActivity {
             String dni = usuario.getText().toString();
             String pass = contraseña.getText().toString();
 
+            if (dni.equals("") || pass.equals("")) {
+
+                AlphaAnimation animation = new AlphaAnimation(0, 1);
+                animation.setDuration(4000);
+                alert.startAnimation(animation);
+                alert.setVisibility(View.VISIBLE);
+                Log.d(TAG, "Hola estoy aqui en gestor creando la alarma");
+                AlphaAnimation animation2 = new AlphaAnimation(1, 0);
+                animation2.setDuration(4000);
+                alert.startAnimation(animation2);
+                alert.setVisibility(View.INVISIBLE);
+                Log.d(TAG, "Hola estoy aqui en gestor apagando la alarma");
+
+            }
+
             db = FirebaseFirestore.getInstance();
             CollectionReference gestores = db.collection("Gestores");
             CollectionReference clientes = db.collection("Clientes");
@@ -142,31 +157,29 @@ public class Login extends AppCompatActivity {
 
                     Gestor gestorObjeto = new Gestor(g_dni, g_pass, g_nombre, g_apellido, g_telefono);
 
-                    if (dni.equals("") || pass.equals("")) {
+                    Intent intent = new Intent(getApplicationContext(), GestorMain.class);
+                    //Bundle bundle = new Bundle();
+                    //bundle.putSerializable("Gestor", (Serializable) gestorObjeto);
+                    //intent.putExtras(bundle);
+                    //intent.putExtra("DNI_Gestor", gestorObjeto);
+                    intent.putExtra("Gestor", gestorObjeto);
+                    controladorLogin.launch(intent);
+                    finish();
 
-                        AlphaAnimation animation = new AlphaAnimation(0, 1);
-                        animation.setDuration(4000);
-                        alert.startAnimation(animation);
-                        alert.setVisibility(View.VISIBLE);
-                        Log.d(TAG, "Hola estoy aqui en gestor creando la alarma");
-                        AlphaAnimation animation2 = new AlphaAnimation(1, 0);
-                        animation2.setDuration(4000);
-                        alert.startAnimation(animation2);
-                        alert.setVisibility(View.INVISIBLE);
-                        Log.d(TAG, "Hola estoy aqui en gestor apagando la alarma");
 
-                    } else {
+                } else {
 
-                        Intent intent = new Intent(getApplicationContext(), GestorMain.class);
-                        //Bundle bundle = new Bundle();
-                        //bundle.putSerializable("Gestor", (Serializable) gestorObjeto);
-                        //intent.putExtras(bundle);
-                        //intent.putExtra("DNI_Gestor", gestorObjeto);
-                        intent.putExtra("Gestor", gestorObjeto);
-                        controladorLogin.launch(intent);
-                        finish();
+                    AlphaAnimation animation = new AlphaAnimation(0, 1);
+                    animation.setDuration(4000);
+                    alert.startAnimation(animation);
+                    alert.setVisibility(View.VISIBLE);
+                    Log.d(TAG, "Hola estoy aqui en gestor creando la alarma");
+                    AlphaAnimation animation2 = new AlphaAnimation(1, 0);
+                    animation2.setDuration(4000);
+                    alert.startAnimation(animation2);
+                    alert.setVisibility(View.INVISIBLE);
+                    Log.d(TAG, "Hola estoy aqui en gestor apagando la alarma");
 
-                    }
                 }
             });
 
@@ -190,27 +203,13 @@ public class Login extends AppCompatActivity {
 
                     Cliente clienteObjeto = new Cliente(c_nombre, c_apellido, c_dni, c_dni_gestor, c_telefono, c_pass, c_sociedad);
 
-                    if (dni.equals("") || pass.equals("")) {
 
-                        AlphaAnimation animation = new AlphaAnimation(0, 1);
-                        animation.setDuration(4000);
-                        alert.startAnimation(animation);
-                        alert.setVisibility(View.VISIBLE);
-                        Log.d(TAG, "Hola estoy aqui en cliente creando la alarma");
-                        AlphaAnimation animation2 = new AlphaAnimation(1, 0);
-                        animation2.setDuration(4000);
-                        alert.startAnimation(animation2);
-                        alert.setVisibility(View.INVISIBLE);
-                        Log.d(TAG, "Hola estoy aqui en cliente apagando la alarma");
-
-                    } else {
-
-                        Intent intent = new Intent(getApplicationContext(), InterfazUsuario.class);
-                        intent.putExtra("Cliente", clienteObjeto);
-                        intent.putExtra(EXTRA_ID_CLIENTE, clienteObjeto.getDni_cliente());
-                        intent.putExtra(EXTRA_SOCIEDAD,clienteObjeto.getSociedad());
-                        controladorLogin.launch(intent);
-                        finish();
+                    Intent intent = new Intent(getApplicationContext(), InterfazUsuario.class);
+                    intent.putExtra("Cliente", clienteObjeto);
+                    intent.putExtra(EXTRA_ID_CLIENTE, clienteObjeto.getDni_cliente());
+                    intent.putExtra(EXTRA_SOCIEDAD,clienteObjeto.getSociedad());
+                    controladorLogin.launch(intent);
+                    finish();
 
 //                        Intent intent2 = new Intent(getApplicationContext(), MainTree.class);
 //                        intent.putExtra("Cliente", clienteObjeto);
@@ -224,7 +223,20 @@ public class Login extends AppCompatActivity {
 //                        controladorLogin.launch(intent3);
 //                        finish();
 
-                    }
+
+                } else {
+
+                    AlphaAnimation animation = new AlphaAnimation(0, 1);
+                    animation.setDuration(4000);
+                    alert.startAnimation(animation);
+                    alert.setVisibility(View.VISIBLE);
+                    Log.d(TAG, "Hola estoy aqui en cliente creando la alarma");
+                    AlphaAnimation animation2 = new AlphaAnimation(1, 0);
+                    animation2.setDuration(4000);
+                    alert.startAnimation(animation2);
+                    alert.setVisibility(View.INVISIBLE);
+                    Log.d(TAG, "Hola estoy aqui en cliente apagando la alarma");
+
                 }
             });
         });
