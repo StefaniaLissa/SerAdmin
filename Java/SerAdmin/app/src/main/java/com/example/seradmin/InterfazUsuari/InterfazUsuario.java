@@ -2,8 +2,6 @@ package com.example.seradmin.InterfazUsuari;
 
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
-import static com.example.seradmin.Login.EXTRA_ID_CLIENTE;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,34 +9,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seradmin.ClienteDetalle;
 import com.example.seradmin.EventoDetalle;
-import com.example.seradmin.EventoMain;
 import com.example.seradmin.Gestor;
-import com.example.seradmin.NuevoEvento;
+import com.example.seradmin.Login;
 import com.example.seradmin.R;
 import com.example.seradmin.Recycler.Cliente;
-import com.example.seradmin.Tree.*;
 import com.example.seradmin.calendario.AdaptadorEventos;
-import com.example.seradmin.calendario.Calendario;
 import com.example.seradmin.database.eventosDatabase.Evento;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -219,6 +211,7 @@ public class InterfazUsuario extends Fragment {
     AdaptadorEventos aE = new AdaptadorEventos(new ArrayList<>());
     String pattern = "dd-MM-yy HH:mm";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    private ImageView logOutButton;
 
     @Nullable
     @Override
@@ -228,7 +221,9 @@ public class InterfazUsuario extends Fragment {
 //        home = view.findViewById(R.id.home);
 //        files = view.findViewById(R.id.files);
 //        calendar = view.findViewById(R.id.calendar);
-        imagen = view.findViewById(R.id.LogOut);
+        imagen = view.findViewById(R.id.perfilImagenGestor);
+        logOutButton = view.findViewById(R.id.logOutFinal);
+
 
 
         RVEventos = view.findViewById(R.id.recyclerEventos);
@@ -275,6 +270,12 @@ public class InterfazUsuario extends Fragment {
             intent.putExtra("ClienteDetalle", CLAVE_CLIENTE_DETALLE);
             intent.putExtra("Cliente", cliente);
             controladorInterfaz.launch(intent);
+        });
+        logOutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), Login.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            requireActivity().finishAffinity();
         });
 
         return view;

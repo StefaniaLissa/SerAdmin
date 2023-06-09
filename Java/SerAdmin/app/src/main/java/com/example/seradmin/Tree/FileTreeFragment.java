@@ -144,6 +144,13 @@ public class FileTreeFragment extends Fragment {
             }
         });
 
+        treeViewAdapter.setTreeNodeClickListener((treeNode, nodeView) -> {
+            if (treeNode.getValue() instanceof String) {
+                String fileName = (String) treeNode.getValue();
+                deleteFile(fileName);
+            }
+        });
+
 
 //        treeViewAdapter.setTreeNodeClickListener((treeNode, nodeView) -> {
 //            Log.d(TAG, "Click on TreeNode with value " + treeNode.getValue().toString());
@@ -175,6 +182,22 @@ public class FileTreeFragment extends Fragment {
                 })
                 .addOnFailureListener(exception -> {
                     // Ha ocurrido un error al descargar el archivo
+                    // Maneja el error aquí
+                });
+    }
+    private void deleteFile(String fileName) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference fileRef = storage.getReference().child(idCliente).child("pdfs").child(fileName);
+
+        fileRef.delete()
+                .addOnSuccessListener(aVoid -> {
+                    // El archivo se ha eliminado correctamente
+                    Toast.makeText(requireContext(), "Archivo eliminado: " + fileName, Toast.LENGTH_SHORT).show();
+                    // Actualiza la vista eliminando el nodo correspondiente
+                   // treeViewAdapter.removeNodeByValue(fileName);
+                })
+                .addOnFailureListener(exception -> {
+                    // Ha ocurrido un error al eliminar el archivo
                     // Maneja el error aquí
                 });
     }

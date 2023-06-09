@@ -60,7 +60,7 @@ public class GestorMain extends AppCompatActivity {
         anadirCliente = findViewById(R.id.añadir);
         buscador = findViewById(R.id.buscador);
 
-        imagenGestor = findViewById(R.id.LogOut);
+        imagenGestor = findViewById(R.id.perfilImagenGestor);
 
         RVClientes = (RecyclerView) findViewById(R.id.RVClientes);
         RVClientes.setHasFixedSize(true);

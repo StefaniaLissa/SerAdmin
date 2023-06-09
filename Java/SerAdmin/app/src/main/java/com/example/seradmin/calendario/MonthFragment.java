@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import com.example.seradmin.EventoDetalle;
 import com.example.seradmin.EventoMain;
+import com.example.seradmin.Login;
 import com.example.seradmin.R;
 import com.example.seradmin.Recycler.Cliente;
 import com.example.seradmin.database.eventosDatabase.Evento;
@@ -60,6 +62,7 @@ public class MonthFragment extends Fragment{
     private ArrayList<Evento> eventos = new ArrayList<Evento>();
     private ArrayList<Event> events = new ArrayList<Event>();
     private List<Day> days = new ArrayList<>();
+    private ImageButton logOutButton;
 
     public MonthFragment(){
 
@@ -81,6 +84,7 @@ public class MonthFragment extends Fragment{
         mes = view.findViewById(R.id.mes);
         right = view.findViewById(R.id.right);
         left = view.findViewById(R.id.left);
+        logOutButton = view.findViewById(R.id.logOutFinal);
 
         right.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +106,14 @@ public class MonthFragment extends Fragment{
             linearLayout = view.findViewById(res.getIdentifier("day_" + i, "id", packageName));
         }
         updateCalendar(targetDate, view);
+
+        logOutButton.setOnClickListener(v -> {
+            // Cerrar la aplicación y volver a la pantalla de inicio de sesión
+            Intent intent = new Intent(requireActivity(), Login.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            requireActivity().finishAffinity();
+        });
 
         return view;
     }
