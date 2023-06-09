@@ -84,7 +84,13 @@ public class MonthFragment extends Fragment{
         mes = view.findViewById(R.id.mes);
         right = view.findViewById(R.id.right);
         left = view.findViewById(R.id.left);
+
         logOutButton = view.findViewById(R.id.logOutFinal);
+
+        if (getActivity().getIntent().getExtras().containsKey("Cliente")) {
+            cliente = (Cliente) getActivity().getIntent().getSerializableExtra("Cliente");
+        }
+
 
         right.setOnClickListener(new View.OnClickListener() {
             @Override

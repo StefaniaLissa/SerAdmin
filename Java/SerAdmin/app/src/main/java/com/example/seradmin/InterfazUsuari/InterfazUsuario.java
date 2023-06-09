@@ -234,14 +234,14 @@ public class InterfazUsuario extends Fragment {
         RVArchivos.setHasFixedSize(true);
         RVArchivos.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        if (getArguments() != null) {
-            if (getArguments().containsKey("Cliente")) {
-                cliente = (Cliente) getArguments().getSerializable("Cliente");
+        if (getActivity().getIntent().getExtras() != null) {
+            if (getActivity().getIntent().getExtras().containsKey("Cliente")) {
+                cliente = (Cliente) getActivity().getIntent().getExtras().getSerializable("Cliente");
                 Log.d("Cliente", cliente.getNombre());
             }
 
-            if (getArguments().containsKey("Gestor")) {
-                gestor = (Gestor) getArguments().getSerializable("Gestor");
+            if (getActivity().getIntent().getExtras().containsKey("Gestor")) {
+                gestor = (Gestor) getActivity().getIntent().getExtras().getSerializable("Gestor");
                 Log.d("Gestor", gestor.getNombre());
             }
         }
@@ -284,62 +284,64 @@ public class InterfazUsuario extends Fragment {
     private void poblarRecyclerView() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference eventos_firebase = db.collection("Eventos");
-//<<<<<<< Updated upstream
-//        Query eventosCliente = eventos_firebase.whereEqualTo("DNI_Cliente",cliente.getDni_cliente()).orderBy("Inicio", Query.Direction.ASCENDING);
-//        eventosCliente.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    eventos = new ArrayList<>();
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        DocumentReference ref = document.getReference();
-//                        Evento evento = new Evento();
-//                        Timestamp timestamp = (Timestamp) document.get("Inicio");
-//                        evento.setId(document.getId());
-//                        evento.setTitulo(document.get("Titulo").toString());
-//                        evento.setFechaInicio(simpleDateFormat.format(timestamp.toDate()));
-//                        eventos.add(evento);
-//                    }
-//                    aE = new AdaptadorEventos(eventos);
-//                    RVEventos.setAdapter(aE);
-//                    aE.setClickListener(new AdaptadorEventos.ItemClickListener() {
-//                        @Override
-//                        public void onClick(View view, int position, Evento evento) {
-//                            Intent intent = new Intent(InterfazUsuario.this, EventoDetalle.class);
-//                            intent.putExtra("Detalle", CLAVE_LISTA);
-//                            intent.putExtra("Evento", evento);
-//                            controladorInterfaz.launch(intent);
-//                        }
-//                    });
-//                } else {
-//                    Log.d(TAG, "Error getting documents: ", task.getException());
-//=======
-        Query eventosCliente = eventos_firebase.whereEqualTo("DNI_Cliente", cliente.getDni_cliente());
-        eventosCliente.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                eventos = new ArrayList<>();
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    DocumentReference ref = document.getReference();
-                    Evento evento = new Evento();
-                    Timestamp timestamp = (Timestamp) document.get("Inicio");
-                    evento.setId(document.getId());
-                    evento.setTitulo(document.get("Titulo").toString());
-                    evento.setFechaInicio(simpleDateFormat.format(timestamp.toDate()));
-                    eventos.add(evento);
-//>>>>>>> Stashed changes
+        Query eventosCliente = eventos_firebase.whereEqualTo("DNI_Cliente",cliente.getDni_cliente()).orderBy("Inicio", Query.Direction.ASCENDING);
+        eventosCliente.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    eventos = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        DocumentReference ref = document.getReference();
+                        Evento evento = new Evento();
+                        Timestamp timestamp = (Timestamp) document.get("Inicio");
+                        evento.setId(document.getId());
+                        evento.setTitulo(document.get("Titulo").toString());
+                        evento.setFechaInicio(simpleDateFormat.format(timestamp.toDate()));
+                        eventos.add(evento);
+                    }
+                    aE = new AdaptadorEventos(eventos);
+                    RVEventos.setAdapter(aE);
+                    aE.setClickListener(new AdaptadorEventos.ItemClickListener() {
+                        @Override
+                        public void onClick(View view, int position, Evento evento) {
+                            Intent intent = new Intent(getActivity(), EventoDetalle.class);
+                            intent.putExtra("Detalle", CLAVE_LISTA);
+                            intent.putExtra("Evento", evento);
+                            controladorInterfaz.launch(intent);
+                        }
+                    });
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
                 }
-                aE = new AdaptadorEventos(eventos);
-                RVEventos.setAdapter(aE);
-                aE.setClickListener((view, position, evento) -> {
-                    Intent intent = new Intent(requireActivity(), EventoDetalle.class);
-                    intent.putExtra("Detalle", CLAVE_LISTA);
-                    intent.putExtra("Evento", evento);
-                    controladorInterfaz.launch(intent);
-                });
-            } else {
-                Log.d(TAG, "Error getting documents: ", task.getException());
             }
         });
+
+//        Query eventosCliente = eventos_firebase.whereEqualTo("DNI_Cliente", cliente.getDni_cliente());
+//        eventosCliente.get().addOnCompleteListener(task -> {
+//            if (task.isSuccessful()) {
+//                eventos = new ArrayList<>();
+//                for (QueryDocumentSnapshot document : task.getResult()) {
+//                    DocumentReference ref = document.getReference();
+//                    Evento evento = new Evento();
+//                    Timestamp timestamp = (Timestamp) document.get("Inicio");
+//                    evento.setId(document.getId());
+//                    evento.setTitulo(document.get("Titulo").toString());
+//                    evento.setFechaInicio(simpleDateFormat.format(timestamp.toDate()));
+//                    eventos.add(evento);
+////>>>>>>> Stashed changes
+//                }
+//                aE = new AdaptadorEventos(eventos);
+//                RVEventos.setAdapter(aE);
+//                aE.setClickListener((view, position, evento) -> {
+//                    Intent intent = new Intent(requireActivity(), EventoDetalle.class);
+//                    intent.putExtra("Detalle", CLAVE_LISTA);
+//                    intent.putExtra("Evento", evento);
+//                    controladorInterfaz.launch(intent);
+//                });
+//            } else {
+//                Log.d(TAG, "Error getting documents: ", task.getException());
+//            }
+//        });
     }
 
     ActivityResultLauncher<Intent> controladorInterfaz = registerForActivityResult(
@@ -348,4 +350,9 @@ public class InterfazUsuario extends Fragment {
                 // Handle the result
             });
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        poblarRecyclerView();
+    }
 }
