@@ -76,37 +76,7 @@ public class Login extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(), result -> {
                     //Log.d(TAG, "Vuelve cancelado");
                     int code = result.getResultCode();
-                    /*switch (code) {
-                        case RESULT_CANCELED:
-                            break;
-                        case CLAVE_INGRESAR:
-                            Log.d(TAG, "NUEVO INGRESO");
-                            PerfilesImagen nuevoPerfil = (PerfilesImagen) result.getData().getSerializableExtra(mensaje);
-                            completo.add(nuevoPerfil);
-                            contactoDao.insert(nuevoPerfil);
-                            AdaptadorListado = new AdaptadorListado(completo, listener);
-                            rV.setAdapter(AdaptadorListado);
-                            break;
 
-                        case CLAVE_VOLVER:
-                            AdaptadorListado = new AdaptadorListado(completo, listener);
-                            rV.setAdapter(AdaptadorListado);
-                            break;
-
-                        case CLAVE_ELIMINAR:
-                            Log.d(TAG, "NUEVO ELIMINADO");
-                            //Intent elim = result.getData();
-                            String nom = result.getData().getStringExtra(mensaje2);
-                            Log.d(TAG, nom);
-                            PerfilesImagen elimPerfil = contactoDao.findByName(nom);
-                            Log.d(TAG, elimPerfil.getNombre());
-                            completo.remove(elimPerfil);
-                            contactoDao.delete(elimPerfil);
-                            AdaptadorListado = new AdaptadorImagen(completo, listener);
-                            rV.setAdapter(AdaptadorListado);
-                            break;
-
-                    }*/
 
                 });
 

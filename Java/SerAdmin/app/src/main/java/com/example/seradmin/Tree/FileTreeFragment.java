@@ -54,12 +54,10 @@ public class FileTreeFragment extends Fragment {
         recyclerView.setNestedScrollingEnabled(false);
 
         TreeViewHolderFactory factory = (v, layout) -> new FileViewHolder(v);
-
         treeViewAdapter = new TreeViewAdapter(factory);
         recyclerView.setAdapter(treeViewAdapter);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-
         // Obtener el clientId de los extras del intent
         //String idCliente = getIntent().getStringExtra(Login.EXTRA_ID_CLIENTE);
 
@@ -147,11 +145,12 @@ public class FileTreeFragment extends Fragment {
             }
         });
 
-        treeViewAdapter.setTreeNodeClickListener((treeNode, nodeView) -> {
+        treeViewAdapter.setTreeNodeLongClickListener((treeNode, nodeView) -> {
             if (treeNode.getValue() instanceof String) {
                 String fileName = (String) treeNode.getValue();
                 deleteFile(fileName);
             }
+            return false;
         });
 
 

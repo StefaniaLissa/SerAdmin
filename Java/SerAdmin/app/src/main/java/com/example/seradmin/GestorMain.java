@@ -94,7 +94,7 @@ public class GestorMain extends AppCompatActivity {
                 //intent.putExtra("DNI_Gestor", gestor.getDNI());
                 intent.putExtra("Gestor", gestor);
                 controladorGestor.launch(intent);
-                finish();
+
             }
         });
 
@@ -120,7 +120,7 @@ public class GestorMain extends AppCompatActivity {
             //intent.putExtra("DNI_Gestor", gestor.getDNI());
             intent.putExtra("Gestor", gestor);
             controladorGestor.launch(intent);
-            finish();
+
         });
 
     }
@@ -191,7 +191,7 @@ public class GestorMain extends AppCompatActivity {
                         intent.putExtra("Detalle", CLAVE_LISTA);
                         intent.putExtra("Cliente", cliente);
                         controladorGestor.launch(intent);
-                        finish();
+
                     }
                 });
             }

@@ -50,21 +50,21 @@ public class Calendario extends AppCompatActivity {
             }
         }
 
-        home.setOnClickListener(view -> {
-            Intent intent = new Intent(Calendario.this, InterfazUsuario.class);
-            //intent.putExtra("Home", CLAVE_HOME);
-            intent.putExtra("Cliente", cliente);
-            controladorCalendario.launch(intent);
-            finish();
-        });
-
-        files.setOnClickListener(view -> {
-            Intent intent = new Intent(Calendario.this, MainTree.class);
-            intent.putExtra("Cliente", cliente);
-            //intent.putExtra("Files", CLAVE_FILES);
-            controladorCalendario.launch(intent);
-            finish();
-        });
+//        home.setOnClickListener(view -> {
+//            Intent intent = new Intent(Calendario.this, InterfazUsuario.class);
+//            //intent.putExtra("Home", CLAVE_HOME);
+//            intent.putExtra("Cliente", cliente);
+//            controladorCalendario.launch(intent);
+//            finish();
+//        });
+//
+//        files.setOnClickListener(view -> {
+//            Intent intent = new Intent(Calendario.this, MainTree.class);
+//            intent.putExtra("Cliente", cliente);
+//            //intent.putExtra("Files", CLAVE_FILES);
+//            controladorCalendario.launch(intent);
+//            finish();
+//        });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
