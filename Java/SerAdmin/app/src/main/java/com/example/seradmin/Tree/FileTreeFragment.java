@@ -41,7 +41,7 @@ public class FileTreeFragment extends Fragment {
 //        idCliente = getActivity().getIntent().getStringExtra(Login.EXTRA_ID_CLIENTE);
 //        idSociedad = (String) getActivity().getIntent().getSerializableExtra(Login.EXTRA_SOCIEDAD);
         cliente = (Cliente) getActivity().getIntent().getSerializableExtra("Cliente");
-        Log.e(TAG, "Error retrieving PDF files from Firebase Storage"+idSociedad);
+        Log.e(TAG, "Error retrieving PDF files from Firebase Storage"+cliente.getSociedad());
 
     }
     @Nullable

@@ -14,12 +14,15 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
 
-        <ImageView
-            android:id="@+id/logoNC"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
+        <de.hdodenhof.circleimageview.CircleImageView
+
+            android:id="@+id/logout"
+            android:layout_width="33dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_add" />
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:tooltipText="@string/logout"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <SearchView
             android:id="@+id/buscador"
@@ -37,7 +40,8 @@
             android:layout_width="33dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:tooltipText="@string/gestorDetalle"
+            android:src="@drawable/pexels_polina_kovaleva_5927743"
             tools:srcCompat="@tools:sample/avatars" />
 
     </LinearLayout>
