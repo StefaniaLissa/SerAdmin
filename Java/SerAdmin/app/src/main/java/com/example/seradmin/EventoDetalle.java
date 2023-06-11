@@ -2,6 +2,8 @@ package com.example.seradmin;
 
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.seradmin.InterfazUsuari.InterfazUsuario;
 import com.example.seradmin.InterfazUsuari.Navegador;
+import com.example.seradmin.calendario.EventActivity;
 import com.example.seradmin.calendario.LocationFragment;
 import com.example.seradmin.database.eventosDatabase.Evento;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -36,6 +39,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EventoDetalle extends AppCompatActivity implements LocationFragment.OnCallbackReceived {
 
@@ -46,10 +51,12 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
     Button modificarEvento, eliminarEvento;
     ImageView editarTitulo, editarFechaInicio, editarFechaFin, editarHoraInicio, editarHoraFin, editarUbicacion, editarDescripcion;
 
-    String patternFecha = "dd-MM-yy";
+    String patternFecha = "dd-MM-yyyy";
     String patternHora = "HH:mm";
     SimpleDateFormat simpleDateFormatFecha = new SimpleDateFormat(patternFecha);
     SimpleDateFormat simpleDateFormatHora = new SimpleDateFormat(patternHora);
+    Evento evento;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +94,11 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
         horaInicioEventoDetalle.setOnClickListener(manejadorHoraInicio);
         horaFinEventoDetalle.setOnClickListener(manejadorHoraFin);
 
-        Evento evento = (Evento) getIntent().getSerializableExtra("Evento");
+        evento = (Evento) getIntent().getSerializableExtra("Evento");
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-        selectEvento(db , evento.getId());
+        selectEvento(evento.getId());
 
         eliminarEvento.setOnClickListener(v -> {
 
@@ -123,37 +130,39 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
 
         modificarEvento.setOnClickListener((v) -> {
 
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy HH:mm");
-            String stringDateInicio = getEditTextText(fechaInicioEventoDetalle.getText().toString()) + " " + getEditTextText(horaInicioEventoDetalle.getText().toString());
-            String stringDateFin = getEditTextText(fechaFinEventoDetalle.getText().toString()) + " " + getEditTextText(horaFinEventoDetalle.getText().toString());
-            Date dateInicio = null;
-            Date dateFin = null;
-
-            try {
-                dateInicio = simpleDateFormat.parse(stringDateInicio);
-                dateFin = simpleDateFormat.parse(stringDateFin);
-            } catch (ParseException e) {
-                Log.d(TAG, e.toString());
-            }
-
-            Timestamp timeStampInicio = new Timestamp(dateInicio);
-            Timestamp timeStampFin = new Timestamp(dateFin);
-            Float s_latitud = Float.valueOf(ubicacionEventoDetalle.getText().toString().substring(0, ubicacionEventoDetalle.getText().toString().indexOf(":")));
-            Float s_longitud = Float.valueOf(ubicacionEventoDetalle.getText().toString().substring(ubicacionEventoDetalle.getText().toString().indexOf(":") + 2));
-            GeoPoint geoPoint = new GeoPoint(s_latitud, s_longitud);
-
-            // UPDATE
-            DocumentReference ref = db.collection("Eventos").document(evento.getId());
-            ref.update("Titulo", getEditTextText(tituloEventoDetalle.getText().toString()));
-            ref.update("Inicio", timeStampInicio);
-            ref.update("Fin", timeStampFin);
-            ref.update("Ubicacion", Float.valueOf(getEditTextText(ubicacionEventoDetalle.getText().toString())));
-            ref.update("Descripcion", getEditTextText(descripcionEventoDetalle.getText().toString()));
-
-            Toast.makeText(this, "Evento con Id " + evento.getId() + " modificado", Toast.LENGTH_LONG).show();
-            Log.d(TAG, "Evento con Id " + evento.getId() + " modificado");
-
-            volverEventoMain(CLAVE_MODIFICADO);
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy HH:mm");
+//            String stringDateInicio = getEditTextText(fechaInicioEventoDetalle.getText().toString()) + " " + getEditTextText(horaInicioEventoDetalle.getText().toString());
+//            String stringDateFin = getEditTextText(fechaFinEventoDetalle.getText().toString()) + " " + getEditTextText(horaFinEventoDetalle.getText().toString());
+//            Date dateInicio = null;
+//            Date dateFin = null;
+//
+//            try {
+//                dateInicio = simpleDateFormat.parse(stringDateInicio);
+//                dateFin = simpleDateFormat.parse(stringDateFin);
+//            } catch (ParseException e) {
+//                Log.d(TAG, e.toString());
+//            }
+//
+//            Timestamp timeStampInicio = new Timestamp(dateInicio);
+//            Timestamp timeStampFin = new Timestamp(dateFin);
+//            Float s_latitud = Float.valueOf(ubicacionEventoDetalle.getText().toString().substring(0, ubicacionEventoDetalle.getText().toString().indexOf(":")));
+//            Float s_longitud = Float.valueOf(ubicacionEventoDetalle.getText().toString().substring(ubicacionEventoDetalle.getText().toString().indexOf(":") + 2));
+//            GeoPoint geoPoint = new GeoPoint(s_latitud, s_longitud);
+//
+//            // UPDATE
+//            DocumentReference ref = db.collection("Eventos").document(evento.getId());
+//            ref.update("Titulo", getEditTextText(tituloEventoDetalle.getText().toString()));
+//            ref.update("Inicio", timeStampInicio);
+//            ref.update("Fin", timeStampFin);
+//            ref.update("Ubicacion", Float.valueOf(getEditTextText(ubicacionEventoDetalle.getText().toString())));
+//            ref.update("Descripcion", getEditTextText(descripcionEventoDetalle.getText().toString()));
+//
+//            Toast.makeText(this, "Evento con Id " + evento.getId() + " modificado", Toast.LENGTH_LONG).show();
+//            Log.d(TAG, "Evento con Id " + evento.getId() + " modificado");
+//
+//            volverEventoMain(CLAVE_MODIFICADO);
+            //actualizarEvento();
+            actualizarEvento2();
 
         });
 
@@ -208,7 +217,7 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
 
     }
 
-    public void selectEvento (FirebaseFirestore db, String id) {
+    public void selectEvento (String id) {
 
         db.collection("Eventos").whereEqualTo("__name__", id).limit(1).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -252,6 +261,174 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
 
     }
 
+    public void actualizarEvento() {
+        Map<String, Object> event = prepararEvento();
+
+        if (event != null) {
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yy HH:mm");
+            String stringDateInicio = getEditTextText(fechaInicioEventoDetalle.getText().toString()) + " " + getEditTextText(horaInicioEventoDetalle.getText().toString());
+            String stringDateFin = getEditTextText(fechaFinEventoDetalle.getText().toString()) + " " + getEditTextText(horaFinEventoDetalle.getText().toString());
+            Date dateInicio = null;
+            Date dateFin = null;
+
+            try {
+                dateInicio = simpleDateFormat.parse(stringDateInicio);
+                dateFin = simpleDateFormat.parse(stringDateFin);
+            } catch (ParseException e) {
+                Log.d(TAG, e.toString());
+            }
+
+            Timestamp timeStampInicio = new Timestamp(dateInicio);
+            Timestamp timeStampFin = new Timestamp(dateFin);
+            Float s_latitud = Float.valueOf(ubicacionEventoDetalle.getText().toString().substring(0, ubicacionEventoDetalle.getText().toString().indexOf(":")));
+            Float s_longitud = Float.valueOf(ubicacionEventoDetalle.getText().toString().substring(ubicacionEventoDetalle.getText().toString().indexOf(":") + 2));
+            GeoPoint geoPoint = new GeoPoint(s_latitud, s_longitud);
+
+            // UPDATE
+            DocumentReference ref = db.collection("Eventos").document(evento.getId());
+            ref.update("Titulo", getEditTextText(tituloEventoDetalle.getText().toString()));
+            ref.update("Inicio", timeStampInicio);
+            ref.update("Fin", timeStampFin);
+            ref.update("Ubicacion", geoPoint);
+            ref.update("Descripcion", getEditTextText(descripcionEventoDetalle.getText().toString()));
+
+            Toast.makeText(this, "Evento con Id " + evento.getId() + " modificado", Toast.LENGTH_LONG).show();
+            Log.d(TAG, "Evento con Id " + evento.getId() + " modificado");
+
+            volverEventoMain(CLAVE_MODIFICADO);
+
+        } else {
+
+            new AlertDialog.Builder(EventoDetalle.this)
+                    .setTitle("Faltan datos")
+                    .setMessage("Tienes que rellenar todos los campos")
+                    .setIcon(android.R.drawable.ic_dialog_dialer)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+
+                        }}
+                    ).show();
+
+        }
+    }
+
+    public void actualizarEvento2() {
+
+        String s_titulo = getEditTextText(tituloEventoDetalle.getText().toString());
+        String s_descripcion = getEditTextText(descripcionEventoDetalle.getText().toString());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        Log.d(TAG, getEditTextText(fechaInicioEventoDetalle.getText().toString()));
+        Log.d(TAG, getEditTextText(horaInicioEventoDetalle.getText().toString()));
+        String s_fechaInicio = getEditTextText(fechaInicioEventoDetalle.getText().toString());
+        String s_horaInicio = getEditTextText(horaInicioEventoDetalle.getText().toString());
+        String stringDateInicio = s_fechaInicio + " " + s_horaInicio;
+        String s_fechaFin = getEditTextText(fechaFinEventoDetalle.getText().toString());
+        String s_horaFin = getEditTextText(horaFinEventoDetalle.getText().toString());
+        String stringDateFin = s_fechaFin + " " + s_horaFin;
+        String s_location = getEditTextText(ubicacionEventoDetalle.getText().toString());
+        Log.d(TAG, getEditTextText(ubicacionEventoDetalle.getText().toString()));
+        Date dateInicio = null;
+        Date dateFin = null;
+        Map<String, Object> event = new HashMap<>();
+
+        if (s_titulo.isEmpty() || s_fechaInicio.isBlank() || s_horaInicio.isBlank()
+                || s_fechaFin.isBlank() || s_horaFin.isBlank() ||s_location.isEmpty() ||
+                //latitud.getText().toString().isEmpty() || longitud.getText().toString().isEmpty() ||
+                s_descripcion.isEmpty()) {
+
+            Log.d(TAG, "Tienes que rellenar todos los campos");
+
+            new AlertDialog.Builder(EventoDetalle.this)
+                    .setTitle("Faltan datos")
+                    .setMessage("Tienes que rellenar todos los campos")
+                    .setIcon(android.R.drawable.ic_dialog_dialer)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+
+                        }}
+                    ).show();
+
+        } else {
+
+            try {
+                dateInicio = simpleDateFormat.parse(stringDateInicio);
+                dateFin = simpleDateFormat.parse(stringDateFin);
+            } catch (ParseException e) {
+                Log.d(TAG, e.toString());
+            }
+
+            Timestamp timeStampInicio = new Timestamp(dateInicio);
+            Timestamp timeStampFin = new Timestamp(dateFin);
+            Float s_latitud = Float.valueOf(s_location.substring(0, s_location.indexOf(":")));
+            Float s_longitud = Float.valueOf(s_location.substring(s_location.indexOf(":") + 2));
+            GeoPoint geoPoint = new GeoPoint(s_latitud, s_longitud);
+
+            // UPDATE
+            DocumentReference ref = db.collection("Eventos").document(evento.getId());
+            ref.update("Titulo", getEditTextText(tituloEventoDetalle.getText().toString()));
+            ref.update("Inicio", timeStampInicio);
+            ref.update("Fin", timeStampFin);
+            ref.update("Ubicacion", geoPoint);
+            ref.update("Descripcion", getEditTextText(descripcionEventoDetalle.getText().toString()));
+
+            Toast.makeText(this, "Evento con Id " + evento.getId() + " modificado", Toast.LENGTH_LONG).show();
+            Log.d(TAG, "Evento con Id " + evento.getId() + " modificado");
+
+            volverEventoMain(CLAVE_MODIFICADO);
+        }
+
+    }
+
+    public Map<String, Object> prepararEvento() {
+
+        String s_titulo = getEditTextText(tituloEventoDetalle.getText().toString()), s_descripcion = getEditTextText(descripcionEventoDetalle.getText().toString());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        Log.d(TAG, getEditTextText(fechaInicioEventoDetalle.getText().toString()));
+        Log.d(TAG, getEditTextText(horaInicioEventoDetalle.getText().toString()));
+        String stringDateInicio = getEditTextText(fechaInicioEventoDetalle.getText().toString()) + " " + getEditTextText(horaInicioEventoDetalle.getText().toString());
+        String stringDateFin = getEditTextText(fechaFinEventoDetalle.getText().toString()) + " " + getEditTextText(horaFinEventoDetalle.getText().toString());
+        String s_location = getEditTextText(ubicacionEventoDetalle.getText().toString());
+        Log.d(TAG, getEditTextText(ubicacionEventoDetalle.getText().toString()));
+        Date dateInicio = null;
+        Date dateFin = null;
+        Map<String, Object> event = new HashMap<>();
+
+        if (s_titulo.isEmpty() || stringDateInicio.isEmpty() || stringDateFin.isEmpty() || s_location.isEmpty() ||
+                //latitud.getText().toString().isEmpty() || longitud.getText().toString().isEmpty() ||
+                s_descripcion.isEmpty()) {
+
+            Log.d(TAG, "Tienes que rellenar todos los campos");
+
+        } else {
+
+            try {
+                dateInicio = simpleDateFormat.parse(stringDateInicio);
+                dateFin = simpleDateFormat.parse(stringDateFin);
+            } catch (ParseException e) {
+                Log.d(TAG, e.toString());
+            }
+
+            Timestamp timeStampInicio = new Timestamp(dateInicio);
+            Timestamp timeStampFin = new Timestamp(dateFin);
+            Float s_latitud = Float.valueOf(s_location.substring(0, s_location.indexOf(":")));
+            Float s_longitud = Float.valueOf(s_location.substring(s_location.indexOf(":") + 2));
+            GeoPoint geoPoint = new GeoPoint(s_latitud, s_longitud);
+
+            event.put("Titulo", s_titulo);
+            event.put("Inicio", timeStampInicio);
+            event.put("Fin", timeStampFin);
+            event.put("DNI_Cliente", evento.getDni_cliente());
+            event.put("Ubicacion", geoPoint);
+            event.put("Descripcion", s_descripcion);
+            return event;
+
+        }
+
+        return null;
+
+    }
+
     private void abrirMapa(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -269,5 +446,44 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
     public void Update(MarkerOptions markerOptions) {
         ubicacionEventoDetalle.setText(markerOptions.getTitle());
     }
+
+    ActivityResultLauncher controladorEventos = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                //Log.d(TAG, "Vuelve cancelado");
+                int code = result.getResultCode();
+                    /*switch (code) {
+                        case RESULT_CANCELED:
+                            break;
+                        case CLAVE_INGRESAR:
+                            Log.d(TAG, "NUEVO INGRESO");
+                            PerfilesImagen nuevoPerfil = (PerfilesImagen) result.getData().getSerializableExtra(mensaje);
+                            completo.add(nuevoPerfil);
+                            contactoDao.insert(nuevoPerfil);
+                            AdaptadorListado = new AdaptadorListado(completo, listener);
+                            rV.setAdapter(AdaptadorListado);
+                            break;
+
+                        case CLAVE_VOLVER:
+                            AdaptadorListado = new AdaptadorListado(completo, listener);
+                            rV.setAdapter(AdaptadorListado);
+                            break;
+
+                        case CLAVE_ELIMINAR:
+                            Log.d(TAG, "NUEVO ELIMINADO");
+                            //Intent elim = result.getData();
+                            String nom = result.getData().getStringExtra(mensaje2);
+                            Log.d(TAG, nom);
+                            PerfilesImagen elimPerfil = contactoDao.findByName(nom);
+                            Log.d(TAG, elimPerfil.getNombre());
+                            completo.remove(elimPerfil);
+                            contactoDao.delete(elimPerfil);
+                            AdaptadorListado = new AdaptadorImagen(completo, listener);
+                            rV.setAdapter(AdaptadorListado);
+                            break;
+
+                    }*/
+
+            });
+
 
 }

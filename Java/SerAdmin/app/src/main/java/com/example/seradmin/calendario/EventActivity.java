@@ -149,12 +149,12 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
 //
 //        });
 
-        event_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abrirMapa();
-            }
-        });
+//        event_location.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                abrirMapa();
+//            }
+//        });
 
         event_show_on_map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,14 +169,19 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
 
         String s_titulo = event_title.getText().toString(), s_descripcion = event_description.getText().toString();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        String stringDateInicio = event_start_date.getText().toString() + " " + event_start_time.getText().toString();
-        String stringDateFin = event_end_date.getText().toString() + " " + event_end_time.getText().toString();
+        String s_fechaInicio = event_start_date.getText().toString();
+        String s_horaInicio = event_start_time.getText().toString();
+        String stringDateInicio = s_fechaInicio + " " + s_horaInicio;
+        String s_fechaFin = event_end_date.getText().toString();
+        String s_horaFin = event_end_time.getText().toString();
+        String stringDateFin = s_fechaFin + " " + s_horaFin;
         String s_location = event_location.getText().toString();
         Date dateInicio = null;
         Date dateFin = null;
         Map<String, Object> evento = new HashMap<>();
 
-        if (s_titulo.isEmpty() || stringDateInicio.isEmpty() || stringDateFin.isEmpty() || s_location.isEmpty() ||
+        if (s_titulo.isEmpty() || s_fechaInicio.isEmpty() || s_horaInicio.isEmpty()
+                || s_fechaFin.isEmpty() || s_horaFin.isEmpty() || s_location.isEmpty() ||
                 //latitud.getText().toString().isEmpty() || longitud.getText().toString().isEmpty() ||
                 s_descripcion.isEmpty()) {
 
@@ -201,8 +206,6 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
             evento.put("Inicio", timeStampInicio);
             evento.put("Fin", timeStampFin);
             evento.put("DNI_Cliente", cliente.getDni_cliente());
-            //evento.put("Latitud", s_latitud);
-            //evento.put("Longitud", s_longitud);
             evento.put("Ubicacion", geoPoint);
             evento.put("Descripcion", s_descripcion);
             return evento;
