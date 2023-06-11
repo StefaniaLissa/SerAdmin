@@ -171,11 +171,12 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         String stringDateInicio = event_start_date.getText().toString() + " " + event_start_time.getText().toString();
         String stringDateFin = event_end_date.getText().toString() + " " + event_end_time.getText().toString();
+        String s_location = event_location.getText().toString();
         Date dateInicio = null;
         Date dateFin = null;
         Map<String, Object> evento = new HashMap<>();
 
-        if (s_titulo.isEmpty() || stringDateInicio.isEmpty() || stringDateFin.isEmpty() || event_location.getText().toString().isEmpty() ||
+        if (s_titulo.isEmpty() || stringDateInicio.isEmpty() || stringDateFin.isEmpty() || s_location.isEmpty() ||
                 //latitud.getText().toString().isEmpty() || longitud.getText().toString().isEmpty() ||
                 s_descripcion.isEmpty()) {
 

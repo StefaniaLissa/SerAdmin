@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayoutStates;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,7 +41,7 @@ public class ClienteDetalle extends AppCompatActivity {
 
     private EditText nombreCliente, apellidoCliente, dniCliente, dniGestor, telefonoCliente, passCliente;
     private Cliente perfil;
-    private TextView alertDniClienteDetalle;
+    private TextView alertDniClienteDetalle, alertDniGestorClienteDetalle;
     private Button eliminarCliente, modificarCliente;
     ImageView editarNombre, editarApellido, editarDniCliente, editarDniGestor, editarTelefono, editarPass;
     FirebaseFirestore db;
@@ -67,14 +68,18 @@ public class ClienteDetalle extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             if (getIntent().getExtras().containsKey("Gestor")) {
                 gestor = (Gestor) getIntent().getSerializableExtra("Gestor");
-                if (gestor != null) {
+                if (gestor.getNombre() != null) {
                     Log.d(TAG, gestor.toString());
                     Log.d(TAG, "Hola " + "No debería estar aqui si vengo de cliente directo");
                 } else {
                     dniCliente.setFocusable(false);
                     dniCliente.setFocusableInTouchMode(false);
                     dniCliente.setKeyListener(null);
-                    dniCliente.setClickable(false);
+                    //dniCliente.setClickable(false);
+                    dniCliente.setTextColor(Color.GRAY);
+                    editarDniCliente.setVisibility(View.INVISIBLE);
+                    dniGestor.setVisibility(View.INVISIBLE);
+                    editarDniGestor.setVisibility(View.INVISIBLE);
                     Log.d(TAG , "Hola " + "Estoy aquí en el else de gestor cliente detalle");
                 }
             }
@@ -94,10 +99,11 @@ public class ClienteDetalle extends AppCompatActivity {
         nombreCliente = findViewById(R.id.nombreEditableClienteDetalle);
         apellidoCliente = findViewById(R.id.apellidoEditableClienteDetalle);
         dniCliente = findViewById(R.id.dniClienteEditableClienteDetalle);
-        //dniGestor = findViewById(R.id.dniGestorEditableClienteDetalle);
+        dniGestor = findViewById(R.id.dniGestorClienteDetalle);
         telefonoCliente = findViewById(R.id.telefonoEditableClienteDetalle);
         passCliente = findViewById(R.id.passwordEditableClienteDetalle);
-        alertDniClienteDetalle = findViewById(R.id.alertdniGestorClienteDetalle);
+        alertDniClienteDetalle = findViewById(R.id.alertdniClienteDetalle);
+        alertDniGestorClienteDetalle = findViewById(R.id.alertdniGestorClienteDetalle);
 
         eliminarCliente = findViewById(R.id.eliminarCliente);
         modificarCliente = findViewById(R.id.modificarCliente);
@@ -105,7 +111,7 @@ public class ClienteDetalle extends AppCompatActivity {
         editarNombre = findViewById(R.id.editNombreCliente);
         editarApellido = findViewById(R.id.editApellidoCliente);
         editarDniCliente = findViewById(R.id.editDniCliente);
-        //editarDniGestor = findViewById(R.id.editDniGestorCliente);
+        editarDniGestor = findViewById(R.id.editDniGestorCliente);
         editarTelefono = findViewById(R.id.editTelefonoCliente);
         editarPass = findViewById(R.id.editPasswordCliente);
 
@@ -127,7 +133,6 @@ public class ClienteDetalle extends AppCompatActivity {
         ManejadorClickEdit manejadorClickEditNombre = new ManejadorClickEdit(
                 nombreCliente, editarNombre, getDecorador(nombreCliente.getText().toString())
         );
-
         ManejadorClickEdit manejadorClickEditApellido = new ManejadorClickEdit(
                 apellidoCliente, editarApellido, getDecorador(apellidoCliente.getText().toString())
         );
@@ -141,11 +146,16 @@ public class ClienteDetalle extends AppCompatActivity {
                 passCliente, editarPass, getDecorador(passCliente.getText().toString())
         );
 
+//        ManejadorClickEdit manejadorClickEditDniGestor = new ManejadorClickEdit(
+//                dniGestor, editarDniGestor, getDecorador(dniGestor.getText().toString())
+//        );
+
         editarNombre.setOnClickListener(manejadorClickEditNombre);
         editarApellido.setOnClickListener(manejadorClickEditApellido);
         editarDniCliente.setOnClickListener(manejadorClickEditDniCliente);
         editarTelefono.setOnClickListener(manejadorClickEditTelefono);
         editarPass.setOnClickListener(manejadorClickEditPassword);
+        //editarDniGestor.setOnClickListener(manejadorClickEditDniGestor);
 
         eliminarCliente.setOnClickListener(v -> {
 
@@ -191,6 +201,17 @@ public class ClienteDetalle extends AppCompatActivity {
 
             volverGestorMain(CLAVE_CLIENTE_MODIFICADO);
 
+        });
+
+        dniGestor.setOnClickListener(v -> {
+            AlphaAnimation animation = new AlphaAnimation(0, 1);
+            animation.setDuration(4000);
+            alertDniGestorClienteDetalle.startAnimation(animation);
+            alertDniGestorClienteDetalle.setVisibility(View.VISIBLE);
+            AlphaAnimation animation2 = new AlphaAnimation(1, 0);
+            animation2.setDuration(4000);
+            alertDniGestorClienteDetalle.startAnimation(animation2);
+            alertDniGestorClienteDetalle.setVisibility(View.INVISIBLE);
         });
 
         dniCliente.setOnClickListener(v -> {
@@ -250,7 +271,7 @@ public class ClienteDetalle extends AppCompatActivity {
             nombreCliente.setText(nombreCliente.getText() + document.get("Nombre").toString());
             apellidoCliente.setText(apellidoCliente.getText() + document.get("Apellido").toString());
             dniCliente.setText(dniCliente.getText() + document.get("DNI").toString());
-            //dniGestor.setText(dniGestor.getText() + document.get("DNI_Gestor").toString());
+            dniGestor.setText(dniGestor.getText() + document.get("DNI_Gestor").toString());
             telefonoCliente.setText(telefonoCliente.getText() + document.get("Num_Telf").toString());
             passCliente.setText(passCliente.getText() + document.get("Contraseña").toString());
         }
