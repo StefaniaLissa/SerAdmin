@@ -105,6 +105,18 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/alertN2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="1"
+            android:text="* Obligatorio"
+            android:textColor="@color/carrot_orange"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/nombreEditableClienteDetalle" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -143,7 +155,20 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="3"
                 android:src="@android:drawable/ic_menu_edit" />
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/alertA2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="3"
+            android:text="* Obligatorio"
+            android:textColor="@color/carrot_orange"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/nombreEditableClienteDetalle" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -174,16 +199,6 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/alertdniClienteDetalle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="Su DNI no se puede editar pongase en contacto con su gestor"
-                android:textColor="@color/carrot_orange"
-                android:visibility="invisible"
-                app:layout_constraintTop_toBottomOf="@+id/dniClienteEditableClienteDetalle" />
-
             <ImageView
                 android:id="@+id/editDniCliente"
                 android:layout_width="50dp"
@@ -192,7 +207,18 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="3"
                 android:src="@android:drawable/ic_menu_edit" />
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/alertdniClienteDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Su DNI no se puede editar pongase en contacto con su gestor"
+            android:textColor="@color/carrot_orange"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/dniClienteEditableClienteDetalle" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -231,7 +257,20 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="3"
                 android:src="@android:drawable/ic_menu_edit" />
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/alertT2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="3"
+            android:text="* Obligatorio"
+            android:textColor="@color/carrot_orange"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/nombreEditableClienteDetalle" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -273,6 +312,18 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/alertP2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="3"
+            android:text="* Obligatorio"
+            android:textColor="@color/carrot_orange"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/nombreEditableClienteDetalle" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -303,26 +354,26 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/alertdniGestorClienteDetalle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="El DNI del gestor no se puede editar"
-                android:textColor="@color/carrot_orange"
-                android:visibility="invisible"
-                app:layout_constraintTop_toBottomOf="@+id/dniGestorClienteDetalle" />
-
             <ImageView
                 android:id="@+id/editDniGestorCliente"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="3"
                 android:src="@android:drawable/ic_menu_edit" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/alertdniGestorClienteDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="El DNI del gestor no se puede editar"
+            android:textColor="@color/carrot_orange"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/dniGestorClienteDetalle" />
 
 
     </LinearLayout>
@@ -361,6 +412,36 @@
             app:strokeColor="@color/white"
             app:strokeWidth="2.5dp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/alertVerifyDNI2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Ya existe una cuenta con ese DNI/NIE"
+            android:textColor="@color/carrot_orange"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/dni" />
+
+        <TextView
+            android:id="@+id/alertVerifyTel3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Número móvil ya registrado"
+            android:textColor="@color/carrot_orange"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/dni" />
     </LinearLayout>
 
 

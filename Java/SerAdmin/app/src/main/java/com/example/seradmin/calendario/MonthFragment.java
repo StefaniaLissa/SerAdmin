@@ -93,7 +93,7 @@ public class MonthFragment extends Fragment {
         res = view.getResources();
         for (int i = 0; i < DAYS_CNT; i++) {
             linearLayout = view.findViewById(res.getIdentifier("day_" + i, "id", packageName));
-
+            //linearLayout.setOnClickListener();
         }
         updateCalendar(targetDate, view);
 

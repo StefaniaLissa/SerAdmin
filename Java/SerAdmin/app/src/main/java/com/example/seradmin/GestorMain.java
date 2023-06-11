@@ -203,6 +203,7 @@ public class GestorMain extends AppCompatActivity {
                         Intent intent = new Intent(GestorMain.this, Navegador.class);
                         intent.putExtra("Detalle", CLAVE_LISTA);
                         intent.putExtra("Cliente", cliente);
+                        intent.putExtra("Gestor", gestor);
                         controladorGestor.launch(intent);
 
                     }
