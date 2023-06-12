@@ -276,6 +276,7 @@ public class MonthFragment extends Fragment {
                 RelativeLayout rl = ev.findViewById(R.id.day_monthly_event_holder);
                 TextView titulo = ev.findViewById(R.id.day_monthly_event_id);
                 titulo.setText(event.getTitulo());
+                //rl.setBackgroundColor(event.getColor());
                 linearLayout.addView(rl);
             }
         }

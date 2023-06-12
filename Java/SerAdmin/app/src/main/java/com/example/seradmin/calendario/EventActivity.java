@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -39,18 +40,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import yuku.ambilwarna.AmbilWarnaDialog;
+//import top.defaults.colorpicker.ColorPickerPopup;
 
 public class EventActivity extends AppCompatActivity implements LocationFragment.OnCallbackReceived {
 
     private static final int CLAVE_INSERTADO = 90;
     EditText event_title, event_location, event_description;
     AppCompatCheckBox event_all_day;
-    TextView event_start_date, event_start_time, event_end_date, event_end_time, event_repetition;
-    ImageView event_color, event_show_on_map;
+    TextView event_start_date, event_start_time, event_end_date, event_end_time, event_color;
+    ImageView event_color_image, event_show_on_map;
     MaterialToolbar event_toolbar;
     Button crearEvento;
     Cliente cliente = new Cliente();
     FirebaseFirestore db;
+    private int mDefaultColor = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +69,8 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
         event_start_time = (TextView) findViewById(R.id.event_start_time);
         event_end_date = (TextView) findViewById(R.id.event_end_date);
         event_end_time = (TextView) findViewById(R.id.event_end_time);
-        event_repetition = (TextView) findViewById(R.id.event_repetition);
-        event_color = (ImageView) findViewById(R.id.event_color);
+        event_color = (TextView) findViewById(R.id.event_color);
+        event_color_image = (ImageView) findViewById(R.id.event_color_image);
         //crearEvento = (Button) findViewById(R.id.crearEvento);
         event_toolbar = (MaterialToolbar) findViewById(R.id.event_toolbar);
         db = FirebaseFirestore.getInstance();
@@ -161,6 +165,62 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
             public void onClick(View v) {
                 abrirMapa();
             }
+        });
+
+        event_color_image.setOnClickListener(v -> {
+//            new ColorPickerPopup.Builder(EventActivity.this).initialColor(
+//                            Color.RED) // set initial color
+//                    // of the color
+//                    // picker dialog
+//                    .enableBrightness(
+//                            true) // enable color brightness
+//                    // slider or not
+//                    .enableAlpha(
+//                            true) // enable color alpha
+//                    // changer on slider or
+//                    // not
+//                    .okTitle(
+//                            "Choose") // this is top right
+//                    // Choose button
+//                    .cancelTitle(
+//                            "Cancel") // this is top left
+//                    // Cancel button which
+//                    // closes the
+//                    .showIndicator(
+//                            true) // this is the small box
+//                    // which shows the chosen
+//                    // color by user at the
+//                    // bottom of the cancel
+//                    // button
+//                    .showValue(
+//                            true) // this is the value which
+//                    // shows the selected
+//                    // color hex code
+//                    // the above all values can be made
+//                    // false to disable them on the
+//                    // color picker dialog.
+//                    .build()
+//                    .show(
+//                            v,
+//                            new ColorPickerPopup.ColorPickerObserver() {
+//                                @Override
+//                                public void
+//                                onColorPicked(int color) {
+//                                    // set the color
+//                                    // which is returned
+//                                    // by the color
+//                                    // picker
+//                                    mDefaultColor = color;
+//
+//                                    // now as soon as
+//                                    // the dialog closes
+//                                    // set the preview
+//                                    // box to returned
+//                                    // color
+//                                    //mColorPreview.setBackgroundColor(mDefaultColor);
+//                                }
+//                            });
+            openColorPickerDialogue();
         });
 
     }
@@ -303,5 +363,38 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
     @Override
     public void Update(MarkerOptions markerOptions) {
         event_location.setText(markerOptions.getTitle());
+    }
+
+    public void openColorPickerDialogue() {
+
+        // the AmbilWarnaDialog callback needs 3 parameters
+        // one is the context, second is default color,
+        final AmbilWarnaDialog colorPickerDialogue = new AmbilWarnaDialog(this, mDefaultColor,
+                new AmbilWarnaDialog.OnAmbilWarnaListener() {
+                    @Override
+                    public void onCancel(AmbilWarnaDialog dialog) {
+                        // leave this function body as
+                        // blank, as the dialog
+                        // automatically closes when
+                        // clicked on cancel button
+                    }
+
+                    @Override
+                    public void onOk(AmbilWarnaDialog dialog, int color) {
+                        // change the mDefaultColor to
+                        // change the GFG text color as
+                        // it is returned when the OK
+                        // button is clicked from the
+                        // color picker dialog
+                        mDefaultColor = color;
+                        Log.d(TAG, color + " - " + mDefaultColor);
+
+                        // now change the picked color
+                        // preview box to mDefaultColor
+                        //mColorPreview.setBackgroundColor(mDefaultColor);
+                        event_color.setText(String.valueOf(mDefaultColor));
+                    }
+                });
+        colorPickerDialogue.show();
     }
 }

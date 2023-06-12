@@ -8,11 +8,19 @@ public class Event {
     private DateTime inicio;
     private DateTime Fin;
     private String titulo;
+    private int color;
 
     public Event(DateTime inicio, DateTime fin, String titulo) {
         this.inicio = inicio;
         Fin = fin;
         this.titulo = titulo;
+    }
+
+    public Event(DateTime inicio, DateTime fin, String titulo, int color) {
+        this.inicio = inicio;
+        Fin = fin;
+        this.titulo = titulo;
+        this.color = color;
     }
 
     public DateTime getInicio() {
@@ -37,5 +45,13 @@ public class Event {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

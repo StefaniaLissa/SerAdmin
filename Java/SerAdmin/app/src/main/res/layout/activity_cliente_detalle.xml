@@ -111,6 +111,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:text="* Obligatorio"
             android:textColor="@color/carrot_orange"
@@ -164,6 +166,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_weight="3"
             android:text="* Obligatorio"
             android:textColor="@color/carrot_orange"
@@ -215,6 +219,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:text="Su DNI no se puede editar pongase en contacto con su gestor"
             android:textColor="@color/carrot_orange"
             android:visibility="invisible"
@@ -266,6 +272,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_weight="3"
             android:text="* Obligatorio"
             android:textColor="@color/carrot_orange"
@@ -319,6 +327,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             android:layout_weight="3"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:text="* Obligatorio"
             android:textColor="@color/carrot_orange"
             android:visibility="invisible"
@@ -369,11 +379,44 @@
             android:id="@+id/alertdniGestorClienteDetalle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_weight="3"
             android:text="El DNI del gestor no se puede editar"
             android:textColor="@color/carrot_orange"
             android:visibility="invisible"
             app:layout_constraintTop_toBottomOf="@+id/dniGestorClienteDetalle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/sociedad3"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/spinner"
+                android:dropDownWidth="wrap_content"
+                android:spinnerMode="dialog"
+                android:splitMotionEvents="false"
+                android:touchscreenBlocksFocus="false" />
+
+            <TextView
+                android:id="@+id/alertTS2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:text="Elige un tipo de sociedad"
+                android:textColor="@color/carrot_orange"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@+id/sociedad2" />
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -10,14 +10,19 @@ import androidx.constraintlayout.widget.ConstraintLayoutStates;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,11 +56,12 @@ public class ClienteDetalle extends AppCompatActivity {
     private TextView alertDniClienteDetalle, alertDniGestorClienteDetalle;
     private Button eliminarCliente, modificarCliente;
     ImageView editarNombre, editarApellido, editarDniCliente, editarDniGestor, editarTelefono, editarPass;
-    TextView alertDNI, alertTel, alertCon, alertNom, alertApe, alertVerifyDNI, alertVerifyTel;
+    TextView alertDNI, alertTel, alertCon, alertNom, alertApe, alertTS, alertVerifyDNI, alertVerifyTel;
     FirebaseFirestore db;
     Cliente cliente = new Cliente();
     Gestor gestor = new Gestor();
     boolean soyCliente = false, soyGestor = false;
+    Spinner spinner;
 
     public static final int CLAVE_CLIENTE_MODIFICADO = 80;
     public static final int CLAVE_CLIENTE_ELIMINADO = 81;
@@ -69,6 +75,49 @@ public class ClienteDetalle extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cliente_detalle);
+
+        spinner = (Spinner) findViewById(R.id.sociedad3);
+        Resources res = getResources();
+        String[] sociedades = res.getStringArray(R.array.sociedades);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, R.layout.spinner_texto, sociedades) {
+
+            @Override
+            public boolean isEnabled(int position) {
+                if (position == 0) {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if (tv.getText().toString().equals("Tipo de Sociedad")) {
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                    tv.setGravity(Gravity.CENTER);
+                    tv.setTextSize(25);
+                    tv.setPadding(0, 15, 20, 25);
+
+                } else {
+                    tv.setTextSize(18);
+                    tv.setTextColor(Color.BLACK);
+                    tv.setGravity(Gravity.NO_GRAVITY);
+                    tv.setGravity(Gravity.FILL_VERTICAL);
+                    tv.setPadding(55, 25, 0, 25);
+                }
+                return view;
+            }
+
+        };
+
+        spinner.setAdapter(adapter);
 
         //inicializa las vistas,recupera los elementos de la interfaz
         initViews();
@@ -152,6 +201,7 @@ public class ClienteDetalle extends AppCompatActivity {
         alertApe = findViewById(R.id.alertA2);
         alertVerifyDNI = findViewById(R.id.alertVerifyDNI2);
         alertVerifyTel = findViewById(R.id.alertVerifyTel3);
+        alertTS = findViewById(R.id.alertTS2);
 
     }
 
@@ -353,8 +403,9 @@ public class ClienteDetalle extends AppCompatActivity {
         String ape = getEditTextText(apellidoCliente.getText().toString());
         String con = getEditTextText(passCliente.getText().toString());
         String tel = getEditTextText(telefonoCliente.getText().toString());
+        String sociedad = spinner.getSelectedItem().toString();
 
-        if ((dniPattern.matcher(s_dni).matches() || niePattern.matcher(s_dni).matches()) && telPattern.matcher(tel).matches() && loQueSeaPattern.matcher(con).matches() && loQueSeaPattern.matcher(nom).matches() && loQueSeaPattern.matcher(ape).matches()) {
+        if ((dniPattern.matcher(s_dni).matches() || niePattern.matcher(s_dni).matches()) && telPattern.matcher(tel).matches() && loQueSeaPattern.matcher(con).matches() && loQueSeaPattern.matcher(nom).matches() && loQueSeaPattern.matcher(ape).matches() && !sociedad.equals("Tipo de Sociedad")) {
 
         //INSTANCIA BBDD
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -495,6 +546,17 @@ public class ClienteDetalle extends AppCompatActivity {
                 alertApe.startAnimation(animation2);
                 alertApe.setVisibility(View.INVISIBLE);
 
+            }
+
+            if (sociedad.equals("Tipo de Sociedad")) {
+                AlphaAnimation animation = new AlphaAnimation(0, 1);
+                animation.setDuration(4000);
+                alertTS.startAnimation(animation);
+                alertTS.setVisibility(View.VISIBLE);
+                AlphaAnimation animation2 = new AlphaAnimation(1, 0);
+                animation2.setDuration(4000);
+                alertTS.startAnimation(animation2);
+                alertTS.setVisibility(View.INVISIBLE);
             }
         }
     }
