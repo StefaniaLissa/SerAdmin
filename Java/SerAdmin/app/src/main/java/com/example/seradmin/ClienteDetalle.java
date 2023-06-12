@@ -303,7 +303,10 @@ public class ClienteDetalle extends AppCompatActivity {
 
     public String getEditTextText (String texto) {
 
-        return texto.substring(texto.indexOf(": ") + 2);
+        if (texto.length() != 0) {
+            return texto.substring(texto.indexOf(": ") + 2);
+        }
+        return "";
 
     }
 
