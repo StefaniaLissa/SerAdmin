@@ -236,6 +236,7 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
         String s_horaFin = event_end_time.getText().toString();
         String stringDateFin = s_fechaFin + " " + s_horaFin;
         String s_location = event_location.getText().toString();
+        String s_color = event_color.getText().toString();
         Date dateInicio = null;
         Date dateFin = null;
         Map<String, Object> evento = new HashMap<>();
@@ -243,7 +244,7 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
         if (s_titulo.isEmpty() || s_fechaInicio.isEmpty() || s_horaInicio.isEmpty()
                 || s_fechaFin.isEmpty() || s_horaFin.isEmpty() || s_location.isEmpty() ||
                 //latitud.getText().toString().isEmpty() || longitud.getText().toString().isEmpty() ||
-                s_descripcion.isEmpty()) {
+                s_descripcion.isEmpty() || s_color.isEmpty()) {
 
             Log.d(TAG, "Tienes que rellenar todos los campos");
 
@@ -268,6 +269,7 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
             evento.put("DNI_Cliente", cliente.getDni_cliente());
             evento.put("Ubicacion", geoPoint);
             evento.put("Descripcion", s_descripcion);
+            evento.put("Color", s_color);
             return evento;
 
         }
