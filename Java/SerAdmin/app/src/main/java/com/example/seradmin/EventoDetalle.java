@@ -42,14 +42,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+
 public class EventoDetalle extends AppCompatActivity implements LocationFragment.OnCallbackReceived {
 
     public static final int CLAVE_MODIFICADO = 56;
     public static final int CLAVE_ELIMINADO = 57;
-    EditText tituloEventoDetalle, fechaInicioEventoDetalle, fechaFinEventoDetalle;
+    EditText tituloEventoDetalle, fechaInicioEventoDetalle, fechaFinEventoDetalle, colorEventoDetalle;
     EditText horaInicioEventoDetalle, horaFinEventoDetalle, ubicacionEventoDetalle, descripcionEventoDetalle;
     Button modificarEvento, eliminarEvento;
-    ImageView editarTitulo, editarFechaInicio, editarFechaFin, editarHoraInicio, editarHoraFin, editarUbicacion, editarDescripcion;
+    ImageView editarTitulo, editarFechaInicio, editarFechaFin, editarHoraInicio, editarHoraFin, editarUbicacion, editarDescripcion, editarColor;
 
     String patternFecha = "dd-MM-yyyy";
     String patternHora = "HH:mm";
@@ -57,6 +59,7 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
     SimpleDateFormat simpleDateFormatHora = new SimpleDateFormat(patternHora);
     Evento evento;
     FirebaseFirestore db;
+    private int mDefaultColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,7 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
         horaFinEventoDetalle = findViewById(R.id.horaFinEditableEventoDetalle);
         ubicacionEventoDetalle = findViewById(R.id.ubicacionEditableEventoDetalle);
         descripcionEventoDetalle = findViewById(R.id.descripcionEditableEventoDetalle);
+        colorEventoDetalle = findViewById(R.id.colorEditableEventoDetalle);
 
         editarTitulo = findViewById(R.id.editTitulo);
         editarFechaInicio = findViewById(R.id.editFechaInicio);
@@ -78,6 +82,7 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
         editarHoraFin = findViewById(R.id.editHoraFin);
         editarUbicacion = findViewById(R.id.editUbicacion);
         editarDescripcion = findViewById(R.id.editDescripcion);
+        editarColor = findViewById(R.id.editColor);
 
         modificarEvento = findViewById(R.id.modificarEvento);
         eliminarEvento = findViewById(R.id.eliminarEvento);
@@ -162,6 +167,9 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
         ManejadorClickEdit manejadorClickEditHoraFin = new ManejadorClickEdit(
                 horaFinEventoDetalle, editarHoraFin, getDecorador(horaFinEventoDetalle.getText().toString())
         );
+        ManejadorClickEdit manejadorClickEditColor = new ManejadorClickEdit(
+                colorEventoDetalle, editarColor, getDecorador(colorEventoDetalle.getText().toString())
+        );
 
         editarTitulo.setOnClickListener(manejadorClickEditTitulo);
         editarUbicacion.setOnClickListener(manejadorClickEditUbicacion);
@@ -170,6 +178,11 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
         editarFechaFin.setOnClickListener(manejadorClickEditFechaFin);
         editarHoraInicio.setOnClickListener(manejadorClickEditHoraInicio);
         editarHoraFin.setOnClickListener(manejadorClickEditHoraFin);
+        editarColor.setOnClickListener(manejadorClickEditColor);
+
+        colorEventoDetalle.setOnClickListener(view -> {
+            openColorPickerDialogue();
+        });
 
     }
 
@@ -228,6 +241,7 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
             horaFinEventoDetalle.setText(horaFinEventoDetalle.getText() + " " + simpleDateFormatHora.format(timestampFin.toDate()));
             ubicacionEventoDetalle.setText(ubicacionEventoDetalle.getText() + " " + geoPoint.getLatitude() + ":" + geoPoint.getLongitude());
             descripcionEventoDetalle.setText(descripcionEventoDetalle.getText() + document.get("Descripcion").toString());
+            colorEventoDetalle.setText(colorEventoDetalle.getText() + document.get("Color").toString());
         }
 
     }
@@ -246,6 +260,7 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
         String s_horaFin = getEditTextText(horaFinEventoDetalle.getText().toString());
         String stringDateFin = s_fechaFin + " " + s_horaFin;
         String s_location = getEditTextText(ubicacionEventoDetalle.getText().toString());
+        String s_color = getEditTextText(colorEventoDetalle.getText().toString());
         Log.d(TAG, getEditTextText(ubicacionEventoDetalle.getText().toString()));
         Date dateInicio = null;
         Date dateFin = null;
@@ -254,7 +269,7 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
         if (s_titulo.isEmpty() || s_fechaInicio.isBlank() || s_horaInicio.isBlank()
                 || s_fechaFin.isBlank() || s_horaFin.isBlank() ||s_location.isEmpty() ||
                 //latitud.getText().toString().isEmpty() || longitud.getText().toString().isEmpty() ||
-                s_descripcion.isEmpty()) {
+                s_descripcion.isEmpty() || s_color.isEmpty()) {
 
             Log.d(TAG, "Tienes que rellenar todos los campos");
 
@@ -290,6 +305,7 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
             ref.update("Fin", timeStampFin);
             ref.update("Ubicacion", geoPoint);
             ref.update("Descripcion", getEditTextText(descripcionEventoDetalle.getText().toString()));
+            ref.update("Color", getEditTextText(colorEventoDetalle.getText().toString()));
 
             Toast.makeText(this, "Evento con Id " + evento.getId() + " modificado", Toast.LENGTH_LONG).show();
             Log.d(TAG, "Evento con Id " + evento.getId() + " modificado");
@@ -355,5 +371,36 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
 
             });
 
+    public void openColorPickerDialogue() {
 
+        // the AmbilWarnaDialog callback needs 3 parameters
+        // one is the context, second is default color,
+        final AmbilWarnaDialog colorPickerDialogue = new AmbilWarnaDialog(this, mDefaultColor,
+                new AmbilWarnaDialog.OnAmbilWarnaListener() {
+                    @Override
+                    public void onCancel(AmbilWarnaDialog dialog) {
+                        // leave this function body as
+                        // blank, as the dialog
+                        // automatically closes when
+                        // clicked on cancel button
+                    }
+
+                    @Override
+                    public void onOk(AmbilWarnaDialog dialog, int color) {
+                        // change the mDefaultColor to
+                        // change the GFG text color as
+                        // it is returned when the OK
+                        // button is clicked from the
+                        // color picker dialog
+                        mDefaultColor = color;
+                        Log.d(TAG, color + " - " + mDefaultColor);
+
+                        // now change the picked color
+                        // preview box to mDefaultColor
+                        //mColorPreview.setBackgroundColor(mDefaultColor);
+                        colorEventoDetalle.setText(String.valueOf(mDefaultColor));
+                    }
+                });
+        colorPickerDialogue.show();
+    }
 }

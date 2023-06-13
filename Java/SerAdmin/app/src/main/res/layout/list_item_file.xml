@@ -29,17 +29,17 @@
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
-        <ImageView
-            android:id="@+id/file_state_icon"
-            android:layout_width="99dp"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/next" />
-
         <Button
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Eliminar" />
+
+        <ImageView
+            android:id="@+id/file_state_icon"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/next" />
 
 
     </LinearLayout>

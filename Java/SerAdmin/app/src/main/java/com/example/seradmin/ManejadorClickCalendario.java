@@ -1,33 +1,52 @@
 package com.example.seradmin;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.seradmin.InterfazUsuari.Navegador;
+import com.example.seradmin.calendario.Event;
 
-public class ManejadorClickCalendario implements View.OnClickListener {
+import java.util.ArrayList;
 
-    LinearLayout linearLayout;
+public class ManejadorClickCalendario extends Activity implements View.OnClickListener {
+
+    RelativeLayout relativeLayout;
     boolean hasEvent = true;
+    Context context;
+    Event evento;
 
-    ManejadorClickCalendario(){
+    public ManejadorClickCalendario(){
 
     }
 
-    ManejadorClickCalendario(LinearLayout linearLayout){
-        this.linearLayout = linearLayout;
+    public ManejadorClickCalendario(RelativeLayout relativeLayout, Event evento){
+        this.relativeLayout = relativeLayout;
+        this.evento = evento;
+    }
+
+    public ManejadorClickCalendario(RelativeLayout relativeLayout, Event evento, Context context){
+        this.relativeLayout = relativeLayout;
+        this.evento = evento;
+        this.context = context;
     }
 
     @Override
     public void onClick(View v) {
-        if (hasEvent) {
-            //Intent intent = new Intent(Navegador.this, EventoDetalle.class);
-            //startActivity(intent);
+        Intent intent;
+        if (evento != null) {
+            intent = new Intent(context, EventoDetalle.class);
+            intent.putExtra("Evento", evento);
+            //finish();
         } else {
-
+            intent = new Intent(context, EventoMain.class);
+            //finish();
         }
+        startActivity(intent);
     }
+
 }

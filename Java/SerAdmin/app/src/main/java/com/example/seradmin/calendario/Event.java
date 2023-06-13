@@ -2,13 +2,15 @@ package com.example.seradmin.calendario;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Event {
+public class Event implements Serializable {
     private DateTime inicio;
     private DateTime Fin;
     private String titulo;
-    private int color;
+    private String color;
+    private String id;
 
     public Event(DateTime inicio, DateTime fin, String titulo) {
         this.inicio = inicio;
@@ -16,11 +18,19 @@ public class Event {
         this.titulo = titulo;
     }
 
-    public Event(DateTime inicio, DateTime fin, String titulo, int color) {
+    public Event(DateTime inicio, DateTime fin, String titulo, String color) {
         this.inicio = inicio;
         Fin = fin;
         this.titulo = titulo;
         this.color = color;
+    }
+
+    public Event(DateTime inicio, DateTime fin, String titulo, String color, String id) {
+        this.inicio = inicio;
+        Fin = fin;
+        this.titulo = titulo;
+        this.color = color;
+        this.id = id;
     }
 
     public DateTime getInicio() {
@@ -47,11 +57,19 @@ public class Event {
         this.titulo = titulo;
     }
 
-    public int getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(int color) {
+    public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
