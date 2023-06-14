@@ -168,58 +168,6 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
         });
 
         event_color_image.setOnClickListener(v -> {
-//            new ColorPickerPopup.Builder(EventActivity.this).initialColor(
-//                            Color.RED) // set initial color
-//                    // of the color
-//                    // picker dialog
-//                    .enableBrightness(
-//                            true) // enable color brightness
-//                    // slider or not
-//                    .enableAlpha(
-//                            true) // enable color alpha
-//                    // changer on slider or
-//                    // not
-//                    .okTitle(
-//                            "Choose") // this is top right
-//                    // Choose button
-//                    .cancelTitle(
-//                            "Cancel") // this is top left
-//                    // Cancel button which
-//                    // closes the
-//                    .showIndicator(
-//                            true) // this is the small box
-//                    // which shows the chosen
-//                    // color by user at the
-//                    // bottom of the cancel
-//                    // button
-//                    .showValue(
-//                            true) // this is the value which
-//                    // shows the selected
-//                    // color hex code
-//                    // the above all values can be made
-//                    // false to disable them on the
-//                    // color picker dialog.
-//                    .build()
-//                    .show(
-//                            v,
-//                            new ColorPickerPopup.ColorPickerObserver() {
-//                                @Override
-//                                public void
-//                                onColorPicked(int color) {
-//                                    // set the color
-//                                    // which is returned
-//                                    // by the color
-//                                    // picker
-//                                    mDefaultColor = color;
-//
-//                                    // now as soon as
-//                                    // the dialog closes
-//                                    // set the preview
-//                                    // box to returned
-//                                    // color
-//                                    //mColorPreview.setBackgroundColor(mDefaultColor);
-//                                }
-//                            });
             openColorPickerDialogue();
         });
 
@@ -241,8 +189,8 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
         Date dateFin = null;
         Map<String, Object> evento = new HashMap<>();
 
-        if (s_titulo.isEmpty() || s_fechaInicio.isEmpty() || s_horaInicio.isEmpty()
-                || s_fechaFin.isEmpty() || s_horaFin.isEmpty() || s_location.isEmpty() ||
+        if (s_titulo.isEmpty() || s_fechaInicio.equals("January 1 1970") || s_horaInicio.isEmpty()
+                || s_fechaFin.equals("January 1 1970") || s_horaFin.isEmpty() || s_location.isEmpty() ||
                 //latitud.getText().toString().isEmpty() || longitud.getText().toString().isEmpty() ||
                 s_descripcion.isEmpty() || s_color.isEmpty()) {
 

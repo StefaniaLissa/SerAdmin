@@ -4,6 +4,7 @@ import static androidx.core.widget.TextViewCompat.setTextAppearance;
 
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -281,7 +282,12 @@ public class MonthFragment extends Fragment {
                 RelativeLayout rl = ev.findViewById(R.id.day_monthly_event_holder);
                 TextView titulo = ev.findViewById(R.id.day_monthly_event_id);
                 titulo.setText(event.getTitulo());
-                rl.setBackgroundColor(Integer.valueOf(event.getColor()));
+                if (rl.getBackground() != null) {
+                    Drawable fondo;
+                    fondo = rl.getBackground();
+                    fondo.setTint(Integer.parseInt(event.getColor()));
+                    rl.setBackground(fondo);
+                }
                 rl.setOnClickListener(new ManejadorClickCalendario(rl, event, getContext()));
                 linearLayout.addView(rl);
             }

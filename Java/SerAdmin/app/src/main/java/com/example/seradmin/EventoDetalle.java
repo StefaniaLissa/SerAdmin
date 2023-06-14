@@ -58,6 +58,7 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
     SimpleDateFormat simpleDateFormatFecha = new SimpleDateFormat(patternFecha);
     SimpleDateFormat simpleDateFormatHora = new SimpleDateFormat(patternHora);
     Evento evento;
+    String id_evento;
     FirebaseFirestore db;
     private int mDefaultColor;
 
@@ -99,11 +100,20 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
         horaInicioEventoDetalle.setOnClickListener(manejadorHoraInicio);
         horaFinEventoDetalle.setOnClickListener(manejadorHoraFin);
 
-        evento = (Evento) getIntent().getSerializableExtra("Evento");
-
         db = FirebaseFirestore.getInstance();
 
-        selectEvento(evento.getId());
+        if (getIntent().getExtras() != null) {
+            if (getIntent().getExtras().containsKey("Evento")) {
+                evento = (Evento) getIntent().getSerializableExtra("Evento");
+                id_evento = evento.getId();
+            }
+            if (getIntent().getExtras().containsKey("ID_Evento")) {
+                id_evento = getIntent().getStringExtra("ID_Evento");
+            }
+
+        }
+
+        selectEvento(id_evento);
 
         eliminarEvento.setOnClickListener(v -> {
 

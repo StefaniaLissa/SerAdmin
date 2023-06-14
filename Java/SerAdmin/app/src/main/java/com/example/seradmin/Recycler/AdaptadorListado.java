@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class AdaptadorListado extends RecyclerView.Adapter<AdaptadorListado.ViewHolder> {
 
-    private ArrayList<Cliente> perfilesArrayList;
+    private ArrayList<Cliente> perfilesArrayList = new ArrayList<Cliente>();
 
     private ArrayList<Cliente> perfilesArrayList2;
 

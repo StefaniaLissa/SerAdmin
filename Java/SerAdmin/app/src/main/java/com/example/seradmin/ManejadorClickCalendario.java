@@ -1,6 +1,5 @@
 package com.example.seradmin;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -11,9 +10,8 @@ import android.widget.RelativeLayout;
 import com.example.seradmin.InterfazUsuari.Navegador;
 import com.example.seradmin.calendario.Event;
 
-import java.util.ArrayList;
 
-public class ManejadorClickCalendario extends Activity implements View.OnClickListener {
+public class ManejadorClickCalendario implements View.OnClickListener {
 
     RelativeLayout relativeLayout;
     boolean hasEvent = true;
@@ -40,13 +38,11 @@ public class ManejadorClickCalendario extends Activity implements View.OnClickLi
         Intent intent;
         if (evento != null) {
             intent = new Intent(context, EventoDetalle.class);
-            intent.putExtra("Evento", evento);
-            //finish();
+            intent.putExtra("ID_Evento", evento.getId());
         } else {
             intent = new Intent(context, EventoMain.class);
-            //finish();
         }
-        startActivity(intent);
+        context.startActivity(intent);
     }
 
 }
