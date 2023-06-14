@@ -1,5 +1,6 @@
 package com.example.seradmin.Tree;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -189,6 +190,10 @@ public class FileTreeFragment extends Fragment {
                 });
     }
     private void deleteFile(String fileName) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Confirmación");
+        builder.setMessage("¿Estás seguro de que deseas eliminar el archivo: " + fileName + "?");
+        builder.setPositiveButton("Sí", (dialog, which) -> {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference fileRef = storage.getReference().child(cliente.getDni_cliente()).child("pdfs").child(fileName);
         fileRef.delete()
@@ -203,7 +208,18 @@ public class FileTreeFragment extends Fragment {
                     // Ha ocurrido un error al eliminar el archivo
                     // Maneja el error aquí
                 });
+        });
+        builder.setNegativeButton("No", (dialog, which) -> {
+            // El usuario ha cancelado la eliminación, no se realiza ninguna acción
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
+
+
+
+
 
     private void updateFileTree() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
