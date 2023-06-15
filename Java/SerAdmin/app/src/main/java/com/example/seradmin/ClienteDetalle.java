@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -62,6 +63,8 @@ public class ClienteDetalle extends AppCompatActivity {
     Gestor gestor = new Gestor();
     boolean soyCliente = false, soyGestor = false;
     Spinner spinner;
+    String tel_respaldo, dni_cliente_respaldo;
+    String[] sociedades = new String[0];
 
     public static final int CLAVE_CLIENTE_MODIFICADO = 80;
     public static final int CLAVE_CLIENTE_ELIMINADO = 81;
@@ -78,7 +81,7 @@ public class ClienteDetalle extends AppCompatActivity {
 
         spinner = (Spinner) findViewById(R.id.sociedad3);
         Resources res = getResources();
-        String[] sociedades = res.getStringArray(R.array.sociedades);
+        sociedades = res.getStringArray(R.array.sociedades);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, R.layout.spinner_texto, sociedades) {
@@ -124,6 +127,9 @@ public class ClienteDetalle extends AppCompatActivity {
         // inicializa los listeners, agrega el comportamiento a los elementos de la interfaz de usuario (botones) cuando se hacen clic
         initListeners();
 
+        tel_respaldo = getEditTextText(telefonoCliente.getText().toString());
+        dni_cliente_respaldo = getEditTextText(dniCliente.getText().toString());
+
         db = FirebaseFirestore.getInstance();
         if (getIntent().getExtras() != null) {
             if (getIntent().getExtras().containsKey("Gestor")) {
@@ -141,8 +147,9 @@ public class ClienteDetalle extends AppCompatActivity {
                     //dniCliente.setClickable(false);
                     dniCliente.setEnabled(false);
                     dniCliente.setTextColor(Color.GRAY);
-                    dniGestor.setVisibility(View.INVISIBLE);
-                    editarDniGestor.setVisibility(View.INVISIBLE);
+                    spinner.setEnabled(false);
+                    //dniGestor.setVisibility(View.INVISIBLE);
+                    //editarDniGestor.setVisibility(View.INVISIBLE);
                     Log.d(TAG , "Hola " + "Estoy aquí en el else de gestor cliente detalle");
                     soyCliente = true;
                 }
@@ -160,12 +167,29 @@ public class ClienteDetalle extends AppCompatActivity {
             editarDniCliente.setOnClickListener(v -> {
                 AlphaAnimation animation = new AlphaAnimation(0, 1);
                 animation.setDuration(4000);
+                alertDniClienteDetalle.setText("Su DNI no se puede editar. Pongase en contacto con su gestor");
                 alertDniClienteDetalle.startAnimation(animation);
                 alertDniClienteDetalle.setVisibility(View.VISIBLE);
                 AlphaAnimation animation2 = new AlphaAnimation(1, 0);
                 animation2.setDuration(4000);
                 alertDniClienteDetalle.startAnimation(animation2);
                 alertDniClienteDetalle.setVisibility(View.INVISIBLE);
+            });
+
+            spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    AlphaAnimation animation = new AlphaAnimation(0, 1);
+                    animation.setDuration(4000);
+                    alertTS.setText("No puedes editar el tipo de sociedad. Ponte en contacto con tu gestor");
+                    alertTS.startAnimation(animation);
+                    alertTS.setVisibility(View.VISIBLE);
+                    AlphaAnimation animation2 = new AlphaAnimation(1, 0);
+                    animation2.setDuration(4000);
+                    alertTS.startAnimation(animation2);
+                    alertTS.setVisibility(View.INVISIBLE);
+                    return false;
+                }
             });
 
         }
@@ -178,11 +202,11 @@ public class ClienteDetalle extends AppCompatActivity {
         nombreCliente = findViewById(R.id.nombreEditableClienteDetalle);
         apellidoCliente = findViewById(R.id.apellidoEditableClienteDetalle);
         dniCliente = findViewById(R.id.dniClienteEditableClienteDetalle);
-        dniGestor = findViewById(R.id.dniGestorClienteDetalle);
+        //dniGestor = findViewById(R.id.dniGestorClienteDetalle);
         telefonoCliente = findViewById(R.id.telefonoEditableClienteDetalle);
         passCliente = findViewById(R.id.passwordEditableClienteDetalle);
         alertDniClienteDetalle = findViewById(R.id.alertdniClienteDetalle);
-        alertDniGestorClienteDetalle = findViewById(R.id.alertdniGestorClienteDetalle);
+        //alertDniGestorClienteDetalle = findViewById(R.id.alertdniGestorClienteDetalle);
 
         eliminarCliente = findViewById(R.id.eliminarCliente);
         modificarCliente = findViewById(R.id.modificarCliente);
@@ -190,11 +214,11 @@ public class ClienteDetalle extends AppCompatActivity {
         editarNombre = findViewById(R.id.editNombreCliente);
         editarApellido = findViewById(R.id.editApellidoCliente);
         editarDniCliente = findViewById(R.id.editDniCliente);
-        editarDniGestor = findViewById(R.id.editDniGestorCliente);
+        //editarDniGestor = findViewById(R.id.editDniGestorCliente);
         editarTelefono = findViewById(R.id.editTelefonoCliente);
         editarPass = findViewById(R.id.editPasswordCliente);
 
-        alertDNI = findViewById(R.id.alert);
+        //alertDNI = findViewById(R.id.alert);
         alertTel = findViewById(R.id.alertT2);
         alertCon = findViewById(R.id.alertP2);
         alertNom = findViewById(R.id.alertN2);
@@ -281,16 +305,16 @@ public class ClienteDetalle extends AppCompatActivity {
 
         });
 
-        editarDniGestor.setOnClickListener(v -> {
-            AlphaAnimation animation = new AlphaAnimation(0, 1);
-            animation.setDuration(4000);
-            alertDniGestorClienteDetalle.startAnimation(animation);
-            alertDniGestorClienteDetalle.setVisibility(View.VISIBLE);
-            AlphaAnimation animation2 = new AlphaAnimation(1, 0);
-            animation2.setDuration(4000);
-            alertDniGestorClienteDetalle.startAnimation(animation2);
-            alertDniGestorClienteDetalle.setVisibility(View.INVISIBLE);
-        });
+//        editarDniGestor.setOnClickListener(v -> {
+//            AlphaAnimation animation = new AlphaAnimation(0, 1);
+//            animation.setDuration(4000);
+//            alertDniGestorClienteDetalle.startAnimation(animation);
+//            alertDniGestorClienteDetalle.setVisibility(View.VISIBLE);
+//            AlphaAnimation animation2 = new AlphaAnimation(1, 0);
+//            animation2.setDuration(4000);
+//            alertDniGestorClienteDetalle.startAnimation(animation2);
+//            alertDniGestorClienteDetalle.setVisibility(View.INVISIBLE);
+//        });
 
 
     }
@@ -368,9 +392,17 @@ public class ClienteDetalle extends AppCompatActivity {
             nombreCliente.setText(nombreCliente.getText() + document.get("Nombre").toString());
             apellidoCliente.setText(apellidoCliente.getText() + document.get("Apellido").toString());
             dniCliente.setText(dniCliente.getText() + document.get("DNI").toString());
-            dniGestor.setText(dniGestor.getText() + document.get("DNI_Gestor").toString());
+            //dniGestor.setText(dniGestor.getText() + document.get("DNI_Gestor").toString());
             telefonoCliente.setText(telefonoCliente.getText() + document.get("Num_Telf").toString());
             passCliente.setText(passCliente.getText() + document.get("Contraseña").toString());
+            //spinner.setSelection(3, true);
+            //Log.d(TAG, spinner.getChildCount() + "");
+            for (int i = 0; i < spinner.getCount(); i++) {
+                if (spinner.getItemAtPosition(i).equals(document.get("Sociedad"))) {
+                    Log.d(TAG, i + ""  + spinner.getChildAt(i) + document.get("Sociedad"));
+                    spinner.setSelection(i, true);
+                }
+            }
         }
 
     }
@@ -416,7 +448,7 @@ public class ClienteDetalle extends AppCompatActivity {
 
         //VERIFICAR TEL
         Query gestorVerify = clientes.whereEqualTo("DNI", s_dni);
-        String tel_respaldo = "";
+        //String tel_respaldo = "";
             gestorVerify.get().addOnCompleteListener(task -> {
                 String lv_dni = "";
 
@@ -426,7 +458,7 @@ public class ClienteDetalle extends AppCompatActivity {
                         lv_dni = document.get("DNI").toString();
                     }
 
-                    if (lv_dni.equals("")) {
+                    if (lv_dni.equals("") || dni_cliente_respaldo.equals(lv_dni)) {
 
                         // SELECT X TELF
                         Query gestorVerifyTel = clientes.whereEqualTo("Num_Telf", tel);
@@ -438,7 +470,7 @@ public class ClienteDetalle extends AppCompatActivity {
                                     lv_num = document.get("Num_Telf").toString();
                                 }
 
-                                if (lv_num.equals("")) {
+                                if (lv_num.equals("") || tel_respaldo.equals(lv_num)) {
 
                                     //UPDATE
                                     DocumentReference ref = db.collection("Clientes").document(cliente.getId());
@@ -446,12 +478,12 @@ public class ClienteDetalle extends AppCompatActivity {
                                     ref.update("Apellido", getEditTextText(apellidoCliente.getText().toString()));
                                     ref.update("DNI", getEditTextText(dniCliente.getText().toString()));
                                     //ref.update("DNI_Gestor", getEditTextText(dniGestor.getText().toString()));
-                                    ref.update("Telefono", getEditTextText(telefonoCliente.getText().toString()));
+                                    ref.update("Num_Telf", getEditTextText(telefonoCliente.getText().toString()));
                                     ref.update("Contraseña", getEditTextText(passCliente.getText().toString()));
 
                                     Toast.makeText(this, "Cliente con Id " + cliente.getId() + " modificado", Toast.LENGTH_LONG).show();
                                     Log.d(TAG, "Cliente con Id " + cliente.getId() + " modificado");
-
+                                    volverActualizar();
                                 } else {
 
                                     AlphaAnimation animation = new AlphaAnimation(0, 1);
@@ -492,12 +524,13 @@ public class ClienteDetalle extends AppCompatActivity {
 
                 AlphaAnimation animation = new AlphaAnimation(0, 1);
                 animation.setDuration(4000);
-                alertDNI.startAnimation(animation);
-                alertDNI.setVisibility(View.VISIBLE);
+                alertDniClienteDetalle.setText("Formato no válido de DNI/NIE");
+                alertDniClienteDetalle.startAnimation(animation);
+                alertDniClienteDetalle.setVisibility(View.VISIBLE);
                 AlphaAnimation animation2 = new AlphaAnimation(1, 0);
                 animation2.setDuration(4000);
-                alertDNI.startAnimation(animation2);
-                alertDNI.setVisibility(View.INVISIBLE);
+                alertDniClienteDetalle.startAnimation(animation2);
+                alertDniClienteDetalle.setVisibility(View.INVISIBLE);
             }
             if (!telPattern.matcher(tel).matches()) {
 
@@ -554,6 +587,7 @@ public class ClienteDetalle extends AppCompatActivity {
             if (sociedad.equals("Tipo de Sociedad")) {
                 AlphaAnimation animation = new AlphaAnimation(0, 1);
                 animation.setDuration(4000);
+                alertTS.setText("Elige un tipo de sociedad");
                 alertTS.startAnimation(animation);
                 alertTS.setVisibility(View.VISIBLE);
                 AlphaAnimation animation2 = new AlphaAnimation(1, 0);
@@ -562,6 +596,16 @@ public class ClienteDetalle extends AppCompatActivity {
                 alertTS.setVisibility(View.INVISIBLE);
             }
         }
+    }
+
+    public int getSelectedItemPosition(String sociedad) {
+        switch (sociedad) {
+//            case sociedades:
+//
+//                break;
+
+        }
+        return 0;
     }
 
 }

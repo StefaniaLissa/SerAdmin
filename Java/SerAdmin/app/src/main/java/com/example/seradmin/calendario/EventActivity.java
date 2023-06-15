@@ -37,6 +37,7 @@ import com.google.firebase.firestore.GeoPoint;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +56,8 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
     Cliente cliente = new Cliente();
     FirebaseFirestore db;
     private int mDefaultColor = 0;
+    AppCompatCheckBox allDay;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
         event_color_image = (ImageView) findViewById(R.id.event_color_image);
         //crearEvento = (Button) findViewById(R.id.crearEvento);
         event_toolbar = (MaterialToolbar) findViewById(R.id.event_toolbar);
+        allDay = (AppCompatCheckBox) findViewById(R.id.event_all_day);
         db = FirebaseFirestore.getInstance();
 
 //        MaterialToolbar event_toolbar = findViewById(R.id.event_toolbar);
@@ -171,12 +175,41 @@ public class EventActivity extends AppCompatActivity implements LocationFragment
             openColorPickerDialogue();
         });
 
+        allDay.setOnClickListener(v -> {
+            if (allDay.isChecked()) {
+                if (!event_start_date.getText().toString().equals("January 1 1970")) {
+                    SimpleDateFormat simpleDateFormatAllDay = new SimpleDateFormat("dd-MM-yyyy");
+                    Date dateInicioAllDay;
+                    String fechaString;
+                    Calendar c = Calendar.getInstance();
+                    try {
+                        c.setTime(simpleDateFormatAllDay.parse(event_start_date.getText().toString()));
+                        c.add(Calendar.DAY_OF_YEAR, 1);
+                        dateInicioAllDay = c.getTime();
+                        event_end_date.setText(simpleDateFormatAllDay.format(dateInicioAllDay));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    new AlertDialog.Builder(EventActivity.this)
+                            .setTitle("Faltan datos")
+                            .setMessage("Tienes que seleccionar  una fecha de inicio")
+                            .setIcon(android.R.drawable.ic_dialog_dialer)
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+
+                                }}
+                            ).show();
+                    allDay.setChecked(false);
+                }
+            }
+        });
+
     }
 
     public Map<String, Object> prepararEvento () {
 
         String s_titulo = event_title.getText().toString(), s_descripcion = event_description.getText().toString();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         String s_fechaInicio = event_start_date.getText().toString();
         String s_horaInicio = event_start_time.getText().toString();
         String stringDateInicio = s_fechaInicio + " " + s_horaInicio;

@@ -1,5 +1,6 @@
 package com.example.seradmin.calendario;
 
+import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 import static androidx.core.widget.TextViewCompat.setTextAppearance;
 
 import android.content.res.Resources;
@@ -279,15 +280,13 @@ public class MonthFragment extends Fragment {
 
             for (Event event : day.getDayEvents()) {
                 final View ev = inflater.inflate(R.layout.day_monthly_event_view_widget, null);
+                //ev.setBackgroundColor(Integer.parseInt(event.getColor()));
+                ImageView evImageView = ev.findViewById(R.id.day_monthly_event_background);
+                evImageView.setImageResource(0);
+                evImageView.setBackgroundColor(Integer.parseInt(event.getColor()));
                 RelativeLayout rl = ev.findViewById(R.id.day_monthly_event_holder);
                 TextView titulo = ev.findViewById(R.id.day_monthly_event_id);
                 titulo.setText(event.getTitulo());
-                if (rl.getBackground() != null) {
-                    Drawable fondo;
-                    fondo = rl.getBackground();
-                    fondo.setTint(Integer.parseInt(event.getColor()));
-                    rl.setBackground(fondo);
-                }
                 rl.setOnClickListener(new ManejadorClickCalendario(rl, event, getContext()));
                 linearLayout.addView(rl);
             }

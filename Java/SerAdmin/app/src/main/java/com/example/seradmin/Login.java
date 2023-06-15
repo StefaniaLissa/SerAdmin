@@ -91,21 +91,21 @@ public class Login extends AppCompatActivity {
             String dni = usuario.getText().toString();
             String pass = contraseña.getText().toString();
 
-            if (dni.equals("") || pass.equals("")) {
-
-                AlphaAnimation animation = new AlphaAnimation(0, 1);
-                animation.setDuration(4000);
-                alert.setText("DNI o Contraseña vacíos");
-                alert.startAnimation(animation);
-                alert.setVisibility(View.VISIBLE);
-                Log.d(TAG, "Hola estoy creando la alarma de campos vacios");
-                AlphaAnimation animation2 = new AlphaAnimation(1, 0);
-                animation2.setDuration(4000);
-                alert.startAnimation(animation2);
-                alert.setVisibility(View.INVISIBLE);
-                Log.d(TAG, "Hola estoy apagando la alarma de campos vacios");
-
-            }
+//            if (dni.equals("") || pass.equals("")) {
+//
+//                AlphaAnimation animation = new AlphaAnimation(0, 1);
+//                animation.setDuration(4000);
+//                alert.setText("DNI o Contraseña vacíos");
+//                alert.startAnimation(animation);
+//                alert.setVisibility(View.VISIBLE);
+//                Log.d(TAG, "Hola estoy creando la alarma de campos vacios");
+//                AlphaAnimation animation2 = new AlphaAnimation(1, 0);
+//                animation2.setDuration(4000);
+//                alert.startAnimation(animation2);
+//                alert.setVisibility(View.INVISIBLE);
+//                Log.d(TAG, "Hola estoy apagando la alarma de campos vacios");
+//
+//            }
 
             db = FirebaseFirestore.getInstance();
             CollectionReference gestores = db.collection("Gestores");
