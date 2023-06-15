@@ -15,7 +15,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.seradmin.GestorMain;
 import com.example.seradmin.InterfazUsuari.InterfazUsuario;
+import com.example.seradmin.Login;
 import com.example.seradmin.NuevoEvento;
 import com.example.seradmin.R;
 import com.example.seradmin.Recycler.Cliente;
@@ -35,6 +37,7 @@ public class CalendarioFragment extends Fragment {
 
     FloatingActionButton add;
     Cliente cliente = new Cliente();
+    private ImageView logOutButton;
     ImageView home,files,calendar;
 
     @Nullable
@@ -43,6 +46,7 @@ public class CalendarioFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_calendario, container, false);
         add = view.findViewById(R.id.add);
         add.setVisibility(View.VISIBLE);
+        logOutButton = view.findViewById(R.id.logOutFinal);
 
 //        home = findViewById(R.id.home);
 //        files = findViewById(R.id.files);
@@ -63,6 +67,15 @@ public class CalendarioFragment extends Fragment {
                 startActivity(intent);
                 //finish();
             }
+        });
+
+        logOutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Login.class);
+            //intent.putExtra("Editar", CLAVE_LOGOUT);
+            //intent.putExtra("DNI_Gestor", gestor.getDNI());
+            //intent.putExtra("Gestor", gestor);
+            startActivity(intent);
+            getActivity().finish();
         });
 
         getActivity().getSupportFragmentManager().

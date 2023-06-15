@@ -127,9 +127,6 @@ public class ClienteDetalle extends AppCompatActivity {
         // inicializa los listeners, agrega el comportamiento a los elementos de la interfaz de usuario (botones) cuando se hacen clic
         initListeners();
 
-        tel_respaldo = getEditTextText(telefonoCliente.getText().toString());
-        dni_cliente_respaldo = getEditTextText(dniCliente.getText().toString());
-
         db = FirebaseFirestore.getInstance();
         if (getIntent().getExtras() != null) {
             if (getIntent().getExtras().containsKey("Gestor")) {
@@ -147,7 +144,7 @@ public class ClienteDetalle extends AppCompatActivity {
                     //dniCliente.setClickable(false);
                     dniCliente.setEnabled(false);
                     dniCliente.setTextColor(Color.GRAY);
-                    spinner.setEnabled(false);
+                    //spinner.setEnabled(false);
                     //dniGestor.setVisibility(View.INVISIBLE);
                     //editarDniGestor.setVisibility(View.INVISIBLE);
                     Log.d(TAG , "Hola " + "Estoy aquí en el else de gestor cliente detalle");
@@ -188,13 +185,15 @@ public class ClienteDetalle extends AppCompatActivity {
                     animation2.setDuration(4000);
                     alertTS.startAnimation(animation2);
                     alertTS.setVisibility(View.INVISIBLE);
-                    return false;
+                    return true;
                 }
             });
 
         }
 
         selectCliente(db , cliente.getId());
+        //tel_respaldo = getEditTextText(telefonoCliente.getText().toString());
+        //dni_cliente_respaldo = getEditTextText(dniCliente.getText().toString());
 
     }
 
@@ -403,6 +402,8 @@ public class ClienteDetalle extends AppCompatActivity {
                     spinner.setSelection(i, true);
                 }
             }
+            tel_respaldo = getEditTextText(telefonoCliente.getText().toString());
+            dni_cliente_respaldo = getEditTextText(dniCliente.getText().toString());
         }
 
     }
@@ -458,6 +459,10 @@ public class ClienteDetalle extends AppCompatActivity {
                         lv_dni = document.get("DNI").toString();
                     }
 
+                    Log.d(TAG, lv_dni);
+
+                    Log.d(TAG, dni_cliente_respaldo);
+
                     if (lv_dni.equals("") || dni_cliente_respaldo.equals(lv_dni)) {
 
                         // SELECT X TELF
@@ -469,6 +474,8 @@ public class ClienteDetalle extends AppCompatActivity {
                                     Log.d(TAG, document.getId() + " => " + document.getData());
                                     lv_num = document.get("Num_Telf").toString();
                                 }
+
+                                Log.d(TAG, lv_num + " " + tel_respaldo);
 
                                 if (lv_num.equals("") || tel_respaldo.equals(lv_num)) {
 

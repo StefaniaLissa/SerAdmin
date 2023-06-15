@@ -263,8 +263,6 @@ public class MainTree extends Fragment {
             startActivity(intent);
             requireActivity().finishAffinity();
         });
-
-
         cliente = (Cliente) requireActivity().getIntent().getSerializableExtra("Cliente");
 
         return rootView;
@@ -309,6 +307,7 @@ public class MainTree extends Fragment {
                                 .addOnFailureListener(e -> {
                                     // Ha ocurrido un error al guardar la URL del archivo en Firestore, maneja el error aquí
                                 });
+
                     });
                 } else {
                     // La carga del archivo ha fallado

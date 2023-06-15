@@ -21,6 +21,8 @@ public class TreeNode {
             this.isSelected = false;
         }
 
+        public TreeNode () {}
+
         public void addChild(TreeNode child) {
             child.setParent(this);
             child.setLevel(level + 1);

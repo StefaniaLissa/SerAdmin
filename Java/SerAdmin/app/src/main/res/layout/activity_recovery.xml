@@ -40,7 +40,7 @@
             android:backgroundTint="@color/white"
             android:gravity="center"
             android:hint="DNI"
-            android:inputType="phone"
+            android:inputType="text"
             android:maxLength="180"
             android:maxLines="1"
             android:minEms="20"

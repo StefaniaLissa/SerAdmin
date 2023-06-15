@@ -333,7 +333,7 @@ public class EventoDetalle extends AppCompatActivity implements LocationFragment
         //MapaFragment mapaFragment = new MapaFragment();
         //fragmentTransaction.add(locationFragment, "LocationFragment");
         //fragmentTransaction.replace(R.id.event_coordinator, locationFragment);
-        fragmentTransaction.add(R.id.eventoDetallado, locationFragment);
+        fragmentTransaction.add(R.id.event_holder_eventodetalle, locationFragment);
         //fragmentTransaction.replace(R.id.event_holder, mapaFragment);
         fragmentTransaction.commit();
     }

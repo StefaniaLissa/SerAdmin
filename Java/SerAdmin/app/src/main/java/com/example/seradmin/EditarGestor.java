@@ -65,6 +65,7 @@ public class EditarGestor extends AppCompatActivity {
             apellido.setText(gestorObject.getApellido());
             telefono.setText(gestorObject.getNum_Telf());
             String tel_respaldo = telefono.getText().toString();
+            listo.setVisibility(View.INVISIBLE);
 
             dni.setOnClickListener(v -> {
                 AlphaAnimation animation = new AlphaAnimation(0, 1);
@@ -253,18 +254,18 @@ public class EditarGestor extends AppCompatActivity {
 
             });
 
-            listo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), GestorMain.class);
-                    Bundle bundle1 = new Bundle();
-                    bundle1.putSerializable("Gestor", getGestorObject());
-                    Log.d( "GESTOR EDIT LISTO",  getGestorObject().toString());
-                    intent.putExtras(bundle1);
-                    startActivity(intent);
-                    finish();
-                }
-            });
+//            listo.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(getApplicationContext(), GestorMain.class);
+//                    Bundle bundle1 = new Bundle();
+//                    bundle1.putSerializable("Gestor", getGestorObject());
+//                    Log.d( "GESTOR EDIT LISTO",  getGestorObject().toString());
+//                    intent.putExtras(bundle1);
+//                    startActivity(intent);
+//                    finish();
+//                }
+//            });
 
         }
 

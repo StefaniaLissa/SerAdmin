@@ -8,13 +8,18 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seradmin.R;
+import com.example.seradmin.Recycler.Cliente;
 import com.example.seradmin.database.eventosDatabase.Evento;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AdaptadorEventos extends RecyclerView.Adapter<AdaptadorEventos.ViewHolder>{
 
-    private ArrayList<Evento> eventosList;
+    private ArrayList<Evento> eventosList = new ArrayList<Evento>();
+
+    private ArrayList<Evento> eventosList2;
 
     public interface ItemClickListener {
         void onClick(View view, int position, Evento evento);
@@ -29,6 +34,29 @@ public class AdaptadorEventos extends RecyclerView.Adapter<AdaptadorEventos.View
     public AdaptadorEventos(ArrayList<Evento> dataSet) {
         eventosList = dataSet;
         this.clickListener = clickListener;
+    }
+
+    public void filtrado(final String nombreCliente) {
+        int longitud = nombreCliente.length();
+        if (longitud == 0) {
+            eventosList.clear();
+            eventosList.addAll(eventosList2);
+        } else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<Evento> collecion = eventosList.stream()
+                        .filter(i -> i.getTitulo().toLowerCase().contains(nombreCliente.toLowerCase()))
+                        .collect(Collectors.toList());
+                eventosList.clear();
+                eventosList.addAll(collecion);
+            } else {
+                for (Evento c : eventosList2) {
+                    if (c.getTitulo().toLowerCase().contains(nombreCliente.toLowerCase())) {
+                        eventosList.add(c);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

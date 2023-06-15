@@ -47,6 +47,11 @@
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/event_holder_eventodetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <LinearLayout
         android:id="@+id/eventoDetallado"
         android:layout_width="match_parent"
@@ -396,6 +401,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:layout_below="@+id/eventoDetallado"
         android:orientation="horizontal">
 
         <Button
@@ -425,6 +431,7 @@
             app:strokeWidth="2.5dp" />
 
     </LinearLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>

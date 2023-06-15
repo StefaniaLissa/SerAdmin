@@ -2,14 +2,17 @@ package com.example.seradmin.InterfazUsuari;
 
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -17,12 +20,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.seradmin.AdaptadorArchivos;
+import com.example.seradmin.Archivos;
 import com.example.seradmin.ClienteDetalle;
 import com.example.seradmin.EventoDetalle;
 import com.example.seradmin.Gestor;
 import com.example.seradmin.Login;
 import com.example.seradmin.R;
 import com.example.seradmin.Recycler.Cliente;
+import com.example.seradmin.Tree.ControladoresTree.TreeNode;
+import com.example.seradmin.Tree.ControladoresTree.TreeViewAdapter;
 import com.example.seradmin.calendario.AdaptadorEventos;
 import com.example.seradmin.database.eventosDatabase.Evento;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,12 +41,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -58,10 +69,16 @@ public class InterfazUsuario extends Fragment {
     Gestor gestor = new Gestor();
     private ArrayList<Evento> eventos = new ArrayList<>();
     RecyclerView RVEventos, RVArchivos;
+    private TreeViewAdapter treeViewAdapter;
+    TreeNode pdfNode = new TreeNode("Mod 134", R.layout.list_item_file);
     AdaptadorEventos aE = new AdaptadorEventos(new ArrayList<>());
     String pattern = "dd-MM-yy HH:mm";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     private ImageView logOutButton;
+    AdaptadorArchivos adapter;
+    private FirebaseFirestore db;
+    private List<Archivos> listaPerfiles;
+    private SearchView buscador;
 
     @Nullable
     @Override
@@ -75,14 +92,30 @@ public class InterfazUsuario extends Fragment {
         logOutButton = view.findViewById(R.id.logOutFinal);
 
 
-
         RVEventos = view.findViewById(R.id.recyclerEventos);
         RVEventos.setHasFixedSize(true);
         RVEventos.setLayoutManager(new LinearLayoutManager(requireContext()));
 
+        buscador = view.findViewById(R.id.buscador);
+//        buscador.setBackgroundResource(R.drawable.ic_search);
+        buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String nombre) {
+                adapter.filtrado(nombre);
+                aE.filtrado(nombre);
+                return false;
+            }
+        });
+
+        listaPerfiles = new ArrayList<>();
         RVArchivos = view.findViewById(R.id.recyclerDocumentos);
-        RVArchivos.setHasFixedSize(true);
-        RVArchivos.setLayoutManager(new LinearLayoutManager(requireContext()));
+        RVArchivos.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
         if (getActivity().getIntent().getExtras() != null) {
             if (getActivity().getIntent().getExtras().containsKey("Cliente")) {
@@ -98,6 +131,7 @@ public class InterfazUsuario extends Fragment {
         }
 
         poblarRecyclerView();
+        poblarRecyclerViewArchivos();
 
 //        files.setOnClickListener(view1 -> {
 //            Intent intent = new Intent(requireActivity(), MainTree.class);
@@ -116,7 +150,7 @@ public class InterfazUsuario extends Fragment {
 //            requireActivity().finish();
 //        });
 
-        imagen.setOnClickListener(view3-> {
+        imagen.setOnClickListener(view3 -> {
             Intent intent = new Intent(requireActivity(), ClienteDetalle.class);
             intent.putExtra("ClienteDetalle", CLAVE_CLIENTE_DETALLE);
             intent.putExtra("Cliente", cliente);
@@ -137,7 +171,7 @@ public class InterfazUsuario extends Fragment {
     private void poblarRecyclerView() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference eventos_firebase = db.collection("Eventos");
-        Query eventosCliente = eventos_firebase.whereEqualTo("DNI_Cliente",cliente.getDni_cliente()).limit(4).orderBy("Inicio", Query.Direction.ASCENDING);
+        Query eventosCliente = eventos_firebase.whereEqualTo("DNI_Cliente", cliente.getDni_cliente()).limit(4).orderBy("Inicio", Query.Direction.ASCENDING);
         eventosCliente.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -181,5 +215,38 @@ public class InterfazUsuario extends Fragment {
     public void onResume() {
         super.onResume();
         poblarRecyclerView();
+        poblarRecyclerViewArchivos();
     }
+
+    private void poblarRecyclerViewArchivos() {
+
+        FirebaseStorage db = FirebaseStorage.getInstance();
+        // Crea una referencia al directorio "pdfs" en Firebase Storage
+        StorageReference storageRef = db.getReference().child(cliente.getDni_cliente()).child("pdfs");
+
+        storageRef.listAll().addOnSuccessListener(listResult -> {
+            //clientRef.listAll().addOnSuccessListener(listResult -> {
+            List<TreeNode> fileRoots = new ArrayList<>();
+            listaPerfiles = new ArrayList<>();
+
+            // Por cada archivo PDF recuperado, crea un nodo en el árbol
+            for (StorageReference item : listResult.getItems()) {
+                Archivos archivo = new Archivos();
+                archivo.setNombre(item.getName());
+                archivo.setDniCliente(cliente.getDni_cliente());
+                //TreeNode pdfNode = new TreeNode(fileName, R.layout.list_item_file);
+                //pdfNode.addChild(new TreeNode(fileName, R.layout.list_item_file));
+                listaPerfiles.add(archivo);
+
+            }
+            //listaPerfiles.sort(Comparator.naturalOrder());
+            adapter = new AdaptadorArchivos(listaPerfiles);
+            RVArchivos.setAdapter(adapter);
+
+        }).addOnFailureListener(e -> {
+            // Maneja el error de recuperación de archivos desde Firebase Storage
+            Log.e(TAG, "Error retrieving PDF files from Firebase Storage", e);
+        });
+    }
+
 }

@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.seradmin.Recycler.AdaptadorListado;
 
-import com.example.seradmin.Recycler.*;
 import com.example.seradmin.Recycler.Cliente;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

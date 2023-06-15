@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.seradmin.InterfazUsuari.InterfazUsuario;
 import com.example.seradmin.InterfazUsuari.Navegador;
-import com.example.seradmin.Recycler.*;
+import com.example.seradmin.Recycler.AdaptadorListado;
 import com.example.seradmin.Recycler.Cliente;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
